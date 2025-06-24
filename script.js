@@ -51,11 +51,24 @@ function renderPayments() {
       `Платёж ${row["Название"]} №${row["№"]}, сумма ${row["Сумма"]}, статус ${row["Статус"]}`
     );
 
+    // Форматируем дату в dd.mm.yyyy
+    let formattedDate = "—";
+    if (row["Дата"]) {
+      const dateObj = new Date(row["Дата"]);
+      if (!isNaN(dateObj)) {
+        formattedDate = dateObj.toLocaleDateString("ru-RU", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        });
+      }
+    }
+
     div.innerHTML = `
       <div role="cell">${row["№"] ?? idx + 1}</div>
       <div role="cell">${row["Название"] ?? "—"}</div>
-      <div role="cell">—</div>
-      <div role="cell">—</div>
+      <div role="cell">${row["Тип"] ?? "—"}</div>
+      <div role="cell">${formattedDate}</div>
       <div role="cell">${row["Сумма"] ?? "—"}</div>
       <div role="cell" class="status ${row["Статус"]?.toLowerCase().trim() === "ожидает" ? "ожидает" : ""}">${row["Статус"] ?? "—"}</div>
     `;
@@ -72,6 +85,7 @@ function renderPayments() {
   updatedAtEl.textContent = "Обновлено: " + lastUpdated.toLocaleTimeString("ru-RU");
   paymentsCountBadge.textContent = paymentsData.length.toString();
 }
+
 
 function openDialog(row) {
   selectedPayment = row;
