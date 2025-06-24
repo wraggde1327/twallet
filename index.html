@@ -32,6 +32,14 @@
       background-color: #ccc;
       border: none;
       cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .refresh-btn:hover {
+      background-color: #bbb;
     }
     .sum {
       font-weight: bold;
@@ -85,7 +93,7 @@
   <div class="container">
     <div class="header">
       <h1>Платежи</h1>
-      <button class="refresh-btn" onclick="fetchPayments()">⟳</button>
+      <button class="refresh-btn" onclick="fetchPayments()" title="Обновить данные">⟳</button>
     </div>
     <div class="sum" id="totalSum">Общая сумма: 0</div>
     <div class="updated" id="updatedAt">Обновлено: —</div>
@@ -106,7 +114,7 @@
 
   <script>
     let paymentsData = [];
-    let lastUpdated = new Date();
+    let lastUpdated = null;
     let selectedPayment = null;
 
     const paymentsList = document.getElementById("paymentsList");
@@ -116,6 +124,8 @@
     const dialogText = document.getElementById("dialogText");
 
     function fetchPayments() {
+      // Показываем, что идёт загрузка
+      updatedAtEl.textContent = "Обновление...";
       fetch("https://fastapi-myapp-production.up.railway.app/pending")
         .then(res => res.json())
         .then(data => {
@@ -124,6 +134,9 @@
           renderPayments();
         })
         .catch(err => {
+          paymentsList.innerHTML = "<p style='color:red'>Ошибка загрузки данных</p>";
+          totalSumEl.textContent = "Общая сумма: 0";
+          updatedAtEl.textContent = "Обновлено: —";
           console.error("Ошибка загрузки данных:", err);
         });
     }
@@ -132,12 +145,13 @@
       if (!paymentsData.length) {
         paymentsList.innerHTML = "<p style='padding: 12px; color: #999;'>Нет ожидающих платежей.</p>";
         totalSumEl.textContent = "Общая сумма: 0";
-        updatedAtEl.textContent = "Обновлено: —";
+        updatedAtEl.textContent = lastUpdated
+          ? "Обновлено: " + lastUpdated.toLocaleTimeString("ru-RU")
+          : "Обновлено: —";
         return;
       }
 
       let sum = 0;
-      let awaitingCount = 0;
       paymentsList.innerHTML = "";
 
       paymentsData.forEach((row, idx) => {
@@ -145,34 +159,37 @@
         div.className = "payment-row";
         div.tabIndex = 0;
         div.setAttribute("role", "button");
-        div.setAttribute("aria-label", `Платёж ${row.name} №${row.number}, сумма ${row.amount}, статус ${row.status}`);
+        div.setAttribute(
+          "aria-label",
+          `Платёж ${row["Название"]} №${row["№"]}, сумма ${row["Сумма"]}, статус ${row["Статус"]}`
+        );
 
         div.innerHTML = `
-          <div>${idx + 1}</div>
-          <div>${row.name}</div>
-          <div>${row.type}</div>
-          <div>${row.date}</div>
-          <div>${row.amount}</div>
-          <div class="status">${row.status}</div>
+          <div>${row["№"] ?? idx + 1}</div>
+          <div>${row["Название"] ?? "—"}</div>
+          <div>—</div>
+          <div>—</div>
+          <div>${row["Сумма"] ?? "—"}</div>
+          <div class="status">${row["Статус"] ?? "—"}</div>
         `;
 
         div.addEventListener("click", () => openDialog(row));
-
         paymentsList.appendChild(div);
 
-        if (row.status?.toLowerCase().trim() === "ожидает") {
-          sum += +row.amount;
-          awaitingCount++;
+        if (row["Статус"]?.toLowerCase().trim() === "ожидает") {
+          sum += +row["Сумма"];
         }
       });
 
       totalSumEl.textContent = "Общая сумма: " + sum.toLocaleString("ru-RU");
-      updatedAtEl.textContent = "Обновлено: " + lastUpdated.toLocaleTimeString("ru-RU");
+      updatedAtEl.textContent = lastUpdated
+        ? "Обновлено: " + lastUpdated.toLocaleTimeString("ru-RU")
+        : "Обновлено: —";
     }
 
     function openDialog(row) {
       selectedPayment = row;
-      dialogText.innerText = `Провести платёж ${row.name} на сумму ${row.amount}?`;
+      dialogText.innerText = `Провести платёж "${row["Название"]}" на сумму ${row["Сумма"]}?`;
       dialog.style.display = "block";
     }
 
@@ -182,11 +199,17 @@
     }
 
     function confirmPayment() {
-      alert(`Платёж ${selectedPayment.name} на ${selectedPayment.amount} проведён.`);
+      alert(`Платёж "${selectedPayment["Название"]}" на ${selectedPayment["Сумма"]} проведён.`);
+      // Удаляем из массива (имитация, на практике нужно делать запрос к серверу)
+      paymentsData = paymentsData.filter(p => p !== selectedPayment);
+      renderPayments();
       closeDialog();
-      // Тут можно добавить логику запроса на бэкенд
     }
 
+    // Автоматическое обновление каждые 30 секунд
+    setInterval(fetchPayments, 30000);
+
+    // Первая загрузка
     fetchPayments();
   </script>
 </body>
