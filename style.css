@@ -1,0 +1,199 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: #f0f2f5;
+  color: #333;
+}
+.container {
+  max-width: 720px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  padding: 24px 32px;
+  box-sizing: border-box;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+.header-left h1 {
+  font-weight: 600;
+  font-size: 28px;
+  margin: 0;
+}
+.badge {
+  background: #e94b4b;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 6px rgba(233,75,75,0.8);
+  user-select: none;
+}
+.refresh-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #4a90e2;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(74,144,226,0.4);
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+.refresh-btn:hover {
+  background-color: #357abd;
+  box-shadow: 0 6px 12px rgba(53,122,189,0.6);
+}
+.info-block {
+  background: #f9fbfd;
+  border-radius: 16px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+  user-select: none;
+}
+.sum {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+.updated {
+  font-weight: 400;
+  font-size: 13px;
+  color: #666;
+}
+.table-header, .payment-row {
+  display: grid;
+  grid-template-columns: 40px 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  align-items: center;
+  user-select: none;
+}
+.table-header {
+  color: #7a7a7a;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 2px solid #cfd8dc;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.payment-row {
+  background: #fafafa;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.payment-row:hover {
+  background-color: #e8f0fe;
+  box-shadow: 0 4px 8px rgba(74,144,226,0.15);
+}
+.payment-row > div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 15px;
+  color: #222;
+}
+.status {
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #4a90e2;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  user-select: none;
+}
+.status.ожидает {
+  background-color: #f9e79f;
+  color: #b58900;
+  font-weight: 700;
+}
+#dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 28px 32px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  border-radius: 20px;
+  display: none;
+  z-index: 1000;
+  max-width: 320px;
+  text-align: center;
+  font-size: 16px;
+  user-select: none;
+}
+#dialog-buttons {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+#dialog-buttons button {
+  padding: 8px 18px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+#dialog-buttons button:first-child {
+  background: #ddd;
+  color: #555;
+}
+#dialog-buttons button:first-child:hover {
+  background: #bbb;
+}
+#dialog-buttons button:last-child {
+  background: #4a90e2;
+  color: white;
+}
+#dialog-buttons button:last-child:hover {
+  background: #357abd;
+}
+/* Адаптив */
+@media (max-width: 600px) {
+  .container {
+    padding: 16px 20px;
+  }
+  .table-header, .payment-row {
+    grid-template-columns: 30px 2fr 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    padding: 10px 0;
+  }
+  .header-left h1 {
+    font-size: 22px;
+  }
+  .refresh-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+}
