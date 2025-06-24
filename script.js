@@ -124,13 +124,39 @@ function closeDialog() {
 }
 
 function confirmPayment() {
-  alert(`Платёж "${selectedPayment["Название"]}" на ${selectedPayment["Сумма"]} проведён.`);
-  // Удаляем из исходного массива
-  paymentsData = paymentsData.filter(p => p !== selectedPayment);
-  // Обновляем фильтр и рендер
-  filterPayments();
-  closeDialog();
+  if (!selectedPayment) return;
+
+  const payload = {
+    invoice_id: selectedPayment["№"],
+    amount: selectedPayment["Сумма"]
+  };
+
+  fetch("https://fastapi-myapp-production.up.railway.app/update_invoice", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Ошибка сервера: ${response.status}`);
+    }
+    return response.json(); // если сервер возвращает JSON, иначе можно пропустить
+  })
+  .then(data => {
+    alert(`Платёж "${selectedPayment["Название"]}" на сумму ${selectedPayment["Сумма"]} успешно проведён.`);
+    // Удаляем платёж из локального массива
+    paymentsData = paymentsData.filter(p => p !== selectedPayment);
+    filterPayments(); // обновляем фильтр и рендер
+    closeDialog();
+  })
+  .catch(error => {
+    alert(`Ошибка при отправке платежа: ${error.message}`);
+    closeDialog();
+  });
 }
+
 
 // События для поиска
 searchInput.addEventListener("input", filterPayments);
