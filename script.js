@@ -123,13 +123,47 @@ function closeDialog() {
   selectedPayment = null;
 }
 
+function showNotification(message, isError = false) {
+  // Создаём или обновляем уведомление на странице
+  let notif = document.getElementById("notification");
+  if (!notif) {
+    notif = document.createElement("div");
+    notif.id = "notification";
+    notif.style.position = "fixed";
+    notif.style.top = "20px";
+    notif.style.right = "20px";
+    notif.style.padding = "12px 20px";
+    notif.style.borderRadius = "8px";
+    notif.style.fontSize = "14px";
+    notif.style.color = "#fff";
+    notif.style.zIndex = 10000;
+    notif.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
+    document.body.appendChild(notif);
+  }
+  notif.textContent = message;
+  notif.style.backgroundColor = isError ? "#e94b4b" : "#4a90e2";
+  notif.style.opacity = "1";
+
+  // Скрываем через 4 секунды
+  setTimeout(() => {
+    notif.style.opacity = "0";
+  }, 4000);
+}
+
 function confirmPayment() {
-  if (!selectedPayment) return;
+  if (!selectedPayment) {
+    showNotification("Ошибка: платеж не выбран", true);
+    console.error("Платёж не выбран");
+    return;
+  }
 
   const payload = {
     invoice_id: selectedPayment["№"],
     amount: selectedPayment["Сумма"]
   };
+
+  console.log("Отправка платежа:", payload);
+  showNotification("Отправка платежа...");
 
   fetch("https://fastapi-myapp-production.up.railway.app/update_invoice", {
     method: "POST",
@@ -139,23 +173,27 @@ function confirmPayment() {
     body: JSON.stringify(payload)
   })
   .then(response => {
+    console.log("Ответ сервера:", response);
     if (!response.ok) {
-      throw new Error(`Ошибка сервера: ${response.status}`);
+      throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
     }
-    return response.json(); // если сервер возвращает JSON, иначе можно пропустить
+    return response.json(); // если сервер возвращает JSON
   })
   .then(data => {
-    alert(`Платёж "${selectedPayment["Название"]}" на сумму ${selectedPayment["Сумма"]} успешно проведён.`);
+    console.log("Данные от сервера:", data);
+    showNotification(`Платёж "${selectedPayment["Название"]}" на сумму ${selectedPayment["Сумма"]} успешно проведён.`);
     // Удаляем платёж из локального массива
     paymentsData = paymentsData.filter(p => p !== selectedPayment);
     filterPayments(); // обновляем фильтр и рендер
     closeDialog();
   })
   .catch(error => {
-    alert(`Ошибка при отправке платежа: ${error.message}`);
+    console.error("Ошибка при отправке платежа:", error);
+    showNotification(`Ошибка при отправке платежа: ${error.message}`, true);
     closeDialog();
   });
 }
+
 
 
 // События для поиска
