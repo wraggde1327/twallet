@@ -16,6 +16,12 @@
       <button class="refresh-btn" onclick="fetchPayments()" aria-label="Обновить данные">⟳</button>
     </div>
 
+     <!-- Блок поиска -->
+  <div class="search-block">
+    <input type="text" id="searchInput" placeholder="Поиск по названию..." aria-label="Поиск по названию платежа" />
+    <button id="clearSearchBtn" aria-label="Сбросить поиск" title="Сбросить поиск">✕</button>
+  </div>
+
     <div class="info-block">
       <div class="sum" id="totalSum">Общая сумма: 0</div>
       <div class="updated" id="updatedAt">Обновлено: —</div>
