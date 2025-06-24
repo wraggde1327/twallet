@@ -1,4 +1,5 @@
 let paymentsData = [];
+let filteredPayments = [];
 let lastUpdated = null;
 let selectedPayment = null;
 
@@ -8,7 +9,10 @@ const updatedAtEl = document.getElementById("updatedAt");
 const dialog = document.getElementById("dialog");
 const dialogText = document.getElementById("dialogText");
 const paymentsCountBadge = document.getElementById("paymentsCountBadge");
+const searchInput = document.getElementById("searchInput");
+const clearSearchBtn = document.getElementById("clearSearchBtn");
 
+// Загрузка данных
 function fetchPayments() {
   updatedAtEl.textContent = "Обновление...";
   fetch("https://fastapi-myapp-production.up.railway.app/pending")
@@ -16,6 +20,7 @@ function fetchPayments() {
     .then(data => {
       paymentsData = data;
       lastUpdated = new Date();
+      filteredPayments = paymentsData; // Изначально без фильтра
       renderPayments();
     })
     .catch(err => {
@@ -27,8 +32,29 @@ function fetchPayments() {
     });
 }
 
+// Фильтрация по названию
+function filterPayments() {
+  const query = searchInput.value.trim().toLowerCase();
+  if (!query) {
+    filteredPayments = paymentsData;
+  } else {
+    filteredPayments = paymentsData.filter(p =>
+      p["Название"].toLowerCase().startsWith(query)
+    );
+  }
+  renderPayments();
+}
+
+// Сброс поиска
+function clearSearch() {
+  searchInput.value = "";
+  filteredPayments = paymentsData;
+  renderPayments();
+}
+
+// Рендер платежей (используем filteredPayments)
 function renderPayments() {
-  if (!paymentsData.length) {
+  if (!filteredPayments.length) {
     paymentsList.innerHTML = "<p style='padding: 12px; color: #999;'>Нет ожидающих платежей.</p>";
     totalSumEl.textContent = "Общая сумма: 0";
     updatedAtEl.textContent = lastUpdated
@@ -41,7 +67,7 @@ function renderPayments() {
   let sum = 0;
   paymentsList.innerHTML = "";
 
-  paymentsData.forEach((row, idx) => {
+  filteredPayments.forEach((row, idx) => {
     const div = document.createElement("div");
     div.className = "payment-row";
     div.tabIndex = 0;
@@ -51,7 +77,7 @@ function renderPayments() {
       `Платёж ${row["Название"]} №${row["№"]}, сумма ${row["Сумма"]}, статус ${row["Статус"]}`
     );
 
-    // Форматируем дату в dd.mm.yyyy
+    // Форматируем дату
     let formattedDate = "—";
     if (row["Дата"]) {
       const dateObj = new Date(row["Дата"]);
@@ -83,9 +109,8 @@ function renderPayments() {
 
   totalSumEl.textContent = "Общая сумма: " + sum.toLocaleString("ru-RU");
   updatedAtEl.textContent = "Обновлено: " + lastUpdated.toLocaleTimeString("ru-RU");
-  paymentsCountBadge.textContent = paymentsData.length.toString();
+  paymentsCountBadge.textContent = filteredPayments.length.toString();
 }
-
 
 function openDialog(row) {
   selectedPayment = row;
@@ -100,13 +125,16 @@ function closeDialog() {
 
 function confirmPayment() {
   alert(`Платёж "${selectedPayment["Название"]}" на ${selectedPayment["Сумма"]} проведён.`);
+  // Удаляем из исходного массива
   paymentsData = paymentsData.filter(p => p !== selectedPayment);
-  renderPayments();
+  // Обновляем фильтр и рендер
+  filterPayments();
   closeDialog();
 }
 
-// Автообновление каждые 30 секунд (если нужно, раскомментируй)
-// setInterval(fetchPayments, 30000);
+// События для поиска
+searchInput.addEventListener("input", filterPayments);
+clearSearchBtn.addEventListener("click", clearSearch);
 
 // Первая загрузка
 fetchPayments();
