@@ -2,344 +2,113 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Платежи</title>
-
-<!-- Иконка для PWA -->
-/*<link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#0088cc" />*/
-
 <style>
-  /* Общие настройки */
-  body {
-    margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #e7f0f7; color: #222;
-    display: flex; flex-direction: column; min-height: 100vh;
-  }
-
-  /* Верхняя панель */
-  header {
-    background: #0088cc;
-    color: white;
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 600;
-    font-size: 1.25rem;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 0.15);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  header .title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  header .title svg {
-    fill: white;
-    width: 24px; height: 24px;
-  }
-
-  header button {
-    background: #006699;
-    border: none;
-    color: white;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    user-select: none;
-    transition: background-color 0.25s;
-  }
-  header button:hover {
-    background: #00557a;
-  }
-
-  /* Основной контент */
-  main {
-    flex: 1;
-    padding: 16px;
-    max-width: 480px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  /* Информация по платежам */
-  .summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 6px;
-  }
-  .summary .total {
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #004466;
-  }
-  .summary .updated {
-    font-size: 0.75rem;
-    color: #666;
-    font-style: italic;
-  }
-
-  /* Блок списка с заголовками */
-  .payments-block {
-    background: white;
-    border-radius: 10px;
-    padding: 8px 12px;
-    box-shadow: 0 1px 5px rgb(0 0 0 / 0.1);
-  }
-
-  .payments-block header {
-    display: flex;
-    gap: 12px;
-    color: #666;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 8px 0 6px 8px;
-    border-bottom: 1px solid #eee;
-  }
-  .payments-block header div {
-    flex: 1;
-    user-select: none;
-  }
-  .payments-block header .number { width: 30px; flex: none; }
-  .payments-block header .status { width: 80px; flex: none; }
-
-  /* Список платежей */
-  .payment-row {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding: 10px 8px;
-    border-radius: 6px;
-    margin-top: 6px;
-    background: #fffbee;
-    cursor: pointer;
-    user-select: none;
-    transition: background-color 0.15s;
-  }
-  .payment-row:hover {
-    background: #fff6c0;
-  }
-  .payment-row div {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .payment-row .number { width: 30px; flex: none; font-weight: 700; color: #555; }
-  .payment-row .status {
-    width: 80px; flex: none;
-    background: #ffc107;
-    color: #5a3e00;
-    font-weight: 700;
-    text-align: center;
-    border-radius: 12px;
-    padding: 2px 6px;
-    font-size: 0.8rem;
-  }
-
-  /* Индикатор загрузки и ошибки */
-  #loading,
-  #error {
-    text-align: center;
-    margin: 20px 0;
-    color: #777;
-    font-style: italic;
-  }
-
-  /* Вкладка платежей с иконкой и количеством */
-  #tabPayments {
-    position: fixed;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: white;
-    box-shadow: 0 1px 6px rgb(0 0 0 / 0.15);
-    border-radius: 30px;
-    padding: 8px 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    color: #0088cc;
-    cursor: default;
-    user-select: none;
-    font-size: 1rem;
-    z-index: 101;
-    min-width: 140px;
-    justify-content: center;
-  }
-  #tabPayments svg {
-    width: 22px; height: 22px;
-    fill: #0088cc;
-  }
-  #tabPayments .badge {
-    background: #d93025;
-    color: white;
-    font-weight: 700;
-    font-size: 0.75rem;
-    border-radius: 50%;
-    min-width: 20px;
-    min-height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 6px;
-    user-select: none;
-  }
-
-  /* Мобильная адаптация */
-  @media (max-width: 480px) {
-    header {
-      font-size: 1.1rem;
-      padding: 12px 14px;
-    }
-    .payments-block header div,
-    .payment-row div {
-      font-size: 0.9rem;
-    }
-    .summary .total {
-      font-size: 1.15rem;
-    }
-    #tabPayments {
-      min-width: 120px;
-      padding: 6px 14px;
-      font-size: 0.9rem;
-    }
-  }
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  .payment-row { display: flex; gap: 10px; padding: 6px; border-bottom: 1px solid #ddd; }
+  .payment-row:hover, .payment-row:focus { background: #f0f8ff; outline: none; }
+  .number { width: 30px; font-weight: bold; }
+  .status { font-weight: bold; }
+  #badgeCount { background: red; color: white; border-radius: 50%; padding: 4px 8px; font-size: 14px; vertical-align: middle; }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="title">
-    <!-- иконка платежей (кошелек) -->
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 7H3c-1.1 0-2 .9-2 2v8a2 2 0 0 0 2 2h18c1.1 0 2-.9 2-2v-8a2 2 0 0 0-2-2zm0 10H3v-8h18v8zM7 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path></svg>
-    Платежи
-  </div>
-  <button id="btnRefresh" aria-label="Обновить">Обновить</button>
-</header>
+<h1>Платежи <span id="badgeCount">0</span></h1>
 
-<main>
-  <div class="summary">
-    <div class="total" id="totalSum">Общая сумма: 0</div>
-    <div class="updated" id="updatedAt">Обновлено: —</div>
-  </div>
+<div id="loading">Загрузка...</div>
+<div id="error" style="color:red; display:none;">Ошибка загрузки данных</div>
 
-  <div id="loading">Загрузка...</div>
-  <div id="error" style="display:none;"></div>
-
-  <section class="payments-block" style="display:none;">
-    <header>
-      <div class="number">№</div>
-      <div>Название</div>
-      <div>Тип</div>
-      <div>Дата</div>
-      <div>Сумма</div>
-      <div class="status">Статус</div>
-    </header>
-    <div id="paymentsList"></div>
-  </section>
-</main>
-
-<div id="tabPayments" aria-label="Вкладка Платежи">
-  <!-- иконка в табе (копия верхней, можно заменить) -->
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 7H3c-1.1 0-2 .9-2 2v8a2 2 0 0 0 2 2h18c1.1 0 2-.9 2-2v-8a2 2 0 0 0-2-2zm0 10H3v-8h18v8zM7 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path></svg>
-  Платежи <div class="badge" id="badgeCount">0</div>
+<div id="paymentsBlock" style="display:none;">
+  <div id="paymentsList"></div>
+  <p id="totalSum">Общая сумма: 0</p>
+  <p id="updatedAt">Обновлено: —</p>
 </div>
 
 <script>
-  const API_URL = "https://fastapi-myapp-production.up.railway.app/pending";
+const loadingEl = document.getElementById("loading");
+const errorEl = document.getElementById("error");
+const paymentsBlock = document.getElementById("paymentsBlock");
+const paymentsList = document.getElementById("paymentsList");
+const totalSumEl = document.getElementById("totalSum");
+const badgeCountEl = document.getElementById("badgeCount");
+const updatedAtEl = document.getElementById("updatedAt");
 
-  const loadingEl = document.getElementById("loading");
-  const errorEl = document.getElementById("error");
-  const paymentsBlock = document.querySelector(".payments-block");
-  const paymentsList = document.getElementById("paymentsList");
-  const totalSumEl = document.getElementById("totalSum");
-  const updatedAtEl = document.getElementById("updatedAt");
-  const badgeCountEl = document.getElementById("badgeCount");
-  const btnRefresh = document.getElementById("btnRefresh");
+let paymentsData = [];
+let lastUpdated = null;
 
-  let paymentsData = [];
-  let lastUpdated = null;
+async function fetchPayments() {
+  loadingEl.style.display = "block";
+  errorEl.style.display = "none";
+  paymentsBlock.style.display = "none";
 
-  async function getPendingPayments() {
-    loadingEl.style.display = "block";
-    errorEl.style.display = "none";
-    paymentsBlock.style.display = "none";
-    try {
-      const response = await fetch(API_URL);
-      if(!response.ok) throw new Error(`HTTP error ${response.status}`);
-      const data = await response.json();
-      paymentsData = data;
-      lastUpdated = new Date();
-      renderPayments();
-    } catch(e) {
-      errorEl.textContent = "Ошибка загрузки данных: " + e.message;
-      errorEl.style.display = "block";
-      loadingEl.style.display = "none";
-    }
-  }
+  try {
+    // Замените URL на ваш реальный эндпоинт
+    const response = await fetch("https://fastapi-myapp-production.up.railway.app/pending");
+    if (!response.ok) throw new Error("Ошибка сети");
+    const data = await response.json();
 
-  function renderPayments() {
+    // Ожидается, что data — массив массивов: [Название, Тип, №, Дата, Сумма, Статус]
+    paymentsData = data;
+    lastUpdated = new Date();
+
+    renderPayments();
+  } catch (err) {
+    console.error(err);
+    errorEl.style.display = "block";
+  } finally {
     loadingEl.style.display = "none";
-    errorEl.style.display = "none";
+  }
+}
 
-    if (!paymentsData.length) {
-      paymentsList.innerHTML = "<p style='padding: 12px; color: #999;'>Нет ожидающих платежей.</p>";
-      paymentsBlock.style.display = "block";
-      totalSumEl.textContent = "Общая сумма: 0";
-      badgeCountEl.textContent = "0";
-      updatedAtEl.textContent = "Обновлено: —";
-      return;
-    }
-
-    let sum = 0;
-    paymentsList.innerHTML = "";
-
-    paymentsData.forEach((row, idx) => {
-      // row: [Название, Тип, №, Дата, Сумма, Статус]
-      const div = document.createElement("div");
-      div.className = "payment-row";
-      div.tabIndex = 0; // чтобы можно было по клавиатуре
-      div.setAttribute("role", "button");
-      div.setAttribute("aria-label", `Платёж ${row[0]} №${row[2]}, сумма ${row[4]}, статус ${row[5]}`);
-
-      div.innerHTML = `
-        <div class="number">${idx + 1}</div>
-        <div>${row[0]}</div>
-        <div>${row[1]}</div>
-        <div>${row[3]}</div>
-        <div>${row[4]}</div>
-        <div class="status">${row[5]}</div>
-      `;
-      paymentsList.appendChild(div);
-
-      // Считаем сумму только для "ожидает"
-      if(row[5].toLowerCase() === "ожидает") {
-        sum += +row[4];
-      }
-    });
-
-    totalSumEl.textContent = "Общая сумма: " + sum.toLocaleString("ru-RU");
-    updatedAtEl.textContent = "Обновлено: " + lastUpdated.toLocaleTimeString("ru-RU");
-    badgeCountEl.textContent = paymentsData.length;
+function renderPayments() {
+  if (!paymentsData.length) {
+    paymentsList.innerHTML = "<p style='padding: 12px; color: #999;'>Нет ожидающих платежей.</p>";
     paymentsBlock.style.display = "block";
+    totalSumEl.textContent = "Общая сумма: 0";
+    badgeCountEl.textContent = "0";
+    updatedAtEl.textContent = "Обновлено: —";
+    return;
   }
 
-  btnRefresh.onclick = () => {
-    getPendingPayments();
-  };
+  let sum = 0;
+  let awaitingCount = 0;
+  paymentsList.innerHTML = "";
 
-  // Автозагрузка при старте
-  getPendingPayments();
+  paymentsData.forEach((row, idx) => {
+    // row: [Название, Тип, №, Дата, Сумма, Статус]
+    const div = document.createElement("div");
+    div.className = "payment-row";
+    div.tabIndex = 0;
+    div.setAttribute("role", "button");
+    div.setAttribute("aria-label", `Платёж ${row[0]} №${row[2]}, сумма ${row[4]}, статус ${row[5]}`);
+
+    div.innerHTML = `
+      <div class="number">${idx + 1}</div>
+      <div>${row[0]}</div>
+      <div>${row[1]}</div>
+      <div>${row[3]}</div>
+      <div>${row[4]}</div>
+      <div class="status">${row[5]}</div>
+    `;
+    paymentsList.appendChild(div);
+
+    if (row[5].toLowerCase() === "ожидает") {
+      sum += +row[4];
+      awaitingCount++;
+    }
+  });
+
+  totalSumEl.textContent = "Общая сумма: " + sum.toLocaleString("ru-RU");
+  badgeCountEl.textContent = awaitingCount;
+  updatedAtEl.textContent = "Обновлено: " + lastUpdated.toLocaleTimeString("ru-RU");
+  paymentsBlock.style.display = "block";
+}
+
+// Запуск загрузки при загрузке страницы
+fetchPayments();
 </script>
+
 </body>
 </html>
