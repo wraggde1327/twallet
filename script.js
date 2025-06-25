@@ -123,7 +123,7 @@ function closeDialog() {
   selectedPayment = null;
 }
 
-function showNotification(message, type = "info", duration = 3000) {
+function showNotification(message, type = "info", duration = 2000) {
   // Создаём или обновляем overlay
   let overlay = document.getElementById("notification-overlay");
   if (!overlay) {
@@ -150,7 +150,7 @@ function showNotification(message, type = "info", duration = 3000) {
   // Длительность показа (по умолчанию 3 сек, для ошибок 4.5 сек, для статуса 2 сек)
   let showTime = duration;
   if (type === "error") showTime = 4500;
-  if (type === "status") showTime = 2000;
+  if (type === "status") showTime = 1000;
 
   // Скрываем через showTime
   setTimeout(() => {
