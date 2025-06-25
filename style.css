@@ -121,16 +121,16 @@ body {
 .status {
  /* font-weight: 600 */
   text-transform: capitalize;
-  color: #4a90e2;
+  /*color: #4a90e2;*/
   border-radius: 20px;
-  display: inline-block;
+  display: block;
   padding: 5px; 
   user-select: none;
-  width: max-content; /* чтобы ширина по содержимому */
+  /*width: max-content; /* чтобы ширина по содержимому */
 }
 
 }
-.status.ожидает {
+.status.await {
   background-color: #f7bb04;
   color: #ffffff;
   font-weight: 450;
