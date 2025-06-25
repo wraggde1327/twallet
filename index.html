@@ -40,9 +40,12 @@
 
   <div id="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogText">
     <div id="dialogText"></div>
-    <div id="dialog-buttons">
-      <button onclick="confirmPayment()" aria-label="Подтвердить платеж">Да</button>
-      <button onclick="closeDialog()" aria-label="Отмена">Нет</button>
+      <div id="dialog-buttons">
+        <button onclick="confirmPayment()" aria-label="Подтвердить платеж">Да</button>
+        <button onclick="startEdit()" aria-label="Изменить платеж">Изменить</button>
+        <button onclick="closeDialog()" aria-label="Отмена">Нет</button>
+  </div>
+
       
     </div>
   </div>
