@@ -128,9 +128,9 @@ body {
   user-select: none;
 }
 .status.ожидает {
-  background-color: #f9e79f;
-  color: #b58900;
-  font-weight: 700;
+  background-color: #f7bb04;
+  color: #ffffff;
+  font-weight: 450;
 }
 #dialog {
   position: fixed;
@@ -169,10 +169,10 @@ body {
   color: #555;
 }
 #dialog-buttons button:first-child:hover {
-  background: #bbb;
+  background: #4a90e2;
 }
 #dialog-buttons button:last-child {
-  background: #4a90e2;
+  background: #bbb;
   color: white;
 }
 #dialog-buttons button:last-child:hover {
