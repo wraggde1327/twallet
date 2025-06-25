@@ -101,8 +101,9 @@ function renderPayments() {
       <div role="cell">${row["Тип"] ?? "—"}</div>
       <div role="cell">${formattedDate}</div>
       <div role="cell">${row["Сумма"] ?? "—"}</div>
-      <div role="cell" class="status ${row["Статус"]?.toLowerCase().trim() === "ожидает" ? "ожидает" : ""}">${row["Статус"] ?? "—"}</div>
-    `;
+      <div role="cell" class="status${row["Статус"]?.toLowerCase().trim() === "ожидает" ? " ожидает" : ""}"
+}">${row["Статус"] ?? "—"}</div>
+      `;
 
     div.addEventListener("click", () => openDialog(row));
     paymentsList.appendChild(div);
