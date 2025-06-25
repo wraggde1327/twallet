@@ -95,15 +95,17 @@ function renderPayments() {
       }
     }
 
+    // Формируем класс для статуса
+    const statusClass = row["Статус"]?.toLowerCase().trim() === "ожидает" ? "status ожидает" : "status";
+
     div.innerHTML = `
       <div role="cell">${row["№"] ?? idx + 1}</div>
       <div role="cell">${row["Название"] ?? "—"}</div>
       <div role="cell">${row["Тип"] ?? "—"}</div>
       <div role="cell">${formattedDate}</div>
       <div role="cell">${row["Сумма"] ?? "—"}</div>
-      <div role="cell" class="status${row["Статус"]?.toLowerCase().trim() === "ожидает" ? " ожидает" : ""}"
-}">${row["Статус"] ?? "—"}</div>
-      `;
+      <div role="cell" class="${statusClass}">${row["Статус"] ?? "—"}</div>
+    `;
 
     div.addEventListener("click", () => openDialog(row));
     paymentsList.appendChild(div);
@@ -134,8 +136,17 @@ function openDialog(row) {
   buttons[1].style.display = "inline-block"; // Изменить
   buttons[2].style.display = "inline-block"; // Нет
 
+  enableButtons(true);
+
   dialog.style.display = "block";
   dialogOverlay.style.display = "block";
+}
+
+// Включить/отключить кнопки диалога
+function enableButtons(enabled) {
+  for (let btn of buttons) {
+    btn.disabled = !enabled;
+  }
 }
 
 // Начать редактирование суммы
@@ -170,29 +181,20 @@ function confirmPayment() {
     return;
   }
 
-  // Блокируем кнопки, чтобы избежать повторных нажатий
-  buttons[0].disabled = true; // Да
-  buttons[1].disabled = true; // Изменить
-  buttons[2].disabled = true; // Нет
+  enableButtons(false); // блокируем кнопки на время отправки
 
   let amountToSend = selectedPayment["Сумма"];
 
   if (isEditing) {
     if (!editInput) {
       alert("Ошибка: поле ввода суммы не найдено.");
-      // Разблокируем кнопки перед выходом
-      buttons[0].disabled = false;
-      buttons[1].disabled = false;
-      buttons[2].disabled = false;
+      enableButtons(true);
       return;
     }
     const val = parseFloat(editInput.value);
     if (isNaN(val) || val <= 0) {
       alert("Введите корректную сумму больше 0.");
-      // Разблокируем кнопки перед выходом
-      buttons[0].disabled = false;
-      buttons[1].disabled = false;
-      buttons[2].disabled = false;
+      enableButtons(true);
       return;
     }
     amountToSend = val;
@@ -229,8 +231,6 @@ function confirmPayment() {
       paymentsData = paymentsData.filter(p => p !== selectedPayment);
 
       filterPayments();
-
-      // Закрываем диалог и сбрасываем состояние
       closeDialog();
     })
     .catch(error => {
@@ -238,13 +238,9 @@ function confirmPayment() {
       closeDialog();
     })
     .finally(() => {
-      // Разблокируем кнопки в любом случае
-      buttons[0].disabled = false;
-      buttons[1].disabled = false;
-      buttons[2].disabled = false;
+      enableButtons(true);
     });
 }
-
 
 // Закрыть диалог
 function closeDialog() {
@@ -298,6 +294,9 @@ function showNotification(message, type = "info", duration = 2000) {
 buttons[0].addEventListener("click", confirmPayment); // Да
 buttons[1].addEventListener("click", startEdit);      // Изменить
 buttons[2].addEventListener("click", closeDialog);    // Нет
+
+// Клик по overlay закрывает диалог
+dialogOverlay.addEventListener("click", closeDialog);
 
 // События для поиска
 searchInput.addEventListener("input", filterPayments);
