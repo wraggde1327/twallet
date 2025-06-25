@@ -165,19 +165,27 @@ body {
   transition: background-color 0.3s ease;
 }
 #dialog-buttons button:first-child {
-  background: #ddd;
-  color: #555;
-}
+  background: #4a90e2; /* синяя */
+  color: white;
+  transition: background-color 0.3s ease;
+  }
+
 #dialog-buttons button:first-child:hover {
-  background: #4a90e2;
-}
+  background: #357abd; /* темно-синяя при наведении */
+  color: white;
+ }
+
 #dialog-buttons button:last-child {
-  background: #357abd;
+  background: #888888; /* серая */
+  color: white;
+  transition: background-color 0.3s ease;
+  }
+
+#dialog-buttons button:last-child:hover {
+ background: #e94b4b; /* красная при наведении */
   color: white;
 }
-#dialog-buttons button:last-child:hover {
-  background: #a4d730;
-}
+
 /* Адаптив */
 @media (max-width: 600px) {
   .container {
