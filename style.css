@@ -219,17 +219,17 @@ body {
   background: #bcbcbc;
   border: none;
   color: white;
-  font-size: 20px;
-  width: 40px;
-  height: 40px;
+  font-size: 15px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 6px rgba(233,75,75,0.8);
+  box-shadow: 0 0 3px rgba(233,75,75,0.8);
   transition: background-color 0.3s ease;
   user-select: none;
 }
 #clearSearchBtn:hover {
-  background-color: #b93a3a;
+  background-color: #bcbcbc;
 }
 
 /* Затемнение фона */
