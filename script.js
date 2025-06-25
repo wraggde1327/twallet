@@ -2,6 +2,8 @@ let paymentsData = [];
 let filteredPayments = [];
 let lastUpdated = null;
 let selectedPayment = null;
+let isEditing = false;
+let editInput = null;
 
 const paymentsList = document.getElementById("paymentsList");
 const totalSumEl = document.getElementById("totalSum");
@@ -11,6 +13,8 @@ const dialogText = document.getElementById("dialogText");
 const paymentsCountBadge = document.getElementById("paymentsCountBadge");
 const searchInput = document.getElementById("searchInput");
 const clearSearchBtn = document.getElementById("clearSearchBtn");
+const dialogButtons = document.getElementById("dialog-buttons");
+const buttons = dialogButtons.getElementsByTagName("button"); // [0] Да, [1] Изменить, [2] Нет
 
 // Загрузка данных
 function fetchPayments() {
@@ -114,17 +118,128 @@ function renderPayments() {
 
 function openDialog(row) {
   selectedPayment = row;
-  dialogText.innerText = `Провести платёж "${row["Название"]}" на сумму ${row["Сумма"]}?`;
+  isEditing = false;
+
+  dialogText.innerHTML = `Провести платёж "<strong>${row["Название"]}</strong>" на сумму <strong>${row["Сумма"]}</strong>?`;
+
+  // Удаляем input если был
+  if (editInput) {
+    editInput.remove();
+    editInput = null;
+  }
+
+  // Показываем все кнопки
+  buttons[0].style.display = "inline-block"; // Да
+  buttons[1].style.display = "inline-block"; // Изменить
+  buttons[2].style.display = "inline-block"; // Нет
+
   dialog.style.display = "block";
+}
+
+function startEdit() {
+  if (isEditing) return;
+  isEditing = true;
+
+  dialogText.innerHTML = `Изменить сумму платежа "<strong>${selectedPayment["Название"]}</strong>"? Введите новую сумму:`;
+
+  editInput = document.createElement("input");
+  editInput.type = "number";
+  editInput.min = "0";
+  editInput.value = selectedPayment["Сумма"];
+  editInput.style.width = "100%";
+  editInput.style.padding = "8px 12px";
+  editInput.style.fontSize = "16px";
+  editInput.style.marginTop = "12px";
+  editInput.style.borderRadius = "8px";
+  editInput.style.border = "1.5px solid #ccc";
+  editInput.autofocus = true;
+
+  dialogText.appendChild(editInput);
+
+  // Скрываем кнопку "Изменить"
+  buttons[1].style.display = "none";
+}
+
+function confirmPayment() {
+  if (!selectedPayment) {
+    showNotification("Ошибка: платеж не выбран", "error", 4500);
+    console.error("Платёж не выбран");
+    return;
+  }
+
+  let amountToSend = selectedPayment["Сумма"];
+
+  if (isEditing) {
+    if (!editInput) {
+      alert("Ошибка: поле ввода суммы не найдено.");
+      return;
+    }
+    const val = parseFloat(editInput.value);
+    if (isNaN(val) || val <= 0) {
+      alert("Введите корректную сумму больше 0.");
+      return;
+    }
+    amountToSend = val;
+  }
+
+  const payload = {
+    invoice_id: selectedPayment["№"],
+    amount: amountToSend
+  };
+
+  console.log("Отправка платежа:", payload);
+  showNotification("Отправка платежа...", "status", 2000);
+
+  fetch("https://fastapi-myapp-production.up.railway.app/update_invoice", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+    .then(response => {
+      console.log("Ответ сервера:", response);
+      if (!response.ok) {
+        throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      showNotification(`Платёж "${selectedPayment["Название"]}" на сумму ${amountToSend} успешно проведён.`, "info", 4000);
+
+      // Обновляем локальные данные
+      if (isEditing) {
+        const idx = paymentsData.findIndex(p => p["№"] === selectedPayment["№"]);
+        if (idx !== -1) paymentsData[idx]["Сумма"] = amountToSend;
+      }
+
+      // Удаляем платёж из массива
+      paymentsData = paymentsData.filter(p => p !== selectedPayment);
+
+      filterPayments();
+      closeDialog();
+    })
+    .catch(error => {
+      console.error("Ошибка при отправке платежа:", error);
+      showNotification(`Ошибка при отправке платежа: ${error.message}`, "error", 5000);
+      closeDialog();
+    });
 }
 
 function closeDialog() {
   dialog.style.display = "none";
   selectedPayment = null;
+  isEditing = false;
+
+  // Показываем кнопку "Изменить" если скрыта
+  buttons[1].style.display = "inline-block";
+
+  if (editInput) {
+    editInput.remove();
+    editInput = null;
+  }
 }
 
+// Уведомления
 function showNotification(message, type = "info", duration = 2000) {
-  // Создаём или обновляем overlay
   let overlay = document.getElementById("notification-overlay");
   if (!overlay) {
     overlay = document.createElement("div");
@@ -133,7 +248,6 @@ function showNotification(message, type = "info", duration = 2000) {
   }
   overlay.style.display = "block";
 
-  // Создаём или обновляем уведомление
   let notif = document.getElementById("notification");
   if (!notif) {
     notif = document.createElement("div");
@@ -143,16 +257,13 @@ function showNotification(message, type = "info", duration = 2000) {
   notif.className = "show" + (type === "error" ? " error" : "");
   notif.textContent = message;
 
-  // Показываем уведомление
   notif.style.opacity = "1";
   notif.style.pointerEvents = "auto";
 
-  // Длительность показа (по умолчанию 3 сек, для ошибок 4.5 сек, для статуса 2 сек)
   let showTime = duration;
   if (type === "error") showTime = 4500;
   if (type === "status") showTime = 1000;
 
-  // Скрываем через showTime
   setTimeout(() => {
     notif.style.opacity = "0";
     notif.style.pointerEvents = "none";
@@ -160,56 +271,12 @@ function showNotification(message, type = "info", duration = 2000) {
   }, showTime);
 }
 
-
-function confirmPayment() {
-  if (!selectedPayment) {
-    showNotification("Ошибка: платеж не выбран", "error", 4500);
-    console.error("Платёж не выбран");
-    return;
-  }
-
-  const payload = {
-    invoice_id: selectedPayment["№"],
-    amount: selectedPayment["Сумма"]
-  };
-
-  console.log("Отправка платежа:", payload);
-  showNotification("Отправка платежа...", "status", 2000);
-
-  fetch("https://fastapi-myapp-production.up.railway.app/update_invoice", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload)
-  })
-  .then(response => {
-    console.log("Ответ сервера:", response);
-    if (!response.ok) {
-      throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log("Данные от сервера:", data);
-    showNotification(`Платёж "${selectedPayment["Название"]}" на сумму ${selectedPayment["Сумма"]} успешно проведён.`, "info", 4000);
-    paymentsData = paymentsData.filter(p => p !== selectedPayment);
-    filterPayments();
-    closeDialog();
-  })
-  .catch(error => {
-    console.error("Ошибка при отправке платежа:", error);
-    showNotification(`Ошибка при отправке платежа: ${error.message}`, "error", 5000);
-    closeDialog();
-  });
-}
-
-
-
-
 // События для поиска
 searchInput.addEventListener("input", filterPayments);
 clearSearchBtn.addEventListener("click", clearSearch);
+
+// Кнопка "Изменить" по индексу 1
+buttons[1].addEventListener("click", startEdit);
 
 // Первая загрузка
 fetchPayments();
