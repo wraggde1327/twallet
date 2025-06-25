@@ -164,25 +164,34 @@ body {
   user-select: none;
   transition: background-color 0.3s ease;
 }
+
+/* Левая кнопка (первый ребёнок) — синяя */
 #dialog-buttons button:first-child {
-  background: #4a90e2; /* синяя */
+  background: #4a90e2;
   color: white;
-  transition: background-color 0.3s ease;
-  }
-
+}
 #dialog-buttons button:first-child:hover {
-  background: #357abd; /* темно-синяя при наведении */
+  background: #357abd;
   color: white;
- }
+}
 
+/* Средняя кнопка (второй ребёнок) — оранжевая */
+#dialog-buttons button:nth-child(2) {
+  background: #f39c12;
+  color: white;
+}
+#dialog-buttons button:nth-child(2):hover {
+  background: #d87e0a;
+  color: white;
+}
+
+/* Правая кнопка (последний ребёнок) — серая */
 #dialog-buttons button:last-child {
-  background: #888888; /* серая */
+  background: #888888;
   color: white;
-  transition: background-color 0.3s ease;
-  }
-
+}
 #dialog-buttons button:last-child:hover {
- background: #e94b4b; /* красная при наведении */
+  background: #e94b4b;
   color: white;
 }
 
