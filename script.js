@@ -169,16 +169,29 @@ function confirmPayment() {
     return;
   }
 
+  // Блокируем кнопки, чтобы избежать повторных нажатий
+  buttons[0].disabled = true; // Да
+  buttons[1].disabled = true; // Изменить
+  buttons[2].disabled = true; // Нет
+
   let amountToSend = selectedPayment["Сумма"];
 
   if (isEditing) {
     if (!editInput) {
       alert("Ошибка: поле ввода суммы не найдено.");
+      // Разблокируем кнопки перед выходом
+      buttons[0].disabled = false;
+      buttons[1].disabled = false;
+      buttons[2].disabled = false;
       return;
     }
     const val = parseFloat(editInput.value);
     if (isNaN(val) || val <= 0) {
       alert("Введите корректную сумму больше 0.");
+      // Разблокируем кнопки перед выходом
+      buttons[0].disabled = false;
+      buttons[1].disabled = false;
+      buttons[2].disabled = false;
       return;
     }
     amountToSend = val;
@@ -189,7 +202,7 @@ function confirmPayment() {
     amount: amountToSend
   };
 
-  showNotification("Отправка платежа...", "status", 2000);
+  showNotification("Отправка платежа...", "status", 1500);
 
   fetch("https://fastapi-myapp-production.up.railway.app/update_invoice", {
     method: "POST",
@@ -203,23 +216,34 @@ function confirmPayment() {
       return response.json();
     })
     .then(data => {
-      showNotification(`Платёж "${selectedPayment["Название"]}" на сумму ${amountToSend} успешно проведён.`, "info", 4000);
+      showNotification(`Платёж "${selectedPayment["Название"]}" на сумму ${amountToSend} успешно проведён.`, "info", 1500);
 
+      // Обновляем локальные данные, если редактировали сумму
       if (isEditing) {
         const idx = paymentsData.findIndex(p => p["№"] === selectedPayment["№"]);
         if (idx !== -1) paymentsData[idx]["Сумма"] = amountToSend;
       }
 
+      // Удаляем проведённый платёж из списка
       paymentsData = paymentsData.filter(p => p !== selectedPayment);
 
       filterPayments();
+
+      // Закрываем диалог и сбрасываем состояние
       closeDialog();
     })
     .catch(error => {
-      showNotification(`Ошибка при отправке платежа: ${error.message}`, "error", 5000);
+      showNotification(`Ошибка при отправке платежа: ${error.message}`, "error", 3000);
       closeDialog();
+    })
+    .finally(() => {
+      // Разблокируем кнопки в любом случае
+      buttons[0].disabled = false;
+      buttons[1].disabled = false;
+      buttons[2].disabled = false;
     });
 }
+
 
 // Закрыть диалог
 function closeDialog() {
