@@ -96,7 +96,8 @@ function renderPayments() {
     }
 
     // Формируем класс для статуса
-    const statusClass = row["Статус"]?.toLowerCase().trim() === "ожидает" ? "await" : "status";
+    const statusClass = `status ${row["Статус"]?.toLowerCase().trim() === "ожидает" ? "await" : ""}`;
+
 
     div.innerHTML = `
       <div role="cell">${row["№"] ?? idx + 1}</div>
