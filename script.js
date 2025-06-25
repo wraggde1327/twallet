@@ -123,36 +123,47 @@ function closeDialog() {
   selectedPayment = null;
 }
 
-function showNotification(message, isError = false) {
-  // Создаём или обновляем уведомление на странице
+function showNotification(message, type = "info", duration = 3000) {
+  // Создаём или обновляем overlay
+  let overlay = document.getElementById("notification-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "notification-overlay";
+    document.body.appendChild(overlay);
+  }
+  overlay.style.display = "block";
+
+  // Создаём или обновляем уведомление
   let notif = document.getElementById("notification");
   if (!notif) {
     notif = document.createElement("div");
     notif.id = "notification";
-    notif.style.position = "fixed";
-    notif.style.top = "20px";
-    notif.style.right = "20px";
-    notif.style.padding = "12px 20px";
-    notif.style.borderRadius = "8px";
-    notif.style.fontSize = "14px";
-    notif.style.color = "#fff";
-    notif.style.zIndex = 10000;
-    notif.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
     document.body.appendChild(notif);
   }
+  notif.className = "show" + (type === "error" ? " error" : "");
   notif.textContent = message;
-  notif.style.backgroundColor = isError ? "#e94b4b" : "#4a90e2";
-  notif.style.opacity = "1";
 
-  // Скрываем через 4 секунды
+  // Показываем уведомление
+  notif.style.opacity = "1";
+  notif.style.pointerEvents = "auto";
+
+  // Длительность показа (по умолчанию 3 сек, для ошибок 4.5 сек, для статуса 2 сек)
+  let showTime = duration;
+  if (type === "error") showTime = 4500;
+  if (type === "status") showTime = 2000;
+
+  // Скрываем через showTime
   setTimeout(() => {
     notif.style.opacity = "0";
-  }, 4000);
+    notif.style.pointerEvents = "none";
+    overlay.style.display = "none";
+  }, showTime);
 }
+
 
 function confirmPayment() {
   if (!selectedPayment) {
-    showNotification("Ошибка: платеж не выбран", true);
+    showNotification("Ошибка: платеж не выбран", "error", 4500);
     console.error("Платёж не выбран");
     return;
   }
@@ -163,7 +174,7 @@ function confirmPayment() {
   };
 
   console.log("Отправка платежа:", payload);
-  showNotification("Отправка платежа...");
+  showNotification("Отправка платежа...", "status", 2000);
 
   fetch("https://fastapi-myapp-production.up.railway.app/update_invoice", {
     method: "POST",
@@ -177,22 +188,22 @@ function confirmPayment() {
     if (!response.ok) {
       throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
     }
-    return response.json(); // если сервер возвращает JSON
+    return response.json();
   })
   .then(data => {
     console.log("Данные от сервера:", data);
-    showNotification(`Платёж "${selectedPayment["Название"]}" на сумму ${selectedPayment["Сумма"]} успешно проведён.`);
-    // Удаляем платёж из локального массива
+    showNotification(`Платёж "${selectedPayment["Название"]}" на сумму ${selectedPayment["Сумма"]} успешно проведён.`, "info", 4000);
     paymentsData = paymentsData.filter(p => p !== selectedPayment);
-    filterPayments(); // обновляем фильтр и рендер
+    filterPayments();
     closeDialog();
   })
   .catch(error => {
     console.error("Ошибка при отправке платежа:", error);
-    showNotification(`Ошибка при отправке платежа: ${error.message}`, true);
+    showNotification(`Ошибка при отправке платежа: ${error.message}`, "error", 5000);
     closeDialog();
   });
 }
+
 
 
 
