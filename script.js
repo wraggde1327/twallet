@@ -180,7 +180,7 @@ function confirmPayment() {
     console.error("Платёж не выбран");
     return;
   }
-
+  closeDialog();
   enableButtons(false); // блокируем кнопки на время отправки
 
   let amountToSend = selectedPayment["Сумма"];
@@ -231,7 +231,7 @@ function confirmPayment() {
       paymentsData = paymentsData.filter(p => p !== selectedPayment);
 
       filterPayments();
-      closeDialog();
+   /*   closeDialog() */
     })
     .catch(error => {
       showNotification(`Ошибка при отправке платежа: ${error.message}`, "error", 3000);
