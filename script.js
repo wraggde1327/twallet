@@ -180,10 +180,11 @@ function confirmPayment() {
     console.error("Платёж не выбран");
     return;
   }
-  closeDialog();
-  enableButtons(false); // блокируем кнопки на время отправки
 
+  // Сохраняем данные в локальные переменные
   let amountToSend = selectedPayment["Сумма"];
+  const invoiceId = selectedPayment["№"];
+  const paymentName = selectedPayment["Название"];
 
   if (isEditing) {
     if (!editInput) {
@@ -200,8 +201,13 @@ function confirmPayment() {
     amountToSend = val;
   }
 
+  // Закрываем диалог после сохранения данных
+  closeDialog();
+
+  enableButtons(false);
+
   const payload = {
-    invoice_id: selectedPayment["№"],
+    invoice_id: invoiceId,
     amount: amountToSend
   };
 
@@ -219,28 +225,25 @@ function confirmPayment() {
       return response.json();
     })
     .then(data => {
-      showNotification(`Платёж "${selectedPayment["Название"]}" на сумму ${amountToSend} успешно проведён.`, "info", 1500);
+      showNotification(`Платёж "${paymentName}" на сумму ${amountToSend} успешно проведён.`, "info", 3000);
 
-      // Обновляем локальные данные, если редактировали сумму
       if (isEditing) {
-        const idx = paymentsData.findIndex(p => p["№"] === selectedPayment["№"]);
+        const idx = paymentsData.findIndex(p => p["№"] === invoiceId);
         if (idx !== -1) paymentsData[idx]["Сумма"] = amountToSend;
       }
 
-      // Удаляем проведённый платёж из списка
-      paymentsData = paymentsData.filter(p => p !== selectedPayment);
+      paymentsData = paymentsData.filter(p => p["№"] !== invoiceId);
 
       filterPayments();
-   /*   closeDialog() */
     })
     .catch(error => {
-      showNotification(`Ошибка при отправке платежа: ${error.message}`, "error", 3000);
-      closeDialog();
+      showNotification(`Ошибка при отправке платежа: ${error.message}`, "error", 5000);
     })
     .finally(() => {
       enableButtons(true);
     });
 }
+
 
 // Закрыть диалог
 function closeDialog() {
