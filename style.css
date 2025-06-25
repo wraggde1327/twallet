@@ -119,13 +119,14 @@ body {
   color: #222;
 }
 .status {
-  font-weight: 600;
+  font-weight: 450;
   text-transform: capitalize;
   color: #4a90e2;
-  padding: 10px 10px;
+  padding: 5px;
   border-radius: 20px;
   display: inline-block;
   user-select: none;
+  width: max-content;
 }
 
 .await {
