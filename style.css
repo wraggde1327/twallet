@@ -1,101 +1,24 @@
 /* Мобильная адаптация (до 600px) */
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .container {
-    margin: 0;
-    padding: 0 8px;
-    max-width: 100vw;
-    box-sizing: border-box;
-    background: #ffcccc
+    background: #ffcccc !important;
   }
-
-  .header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
-    margin: 24px 0 12px;
-  }
-
-  .header-left h1 {
-    font-size: 20px;
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .badge {
-    font-size: 12px;
-    width: 25px;
-    height: 25px;
-    line-height: 22px;
-    margin-left: 4px;
-  }
-
-  .refresh-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 18px;
-    margin-left: auto;
-  }
-
-  .search-block {
-    flex-wrap: nowrap;
-    gap: 6px;
-    margin-bottom: 14px;
-  }
-
-  #searchInput {
-    flex: 1;
-    font-size: 14px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: 1.2px solid #ccc;
-  }
-
-  #clearSearchBtn {
-    width: 28px;
-    height: 28px;
-    font-size: 13px;
-  }
-  
   .payment-row {
     display: flex;
     flex-direction: column;
-    padding: 8px 6px;
-    gap: 2px;
-    border-bottom: 1px solid #eee;
-    font-size: 18px;
+    font-size: 12px !important;
+    background: #e0f7fa !important;
   }
-  
   .payment-row > div {
-    font-size: 18px
+    font-size: 11px !important;
     line-height: 1.2;
     white-space: normal;
     word-break: break-word;
-    overflow: visible;
-    text-overflow: unset;
-    margin-bottom: 1px;
-    white-space: normal;        /* разрешает автоматический перенос строк */
-  word-break: break-word;     /* переносит длинные слова, если не помещаются */
-  overflow-wrap: anywhere;    /* дополнительная гарантия переноса длинных слов */
-  }
-
-  .status {
-    font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    width: max-content;
-  }
-
-  .await {
-    background-color: #f7bb04;
-    color: white;
-    font-size: 10px;
-  }
-
-  .dialog-edit-input {
-    font-size: 12px;
+    overflow-wrap: anywhere;
+    background: #c8e6c9 !important;
   }
 }
+
 
 
 body {
