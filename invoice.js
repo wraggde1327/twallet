@@ -1,128 +1,150 @@
-document.addEventListener('DOMContentLoaded', function() {
+// --- Переменные ---
+let allClients = [];
+let selectedClientId = null;
 
-  // --- Переменные ---
-  let clientsLoaded = false;
-  let allClients = [];
-  const clientSelect = document.getElementById('clientSelect');
-  const invoiceForm = document.getElementById('invoiceForm');
-  const clientSearchInput = document.getElementById('clientSearchInput');
-  const paymentTypeInput = document.getElementById('paymentTypeInput');
+const clientSearchInput = document.getElementById('clientSearchInput');
+const clientDropdown = document.getElementById('clientDropdown');
+const invoiceForm = document.getElementById('invoiceForm');
+const paymentTypeInput = document.getElementById('paymentTypeInput');
 
-  // --- Функция загрузки клиентов ---
-  async function loadClients() {
-    clientSelect.innerHTML = '<option value="">Загрузка...</option>';
-    try {
-      const response = await fetch('https://fastapi-myapp-production.up.railway.app/clients');
-      if (!response.ok) throw new Error('Ошибка загрузки клиентов');
-      const clients = await response.json();
-
-      allClients = clients; // Сохраняем для поиска
-
-      // Очищаем и добавляем опции
-      clientSelect.innerHTML = '<option value="">Выберите клиента</option>';
-      clients.forEach(client => {
-        const option = document.createElement('option');
-        option.value = client.id;
-        option.textContent = client.name;
-        clientSelect.appendChild(option);
-      });
-      clientsLoaded = true;
-    } catch (error) {
-      clientSelect.innerHTML = '<option value="">Ошибка загрузки</option>';
-      showNotification('Ошибка загрузки клиентов', 'error', 4000);
-      console.error(error);
-    }
+// --- Загрузка клиентов ---
+async function loadClients() {
+  try {
+    const response = await fetch('https://fastapi-myapp-production.up.railway.app/clients');
+    if (!response.ok) throw new Error('Ошибка загрузки клиентов');
+    allClients = await response.json();
+  } catch (e) {
+    allClients = [];
+    showNotification('Ошибка загрузки клиентов', 'error');
   }
+}
 
-  // --- Поиск по клиентам ---
-  clientSearchInput.addEventListener('input', function() {
-    const val = this.value.trim().toLowerCase();
-    clientSelect.innerHTML = '<option value="">Выберите клиента</option>';
-    allClients
-      .filter(cl => cl.name.toLowerCase().includes(val))
-      .forEach(client => {
-        const option = document.createElement('option');
-        option.value = client.id;
-        option.textContent = client.name;
-        clientSelect.appendChild(option);
+// --- Показать выпадающий список ---
+function showDropdown(filter = '') {
+  clientDropdown.innerHTML = '';
+  const filtered = allClients.filter(cl => cl.name.toLowerCase().includes(filter.toLowerCase()));
+  if (filtered.length === 0) {
+    clientDropdown.innerHTML = '<div class="autocomplete-option" style="color:#888;">Нет совпадений</div>';
+  } else {
+    filtered.forEach(client => {
+      const div = document.createElement('div');
+      div.className = 'autocomplete-option';
+      div.textContent = client.name;
+      div.dataset.id = client.id;
+      div.addEventListener('mousedown', function(e) {
+        clientSearchInput.value = client.name;
+        selectedClientId = client.id;
+        clientDropdown.style.display = 'none';
       });
-  });
-
-  // --- Загрузка клиентов при первом открытии вкладки ---
-  document.getElementById('invoiceTab').addEventListener('click', () => {
-    if (!clientsLoaded) loadClients();
-  });
-
-  // --- Кнопки выбора типа платежа ---
-  document.querySelectorAll('.payment-type-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.payment-type-btn').forEach(b => b.classList.remove('active', 'blue', 'green', 'yellow'));
-      this.classList.add('active');
-      if (this.dataset.type === "Счет") this.classList.add('blue');
-      if (this.dataset.type === "Наличные") this.classList.add('green');
-      if (this.dataset.type === "Пополнить") this.classList.add('yellow');
-      paymentTypeInput.value = this.dataset.type;
+      clientDropdown.appendChild(div);
     });
-  });
+  }
+  clientDropdown.style.display = 'block';
+}
 
-  // --- Обработка отправки формы ---
-  invoiceForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+// --- Скрыть dropdown ---
+function hideDropdown() {
+  setTimeout(() => { clientDropdown.style.display = 'none'; }, 120);
+}
 
-    const clientId = clientSelect.value;
-    const paymentType = paymentTypeInput.value;
-    const amount = invoiceForm.querySelector('#amountInput').value.trim();
+// --- События для автокомплита ---
+clientSearchInput.addEventListener('focus', function() {
+  showDropdown('');
+});
+clientSearchInput.addEventListener('input', function() {
+  selectedClientId = null;
+  showDropdown(this.value);
+});
+clientSearchInput.addEventListener('blur', hideDropdown);
 
-    if (!clientId) {
-      showNotification('Пожалуйста, выберите клиента', 'error');
-      return;
-    }
-    if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      showNotification('Введите корректную сумму', 'error');
-      return;
-    }
-
-    // Получаем Telegram user id из глобальной переменной (из script.js)
-    const tgUserId = window.tgUserId || null;
-    const who = tgUserId ? `tg_user_${tgUserId}` : 'unknown';
-
-    const payload = {
-      id: clientId,
-      type: paymentType,
-      sum: parseFloat(amount),
-      who: who
-    };
-
-    try {
-      const response = await fetch('https://fastapi-myapp-production.up.railway.app/invoices', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (response.ok) {
-        showNotification('Счет успешно создан!');
-        invoiceForm.reset();
-        // Вернем кнопки в исходное состояние
-        document.querySelectorAll('.payment-type-btn').forEach(b => b.classList.remove('active', 'blue', 'green', 'yellow'));
-        document.querySelector('.payment-type-btn.blue').classList.add('active');
-        paymentTypeInput.value = 'Счет';
-      } else {
-        showNotification('Ошибка при создании счета', 'error');
-      }
-    } catch (error) {
-      showNotification('Ошибка сети', 'error');
-      console.error(error);
-    }
-  });
-
-  // --- Функция уведомлений ---
-  function showNotification(text, type = '', timeout = 2500) {
-    const notif = document.getElementById('notification');
-    notif.textContent = text;
-    notif.className = 'show' + (type === 'error' ? ' error' : '');
-    setTimeout(() => {
-      notif.className = '';
-    }, timeout);
+// --- При клике вне автокомплита — скрыть ---
+document.addEventListener('mousedown', function(e) {
+  if (!clientSearchInput.contains(e.target) && !clientDropdown.contains(e.target)) {
+    clientDropdown.style.display = 'none';
   }
 });
+
+// --- Кнопки выбора типа платежа ---
+document.querySelectorAll('.payment-type-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.payment-type-btn').forEach(b => b.classList.remove('active', 'blue', 'green', 'yellow'));
+    this.classList.add('active');
+    if (this.dataset.type === "Счет") this.classList.add('blue');
+    if (this.dataset.type === "Наличные") this.classList.add('green');
+    if (this.dataset.type === "Пополнить") this.classList.add('yellow');
+    paymentTypeInput.value = this.dataset.type;
+  });
+});
+
+// --- Загрузи клиентов при первом открытии вкладки ---
+document.getElementById('invoiceTab').addEventListener('click', () => {
+  if (allClients.length === 0) loadClients();
+});
+
+// --- Обработка отправки формы ---
+invoiceForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const clientName = clientSearchInput.value.trim();
+  const paymentType = paymentTypeInput.value;
+  const amount = invoiceForm.querySelector('#amountInput').value.trim();
+
+  // Найти id клиента по имени, если не выбран через dropdown
+  let clientId = selectedClientId;
+  if (!clientId) {
+    const found = allClients.find(cl => cl.name.toLowerCase() === clientName.toLowerCase());
+    clientId = found ? found.id : null;
+  }
+
+  if (!clientId) {
+    showNotification('Пожалуйста, выберите клиента из списка', 'error');
+    return;
+  }
+  if (!amount || isNaN(amount) || Number(amount) <= 0) {
+    showNotification('Введите корректную сумму', 'error');
+    return;
+  }
+
+  const tgUserId = window.tgUserId || null;
+  const who = tgUserId ? `tg_user_${tgUserId}` : 'unknown';
+
+  const payload = {
+    id: clientId,
+    type: paymentType,
+    sum: parseFloat(amount),
+    who: who
+  };
+
+  try {
+    const response = await fetch('https://fastapi-myapp-production.up.railway.app/invoices', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      showNotification('Счет успешно создан!');
+      invoiceForm.reset();
+      clientSearchInput.value = '';
+      selectedClientId = null;
+      // Вернуть кнопки в исходное состояние
+      document.querySelectorAll('.payment-type-btn').forEach(b => b.classList.remove('active', 'blue', 'green', 'yellow'));
+      document.querySelector('.payment-type-btn.blue').classList.add('active');
+      paymentTypeInput.value = 'Счет';
+    } else {
+      showNotification('Ошибка при создании счета', 'error');
+    }
+  } catch (error) {
+    showNotification('Ошибка сети', 'error');
+    console.error(error);
+  }
+});
+
+// --- Функция уведомлений ---
+function showNotification(text, type = '', timeout = 2500) {
+  const notif = document.getElementById('notification');
+  notif.textContent = text;
+  notif.className = 'show' + (type === 'error' ? ' error' : '');
+  setTimeout(() => {
+    notif.className = '';
+  }, timeout);
+}
