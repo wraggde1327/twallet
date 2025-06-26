@@ -1,3 +1,4 @@
+// --- Переменные и DOM-элементы ---
 let paymentsData = [];
 let filteredPayments = [];
 let lastUpdated = null;
@@ -17,25 +18,41 @@ const dialogOverlay = document.getElementById("dialog-overlay");
 const dialogButtons = document.getElementById("dialog-buttons");
 const buttons = dialogButtons.getElementsByTagName("button"); // [0] Да, [1] Изменить, [2] Нет
 
-// Telegram Web App интеграция и отображение пользователя
+// --- Telegram Web App интеграция ---
 const tgUserInfoDiv = document.getElementById('tgUserInfo');
 let tgUserLabel = '';
+let tgUserId = null;
+let tgUserObj = null;
 
 if (window.Telegram && window.Telegram.WebApp) {
-  const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
-if (tg) {
+  const tg = window.Telegram.WebApp;
   document.body.classList.add('telegram-webapp');
-}
-
   tg.ready && tg.ready();
   const user = tg.initDataUnsafe?.user;
   if (user) {
+    tgUserObj = user;
+    tgUserId = user.id;
     tgUserLabel = user.username ? '@' + user.username : 'ID: ' + user.id;
     tgUserInfoDiv.textContent = tgUserLabel;
     tgUserInfoDiv.title = user.first_name + (user.last_name ? ' ' + user.last_name : '');
   }
 }
 
+// --- Переключение вкладок ---
+document.getElementById('paymentsTab').addEventListener('click', () => {
+  document.getElementById('paymentsContent').style.display = 'block';
+  document.getElementById('invoiceContent').style.display = 'none';
+  document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('paymentsTab').classList.add('active');
+});
+
+document.getElementById('invoiceTab').addEventListener('click', () => {
+  document.getElementById('paymentsContent').style.display = 'none';
+  document.getElementById('invoiceContent').style.display = 'block';
+  document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+  document.getElementById('invoiceTab').classList.add('active');
+  // Загрузка клиентов для invoiceTab будет в invoice.js
+});
 
 // Загрузка данных
 function fetchPayments() {
