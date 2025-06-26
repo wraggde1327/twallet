@@ -23,8 +23,8 @@
 
   .badge {
     font-size: 12px;
-    width: 22px;
-    height: 22px;
+    width: 25px;
+    height: 25px;
     line-height: 22px;
     margin-left: 4px;
   }
@@ -55,11 +55,6 @@
     height: 28px;
     font-size: 13px;
   }
-
-  .table-header {
-    display: none; /* Прячем заголовок таблицы на мобилке */
-  }
-
   
   .payment-row {
     display: flex;
@@ -69,6 +64,7 @@
     border-bottom: 1px solid #eee;
     font-size: 8px;
   }
+  
   .payment-row > div {
     font-size: clamp(8px, 3vw, 10px);
     line-height: 1.2;
@@ -77,8 +73,7 @@
     overflow: visible;
     text-overflow: unset;
     margin-bottom: 1px;
-  
-}
+  }
 
   .status {
     font-size: 12px;
@@ -90,6 +85,11 @@
   .await {
     background-color: #f7bb04;
     color: white;
+    font-size: 10px;
+  }
+
+  .dialog-edit-input {
+    font-size: 12px;
   }
 }
 
@@ -199,11 +199,11 @@ body {
 .payment-row {
   background: #fafafa;
   border-radius: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 3px;
   /*display: flex;*/
  /* align-items: center;*/
  /* gap: 16px;           /* Отступ между ячейками */
-  padding: 8px 8px;   /* Внутренние отступы слева и справа */
+  padding: 5px 5px;   /* Внутренние отступы слева и справа */
   min-height: 30px;    /* Минимальная высота строки */
   border-bottom: 1px solid #eee; /* Разделитель строк (по желанию) */
   cursor: pointer;
@@ -227,7 +227,7 @@ body {
   color: #4a90e2;
   padding: 5px;
   display: flex;
-  border-radius: 20px;
+  border-radius: 15px;
 /*  display: inline-block;*/
   user-select: none;
   width: max-content;
@@ -237,7 +237,7 @@ body {
   background-color: #f7bb04;
   color: #ffffff;
   font-weight: 450;
-}
+  }
 
 #dialog {
   position: fixed;
