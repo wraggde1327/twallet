@@ -67,10 +67,10 @@
     padding: 8px 6px;
     gap: 2px;
     border-bottom: 1px solid #eee;
-    font-size: 12px;
+    font-size: 8px;
   }
   .payment-row > div {
-    font-size: clamp(9px, 3vw, 12px);
+    font-size: clamp(8px, 3vw, 10px);
     line-height: 1.2;
     white-space: normal;
     word-break: break-word;
