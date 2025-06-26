@@ -1,21 +1,21 @@
 /* Мобильная адаптация (до 600px) */
 @media (max-width: 1000px) {
   .container {
-    background: #ffcccc !important;
+    background: #dddddd !important;
   }
   .payment-row {
     display: flex;
     flex-direction: column;
     font-size: 12px !important;
-    background: #e0f7fa !important;
+ /*   background: #e0f7fa !important;*/
   }
   .payment-row > div {
-    font-size: 11px !important;
+    font-size: 9px !important;
     line-height: 1.2;
     white-space: normal;
     word-break: break-word;
     overflow-wrap: anywhere;
-    background: #c8e6c9 !important;
+   /* background: #c8e6c9 !important;*/
   }
 }
 
@@ -31,7 +31,7 @@ body {
 .container {
   max-width: 720px;
   margin: 20px auto;
-  background: #ffcccc;
+  background: #dddddd;
   border-radius: 16px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   padding: 24px 32px;
