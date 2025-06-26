@@ -17,6 +17,22 @@ const dialogOverlay = document.getElementById("dialog-overlay");
 const dialogButtons = document.getElementById("dialog-buttons");
 const buttons = dialogButtons.getElementsByTagName("button"); // [0] Да, [1] Изменить, [2] Нет
 
+// Telegram Web App интеграция и отображение пользователя
+const tgUserInfoDiv = document.getElementById('tgUserInfo');
+let tgUserLabel = '';
+
+if (window.Telegram && window.Telegram.WebApp) {
+  const tg = window.Telegram.WebApp;
+  tg.ready && tg.ready();
+  const user = tg.initDataUnsafe?.user;
+  if (user) {
+    tgUserLabel = user.username ? '@' + user.username : 'ID: ' + user.id;
+    tgUserInfoDiv.textContent = tgUserLabel;
+    tgUserInfoDiv.title = user.first_name + (user.last_name ? ' ' + user.last_name : '');
+  }
+}
+
+
 // Загрузка данных
 function fetchPayments() {
   updatedAtEl.textContent = "Обновление...";
