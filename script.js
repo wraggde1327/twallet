@@ -51,7 +51,9 @@ document.getElementById('invoiceTab').addEventListener('click', function() {
   document.getElementById('invoiceContent').style.display = 'block';
   this.classList.add('active');
   document.getElementById('paymentsTab').classList.remove('active');
+  if (allClients.length === 0) loadClients();
 });
+
 
 // Загрузка данных
 function fetchPayments() {
