@@ -103,7 +103,7 @@ body {
   background: #fafafa;
   border-radius: 12px;
   margin-bottom: 8px;
-  display: flex;
+  /*display: flex;*/
  /* align-items: center;*/
  /* gap: 16px;           /* Отступ между ячейками */
   padding: 8px 8px;   /* Внутренние отступы слева и справа */
