@@ -299,4 +299,23 @@ body {
   background: #e94b4b;
 }
 
+.tg-user-info {
+  margin-left: 16px;
+  font-size: 1em;
+  color: #555;
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+  align-self: center;
+}
+@media (max-width: 600px) {
+  .tg-user-info {
+    font-size: 0.95em;
+    max-width: 80px;
+  }
+}
+
+
 
