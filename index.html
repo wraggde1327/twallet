@@ -47,42 +47,29 @@
 
     <!-- Вкладка Счет -->
     <div id="invoiceContent" class="tab-content invoice-tab" style="display:none;">
-      <div class="header">
-        <h1>Счет</h1>
-      </div>
-      <form id="invoiceForm" class="invoice-form" autocomplete="off">
-        <!-- Выбор клиента -->
-        <div class="form-group">
-          <label for="clientSelect">Выберите клиента:</label>
-          <select id="clientSelect" class="form-control">
-            <option value="">Загрузка...</option>
-          </select>
-        </div>
-        <!-- Тип платежа -->
-        <div class="form-group">
-          <label>Тип платежа:</label>
-          <div class="radio-group">
-            <label><input type="radio" name="paymentType" value="Счет" checked> Счет</label>
-            <label><input type="radio" name="paymentType" value="Наличные"> Наличные</label>
-          </div>
-        </div>
-        <!-- Сумма -->
-        <div class="form-group">
-          <label for="amountInput">Сумма:</label>
-          <input type="number" id="amountInput" class="form-control" placeholder="Введите сумму" min="0" step="0.01" required>
-        </div>
-        <!-- Чекбокс -->
-        <div class="form-group">
-          <label class="checkbox-label">
-            <input type="checkbox" id="immediateCheckbox">
-            <span>Сразу провести</span>
-          </label>
-        </div>
-        <!-- Кнопка отправки -->
-        <button type="submit" id="createInvoiceBtn" class="submit-btn">Добавить</button>
-      </form>
+    <div class="header">
+      <h1>Создать счет</h1>
     </div>
+    <form id="invoiceForm" class="invoice-form">
+      <div class="form-group">
+        <input type="text" id="clientSearchInput" class="form-control" placeholder="Поиск клиента...">
+        <select id="clientSelect" class="form-control" size="5"></select>
+      </div>
+      <div class="form-group">
+        <div class="payment-type-group">
+          <button type="button" class="payment-type-btn blue active" data-type="Счет">Счет</button>
+          <button type="button" class="payment-type-btn green" data-type="Наличные">Наличные</button>
+          <button type="button" class="payment-type-btn yellow" data-type="Пополнить">Пополнить</button>
+        </div>
+        <input type="hidden" name="paymentType" id="paymentTypeInput" value="Счет">
+      </div>
+      <div class="form-group">
+        <input type="number" id="amountInput" class="form-control" placeholder="Сумма">
+      </div>
+      <button type="submit" class="submit-btn">Создать</button>
+    </form>
   </div>
+</div>
 
   <!-- Диалог и уведомления -->
   <div id="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogText">
