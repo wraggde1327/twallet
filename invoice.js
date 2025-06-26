@@ -113,6 +113,7 @@ invoiceForm.addEventListener('submit', async (e) => {
     sum: parseFloat(amount),
     who: tgUserLabel 
   };
+console.log('payload:', payload);
 
   try {
     const response = await fetch('https://fastapi-myapp-production.up.railway.app/invoices', {
