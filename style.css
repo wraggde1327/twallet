@@ -60,21 +60,25 @@
     display: none; /* Прячем заголовок таблицы на мобилке */
   }
 
+  @media (max-width: 600px) {
   .payment-row {
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    gap: 4px;
+    padding: 8px 6px;
+    gap: 2px;
     border-bottom: 1px solid #eee;
-    font-size: 13px;
+    font-size: 12px;
   }
-
   .payment-row > div {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: clamp(9px, 3vw, 12px);
+    line-height: 1.2;
+    white-space: normal;
+    word-break: break-word;
+    overflow: visible;
+    text-overflow: unset;
+    margin-bottom: 1px;
   }
+}
 
   .status {
     font-size: 12px;
