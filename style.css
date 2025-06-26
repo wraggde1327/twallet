@@ -7,42 +7,88 @@ body {
 
 /* Адаптив */
 @media (max-width: 600px) {
+  /* Контейнер с минимальными отступами */
   .container {
-    margin: 5px auto;
-    
+    margin: 5px 5px;
+    padding: 0 5px;
   }
-  .table-header, .payment-row {
-    grid-template-columns: 20px 2fr 1fr 1fr 1fr 1fr;
-    gap: 8px;
-    padding: 10px 0;
+
+  /* Заголовок и блок с ID пользователя */
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
+
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
   .header-left h1 {
-    font-size: 18px; /* чуть меньше */
+    font-size: 18px; /* уменьшенный заголовок */
+    margin: 0;
   }
+
+  .tg-user-info {
+    font-size: 12px; /* уменьшенный шрифт для ID */
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #555;
+    margin-top: 2px;
+  }
+
+  /* Кнопка обновления — компактнее */
   .refresh-btn {
     width: 38px;
     height: 38px;
-    font-size: 20px; /* чуть меньше */
+    font-size: 18px;
+    align-self: flex-end;
   }
-  /* Добавим уменьшение шрифта для текста в платежах */
+
+  /* Таблица — компактнее, шрифты меньше */
+  .table-header, .payment-row {
+    grid-template-columns: 20px 2fr 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    padding: 8px 0;
+  }
+
+  .table-header {
+    font-size: 12px;
+  }
+
   .payment-row > div {
     font-size: 11px;
+    line-height: 1.2;
   }
-  
-  .dialog-edit-input {
-  font-size: 11px;
-  }
-  
+
+  /* Значок-бейдж */
   .badge {
     font-size: 10px;
+    width: 20px;
+    height: 20px;
   }
-  
-   .tg-user-info {
-    font-size: 0.95em;
-    max-width: 80px;
+
+  /* Поле ввода в диалоге */
+  .dialog-edit-input {
+    font-size: 12px;
+    padding: 6px 10px;
+    margin-top: 10px;
   }
-  
+
+  /* Диалог — адаптивная ширина */
+  #dialog {
+    max-width: 90vw;
+    width: auto;
+    padding: 20px 24px;
+    font-size: 14px;
+  }
 }
+
 
 
 .container {
