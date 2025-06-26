@@ -104,14 +104,14 @@ invoiceForm.addEventListener('submit', async (e) => {
     return;
   }
 
-  const tgUserId = window.tgUserId || null;
-  const who = tgUserId ? `tg_user_${tgUserId}` : 'unknown';
+  /*const tgUserId = window.tgUserId || null;
+  const who = tgUserId ? `tg_user_${tgUserId}` : 'unknown';*/
 
   const payload = {
     id: clientId,
     type: paymentType,
     sum: parseFloat(amount),
-    who: who
+    who: tgUserId
   };
 
   try {
