@@ -19,7 +19,7 @@ const dialogButtons = document.getElementById("dialog-buttons");
 const buttons = dialogButtons.getElementsByTagName("button"); // [0] Да, [1] Изменить, [2] Нет
 
 // --- Telegram Web App интеграция ---
-const tgUserInfoDiv = document.getElementById('tgUserInfo');
+/*const tgUserInfoDiv = document.getElementById('tgUserInfo');*/
 let tgUserLabel = '';
 let tgUserId = null;
 let tgUserObj = null;
