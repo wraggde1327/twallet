@@ -1,6 +1,5 @@
 /* Общие стили для мобильных (до 600px) */
 @media (max-width: 600px) {
-  /* Контейнер с минимальными отступами */
   .container {
     margin: 0;
     padding: 0 4px;
@@ -8,13 +7,12 @@
     box-sizing: border-box;
   }
 
-  /* Заголовок и блок с ID пользователя */
   .header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 8px;
-    margin-top: 30px; /* чтобы не перекрывалось с ником */
+    margin-top: 30px;
     margin-bottom: 8px;
     position: relative;
   }
@@ -39,25 +37,8 @@
     margin-left: 4px;
   }
 
-  /* ID пользователя под заголовком */
-  .tg-user-info {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 11px;
-    color: #888;
-    opacity: 0.8;
-    z-index: 10;
-    background: none;
-    margin: 0;
-    padding: 0;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  /* Кнопка обновления справа, но с небольшим размером */
   .refresh-btn {
-      width: 36px;
+    width: 36px;
     height: 36px;
     font-size: 18px;
     margin-left: auto;
@@ -69,11 +50,11 @@
     align-items: center;
     justify-content: center;
   }
+
   .refresh-btn:hover {
     background-color: #357abd;
   }
 
-  /* Поисковый блок: input и кнопка сброса */
   .search-block {
     display: flex;
     align-items: center;
@@ -111,8 +92,8 @@
     background-color: #a0a0a0;
   }
 
-  /* Таблица заголовок и строки — компактнее */
-  .table-header, .payment-row {
+  .table-header,
+  .payment-row {
     display: grid;
     grid-template-columns: 24px 2fr 1fr 1fr 1fr 1fr;
     gap: 8px;
@@ -137,13 +118,13 @@
     min-height: 30px;
     border-bottom: 1px solid #eee;
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: background-color 0.25s ease;
   }
 
   .payment-row:hover {
     background-color: #e8f0fe;
-    box-shadow: 0 4px 8px rgba(74,144,226,0.15);
+    box-shadow: 0 4px 8px rgba(74, 144, 226, 0.15);
   }
 
   .payment-row > div {
@@ -154,11 +135,6 @@
     text-overflow: ellipsis;
   }
 
-  .badge {
-    font-size: 10px;
-  }
-
-  /* Статус платежа */
   .status {
     font-weight: 450;
     text-transform: capitalize;
@@ -173,78 +149,6 @@
     background-color: #f7bb04;
     color: #ffffff;
     font-weight: 450;
-  }
-
-  /* Диалоговое окно */
-  #dialog {
-    max-width: 90vw;
-    width: auto;
-    padding: 20px 24px;
-    font-size: 14px;
-    border-radius: 20px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    background: white;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    z-index: 1000;
-    text-align: center;
-    box-sizing: border-box;
-  }
-
-  #dialog-buttons {
-    margin-top: 24px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-  }
-
-  #dialog-buttons button {
-    padding: 8px 18px;
-    border-radius: 12px;
-    border: none;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    user-select: none;
-    transition: background-color 0.3s ease;
-  }
-
-  #dialog-buttons button:first-child {
-    background: #4a90e2;
-    color: white;
-  }
-  #dialog-buttons button:first-child:hover {
-    background: #357abd;
-  }
-
-  #dialog-buttons button:nth-child(2) {
-    background: #f39c12;
-    color: white;
-  }
-  #dialog-buttons button:nth-child(2):hover {
-    background: #d87e0a;
-  }
-
-  #dialog-buttons button:last-child {
-    background: #888888;
-    color: white;
-  }
-  #dialog-buttons button:last-child:hover {
-    background: #e94b4b;
-  }
-
-  /* Поле ввода в диалоге */
-  .dialog-edit-input {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 14px;
-    margin-top: 12px;
-    border-radius: 8px;
-    border: 1.5px solid #ccc;
-    box-sizing: border-box;
   }
 }
 
