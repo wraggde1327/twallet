@@ -22,7 +22,11 @@ const tgUserInfoDiv = document.getElementById('tgUserInfo');
 let tgUserLabel = '';
 
 if (window.Telegram && window.Telegram.WebApp) {
-  const tg = window.Telegram.WebApp;
+  const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+if (tg) {
+  document.body.classList.add('telegram-webapp');
+}
+
   tg.ready && tg.ready();
   const user = tg.initDataUnsafe?.user;
   if (user) {
