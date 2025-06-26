@@ -8,7 +8,8 @@ body {
 /* Адаптив */
 @media (max-width: 600px) {
   .container {
-    padding: 5px 5px;
+    margin: 5px auto;
+    
   }
   .table-header, .payment-row {
     grid-template-columns: 20px 2fr 1fr 1fr 1fr 1fr;
@@ -28,33 +29,21 @@ body {
     font-size: 11px;
   }
   
-  #dialog {
-  max-width: 100vw; /* максимум 90% ширины экрана */
-  width: auto; /* чтобы не было фиксированной ширины */
-  box-sizing: border-box;
+  .dialog-edit-input {
+  font-size: 11px;
   }
   
   .badge {
     font-size: 10px;
-    width: 15px;
-    height: 15px;
   }
+  
    .tg-user-info {
     font-size: 0.95em;
     max-width: 80px;
   }
-
   
 }
-.dialog-edit-input {
-  width: 100%;
-  padding: 8px 12px;
-  font-size: 16px;
-  margin-top: 12px;
-  border-radius: 8px;
-  border: 1.5px solid #ccc;
-  box-sizing: border-box;
-}
+
 
 .container {
   max-width: 720px;
@@ -209,6 +198,16 @@ body {
   text-align: center;
   font-size: 16px;
   user-select: none;
+}
+
+.dialog-edit-input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  margin-top: 12px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  box-sizing: border-box;
 }
 
 #dialog-buttons {
