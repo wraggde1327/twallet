@@ -466,3 +466,37 @@ body {
 .autocomplete-option:hover, .autocomplete-option.active {
   background: #e8f0fe;
 }
+.form-control {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+  background: #f9f9f9;
+  transition: border 0.2s;
+}
+.form-control:focus {
+  border-color: #4a90e2;
+  outline: none;
+  background: #fff;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px 0;
+  border: none;
+  border-radius: 12px;
+  background: #4a90e2;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 12px;
+}
+.submit-btn:hover, .submit-btn:focus {
+  background: #3578c7;
+}
+
