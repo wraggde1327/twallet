@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Платежи</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Подключаем Telegram Web App API -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
   <div class="container" role="main" aria-label="Список платежей">
@@ -13,14 +15,16 @@
         <h1>Платежи</h1>
         <span class="badge" id="paymentsCountBadge" aria-live="polite" aria-atomic="true">0</span>
       </div>
+      <!-- Здесь будет отображаться ник/ID Telegram-пользователя -->
+      <div class="tg-user-info" id="tgUserInfo"></div>
       <button class="refresh-btn" onclick="fetchPayments()" aria-label="Обновить данные">⟳</button>
     </div>
 
-     <!-- Блок поиска -->
-  <div class="search-block">
-    <input type="text" id="searchInput" placeholder="Поиск по названию..." aria-label="Поиск по названию платежа" />
-    <button id="clearSearchBtn" aria-label="Сбросить поиск" title="Сбросить поиск">✕</button>
-  </div>
+    <!-- Блок поиска -->
+    <div class="search-block">
+      <input type="text" id="searchInput" placeholder="Поиск по названию..." aria-label="Поиск по названию платежа" />
+      <button id="clearSearchBtn" aria-label="Сбросить поиск" title="Сбросить поиск">✕</button>
+    </div>
 
     <div class="info-block">
       <div class="sum" id="totalSum">Общая сумма: 0</div>
@@ -39,22 +43,32 @@
   </div>
 
   <div id="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogText">
-  <div id="dialogText"></div>
-  <div id="dialog-buttons">
-    <button type="button" aria-label="Подтвердить платеж">Да</button>
-    <button type="button" aria-label="Изменить платеж">Изменить</button>
-    <button type="button" aria-label="Отмена">Нет</button>
-  </div>
-</div>
-
-<!-- Добавь overlay для затемнения диалога -->
-<div id="dialog-overlay"></div>
-
-
-      
+    <div id="dialogText"></div>
+    <div id="dialog-buttons">
+      <button type="button" aria-label="Подтвердить платеж">Да</button>
+      <button type="button" aria-label="Изменить платеж">Изменить</button>
+      <button type="button" aria-label="Отмена">Нет</button>
     </div>
   </div>
+  <div id="dialog-overlay"></div>
 
   <script src="script.js"></script>
+  <script>
+    // Telegram Web App интеграция и отображение пользователя
+    const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+    const tgUserInfoDiv = document.getElementById('tgUserInfo');
+    if (tg) {
+      tg.ready();
+      const user = tg.initDataUnsafe?.user;
+      if (user) {
+        // Показываем никнейм, если есть, иначе id
+        let userLabel = user.username ? '@' + user.username : 'ID: ' + user.id;
+        tgUserInfoDiv.textContent = userLabel;
+        tgUserInfoDiv.title = user.first_name + (user.last_name ? ' ' + user.last_name : '');
+      } else {
+        tgUserInfoDiv.textContent = '';
+      }
+    }
+  </script>
 </body>
 </html>
