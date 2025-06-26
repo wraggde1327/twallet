@@ -39,19 +39,18 @@ if (window.Telegram && window.Telegram.WebApp) {
 }
 
 // --- Переключение вкладок ---
-document.getElementById('paymentsTab').addEventListener('click', () => {
+document.getElementById('paymentsTab').addEventListener('click', function() {
   document.getElementById('paymentsContent').style.display = 'block';
   document.getElementById('invoiceContent').style.display = 'none';
-  document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-  document.getElementById('paymentsTab').classList.add('active');
+  this.classList.add('active');
+  document.getElementById('invoiceTab').classList.remove('active');
 });
 
-document.getElementById('invoiceTab').addEventListener('click', () => {
+document.getElementById('invoiceTab').addEventListener('click', function() {
   document.getElementById('paymentsContent').style.display = 'none';
   document.getElementById('invoiceContent').style.display = 'block';
-  document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-  document.getElementById('invoiceTab').classList.add('active');
-  // Загрузка клиентов для invoiceTab будет в invoice.js
+  this.classList.add('active');
+  document.getElementById('paymentsTab').classList.remove('active');
 });
 
 // Загрузка данных
