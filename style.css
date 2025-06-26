@@ -150,7 +150,7 @@ body {
   /*display: flex;*/
  /* align-items: center;*/
  /* gap: 16px;           /* Отступ между ячейками */
-  padding: 5px 5px;   /* Внутренние отступы слева и справа */
+  padding: 10px 5px;   /* Внутренние отступы слева и справа */
   min-height: 30px;    /* Минимальная высота строки */
   border-bottom: 1px solid #eee; /* Разделитель строк (по желанию) */
   cursor: pointer;
