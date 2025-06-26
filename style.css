@@ -10,12 +10,32 @@
  /*   background: #e0f7fa !important;*/
   }
   .payment-row > div {
-    font-size: 12px !important;
+    font-size: 10px !important;
     line-height: 1.2;
     white-space: normal;
     word-break: break-word;
     overflow-wrap: anywhere;
    /* background: #c8e6c9 !important;*/
+  }
+  .dialog-edit-input {
+    width: 95vw;           /* почти вся ширина экрана */
+    max-width: 98vw;       /* не вылезает за экран */
+    min-width: 0;
+    font-size: 15px;
+    padding: 10px 14px;
+    margin: 12px auto 0 auto; /* сверху — 12px, по бокам и снизу — auto */
+    display: block;
+    border-radius: 8px;
+    border: 1.5px solid #ccc;
+    box-sizing: border-box;
+  }
+  #dialog {
+    min-width: 0;
+    width: 98vw;
+    max-width: 99vw;
+    box-sizing: border-box;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }
 
