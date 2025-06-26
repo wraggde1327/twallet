@@ -438,3 +438,38 @@ body {
 .submit-btn:hover {
   background: #357abd;
 }
+
+.payment-type-group {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+.payment-type-btn {
+  flex: 1 1 0;
+  border: none;
+  border-radius: 16px;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #e0e0e0;
+  color: #666;
+  transition: background 0.2s, color 0.2s;
+}
+.payment-type-btn.blue.active {
+  background: #4a90e2;
+  color: #fff;
+}
+.payment-type-btn.green.active {
+  background: #43b94a;
+  color: #fff;
+}
+.payment-type-btn.yellow.active {
+  background: #f7bb04;
+  color: #fff;
+}
+.payment-type-btn:not(.active) {
+  background: #e0e0e0;
+  color: #888;
+}
+
