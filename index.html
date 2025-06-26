@@ -10,14 +10,16 @@
 </head>
 <body>
   <div class="container">
-      <div class="header">
-      <div class="header-left">
-        <div class="tg-user-info" id="tgUserInfo">
+    <div class="header">
+      <div class="header-left" style="display: flex; align-items: center; gap: 8px;">
         <h1>Платежи</h1>
-        <span class="badge" id="paymentsCountBadge">21</span>
+        <span class="badge" id="paymentsCountBadge">0</span>
       </div>
-    <button class="refresh-btn" onclick="fetchPayments()" aria-label="Обновить данные">⟳</button>
-  </div>
+      <button class="refresh-btn" onclick="fetchPayments()" aria-label="Обновить данные">⟳</button>
+    </div>
+
+    <!-- Здесь можно вывести данные из Telegram, если нужно -->
+    <div class="tg-user-info" id="tgUserInfo" style="margin-bottom: 10px;"></div>
 
   <div class="search-block">
     <input type="text" id="searchInput" placeholder="Поиск по названию..." />
