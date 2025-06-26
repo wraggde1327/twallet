@@ -60,7 +60,7 @@
     display: none; /* Прячем заголовок таблицы на мобилке */
   }
 
-  @media (max-width: 600px) {
+  
   .payment-row {
     display: flex;
     flex-direction: column;
@@ -77,7 +77,7 @@
     overflow: visible;
     text-overflow: unset;
     margin-bottom: 1px;
-  }
+  
 }
 
   .status {
