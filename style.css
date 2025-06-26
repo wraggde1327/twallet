@@ -62,17 +62,20 @@
     padding: 8px 6px;
     gap: 2px;
     border-bottom: 1px solid #eee;
-    font-size: 8px;
+    font-size: 18px;
   }
   
   .payment-row > div {
-    font-size: clamp(8px, 3vw, 10px);
+    font-size: 18px
     line-height: 1.2;
     white-space: normal;
     word-break: break-word;
     overflow: visible;
     text-overflow: unset;
     margin-bottom: 1px;
+    white-space: normal;        /* разрешает автоматический перенос строк */
+  word-break: break-word;     /* переносит длинные слова, если не помещаются */
+  overflow-wrap: anywhere;    /* дополнительная гарантия переноса длинных слов */
   }
 
   .status {
