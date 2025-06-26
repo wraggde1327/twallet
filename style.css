@@ -103,6 +103,12 @@ body {
   background: #fafafa;
   border-radius: 12px;
   margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+ /* gap: 16px;           /* Отступ между ячейками */
+  padding: 8px 8px;   /* Внутренние отступы слева и справа */
+  min-height: 30px;    /* Минимальная высота строки */
+  border-bottom: 1px solid #eee; /* Разделитель строк (по желанию) */
   cursor: pointer;
   transition: background-color 0.25s ease;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -123,8 +129,9 @@ body {
   text-transform: capitalize;
   color: #4a90e2;
   padding: 5px;
+  display: flex;
   border-radius: 20px;
-  display: inline-block;
+/*  display: inline-block;*/
   user-select: none;
   width: max-content;
 }
@@ -251,9 +258,9 @@ body {
   transition: background-color 0.3s ease;
   user-select: none;
 }
-#clearSearchBtn:hover {
+/*#clearSearchBtn:hover {
   background-color: #bcbcbc;
-}
+}*/
 
 /* Затемнение фона */
 #notification-overlay {
