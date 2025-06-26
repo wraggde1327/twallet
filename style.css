@@ -1,4 +1,4 @@
-/* Мобильная адаптация (до 600px) */
+/* === Мобильная адаптация (до 600px) === */
 @media (max-width: 600px) {
   .container {
     margin: 0;
@@ -89,7 +89,7 @@
   }
 }
 
-
+/* === Основные стили === */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -106,6 +106,7 @@ body {
   padding: 24px 32px;
   box-sizing: border-box;
 }
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -113,17 +114,20 @@ body {
   margin-bottom: 20px;
   position: relative;
 }
+
 .header-left {
   display: flex;
   align-items: center;
   gap: 12px;
   user-select: none;
 }
+
 .header-left h1 {
   font-weight: 600;
   font-size: 28px;
   margin: 0;
 }
+
 .badge {
   background: #e94b4b;
   color: white;
@@ -138,6 +142,7 @@ body {
   box-shadow: 0 0 6px rgba(233,75,75,0.8);
   user-select: none;
 }
+
 .refresh-btn {
   width: 44px;
   height: 44px;
@@ -153,11 +158,15 @@ body {
   box-shadow: 0 4px 8px rgba(74,144,226,0.4);
   transition: background-color 0.3s ease;
   user-select: none;
+  /* Добавил плавное изменение теней для лучшего UX */
+  will-change: background-color, box-shadow;
 }
+
 .refresh-btn:hover {
   background-color: #357abd;
   box-shadow: 0 6px 12px rgba(53,122,189,0.6);
 }
+
 .info-block {
   background: #f9fbfd;
   border-radius: 16px;
@@ -166,16 +175,19 @@ body {
   box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
   user-select: none;
 }
+
 .sum {
   font-weight: 600;
   font-size: 18px;
   margin-bottom: 6px;
 }
+
 .updated {
   font-weight: 400;
   font-size: 13px;
   color: #666;
 }
+
 .table-header, .payment-row {
   display: grid;
   grid-template-columns: 40px 1.5fr 1fr 1fr 1fr 1fr;
@@ -184,6 +196,7 @@ body {
   align-items: center;
   user-select: none;
 }
+
 .table-header {
   color: #7a7a7a;
   font-size: 13px;
@@ -192,24 +205,24 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
 .payment-row {
   background: #fafafa;
   border-radius: 12px;
   margin-bottom: 8px;
-  /*display: flex;*/
- /* align-items: center;*/
- /* gap: 16px;           /* Отступ между ячейками */
-  padding: 8px 8px;   /* Внутренние отступы слева и справа */
-  min-height: 30px;    /* Минимальная высота строки */
-  border-bottom: 1px solid #eee; /* Разделитель строк (по желанию) */
+  padding: 8px 8px;
+  min-height: 30px;
+  border-bottom: 1px solid #eee;
   cursor: pointer;
-  transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
+
 .payment-row:hover {
   background-color: #e8f0fe;
   box-shadow: 0 4px 8px rgba(74,144,226,0.15);
 }
+
 .payment-row > div {
   overflow: hidden;
   white-space: nowrap;
@@ -217,16 +230,17 @@ body {
   font-size: 15px;
   color: #222;
 }
+
 .status {
   font-weight: 450;
   text-transform: capitalize;
   color: #4a90e2;
   padding: 5px;
-  display: flex;
   border-radius: 20px;
-/*  display: inline-block;*/
   user-select: none;
   width: max-content;
+  display: flex;
+  align-items: center; /* добавил, чтобы текст вертикально центрировался */
 }
 
 .await {
@@ -268,6 +282,7 @@ body {
   justify-content: flex-end;
   gap: 12px;
 }
+
 #dialog-buttons button {
   padding: 8px 18px;
   border-radius: 12px;
@@ -284,6 +299,7 @@ body {
   background: #4a90e2;
   color: white;
 }
+
 #dialog-buttons button:first-child:hover {
   background: #357abd;
   color: white;
@@ -294,6 +310,7 @@ body {
   background: #f39c12;
   color: white;
 }
+
 #dialog-buttons button:nth-child(2):hover {
   background: #d87e0a;
   color: white;
@@ -304,6 +321,7 @@ body {
   background: #888888;
   color: white;
 }
+
 #dialog-buttons button:last-child:hover {
   background: #e94b4b;
   color: white;
@@ -316,18 +334,21 @@ body {
   gap: 8px;
   margin-bottom: 20px;
 }
+
 #searchInput {
- flex-grow: 1;
+  flex-grow: 1;
   padding: 10px 14px;
   font-size: 16px;
   border-radius: 12px;
   border: 1.5px solid #ccc;
   outline-offset: 2px;
 }
+
 #searchInput:focus {
   border-color: #4a90e2;
   outline: none;
 }
+
 #clearSearchBtn {
   background: #bcbcbc;
   border: none;
@@ -371,32 +392,9 @@ body {
   font-size: 17px;
   color: #fff;
   background: #4a90e2;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 24px rgba(74,144,226,0.8);
+  display: none;
   text-align: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
+  user-select: none;
+  box-sizing: border-box;
 }
-#notification.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-#notification.error {
-  background: #e94b4b;
-}
-
-.tg-user-info {
-  margin-left: 16px;
-  font-size: 1em;
-  color: #555;
-  opacity: 0.85;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 140px;
-  align-self: center;
-}
-
-
-
-
