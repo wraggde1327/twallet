@@ -1,3 +1,253 @@
+/* Общие стили для мобильных (до 600px) */
+@media (max-width: 600px) {
+  /* Контейнер с минимальными отступами */
+  .container {
+    margin: 5px 5px;
+    padding: 0 8px;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+
+  /* Заголовок и блок с ID пользователя */
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    position: relative;
+    padding-top: 4px;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .header-left h1 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .badge {
+    font-size: 12px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+  }
+
+  /* ID пользователя под заголовком */
+  .tg-user-info {
+    font-size: 11px;
+    color: #555;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+    margin-left: 2px;
+  }
+
+  /* Кнопка обновления справа, но с небольшим размером */
+  .refresh-btn {
+    align-self: flex-start;
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(74,144,226,0.4);
+    cursor: pointer;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  .refresh-btn:hover {
+    background-color: #357abd;
+  }
+
+  /* Поисковый блок: input и кнопка сброса */
+  .search-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  #searchInput {
+    flex-grow: 1;
+    padding: 10px 14px;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 1.5px solid #ccc;
+    outline-offset: 2px;
+    box-sizing: border-box;
+  }
+
+  #searchInput:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+
+  #clearSearchBtn {
+    background: #bcbcbc;
+    border: none;
+    color: white;
+    font-size: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+
+  #clearSearchBtn:hover {
+    background-color: #a0a0a0;
+  }
+
+  /* Таблица заголовок и строки — компактнее */
+  .table-header, .payment-row {
+    display: grid;
+    grid-template-columns: 24px 2fr 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    padding: 8px 0;
+    align-items: center;
+  }
+
+  .table-header {
+    font-size: 12px;
+    font-weight: 600;
+    color: #7a7a7a;
+    border-bottom: 2px solid #cfd8dc;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .payment-row {
+    background: #fafafa;
+    border-radius: 12px;
+    margin-bottom: 6px;
+    padding: 8px 8px;
+    min-height: 30px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: background-color 0.25s ease;
+  }
+
+  .payment-row:hover {
+    background-color: #e8f0fe;
+    box-shadow: 0 4px 8px rgba(74,144,226,0.15);
+  }
+
+  .payment-row > div {
+    font-size: 12px;
+    color: #222;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .badge {
+    font-size: 10px;
+  }
+
+  /* Статус платежа */
+  .status {
+    font-weight: 450;
+    text-transform: capitalize;
+    color: #4a90e2;
+    padding: 4px 10px;
+    border-radius: 20px;
+    user-select: none;
+    width: max-content;
+  }
+
+  .await {
+    background-color: #f7bb04;
+    color: #ffffff;
+    font-weight: 450;
+  }
+
+  /* Диалоговое окно */
+  #dialog {
+    max-width: 90vw;
+    width: auto;
+    padding: 20px 24px;
+    font-size: 14px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    background: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 1000;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  #dialog-buttons {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  #dialog-buttons button {
+    padding: 8px 18px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+
+  #dialog-buttons button:first-child {
+    background: #4a90e2;
+    color: white;
+  }
+  #dialog-buttons button:first-child:hover {
+    background: #357abd;
+  }
+
+  #dialog-buttons button:nth-child(2) {
+    background: #f39c12;
+    color: white;
+  }
+  #dialog-buttons button:nth-child(2):hover {
+    background: #d87e0a;
+  }
+
+  #dialog-buttons button:last-child {
+    background: #888888;
+    color: white;
+  }
+  #dialog-buttons button:last-child:hover {
+    background: #e94b4b;
+  }
+
+  /* Поле ввода в диалоге */
+  .dialog-edit-input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: 1.5px solid #ccc;
+    box-sizing: border-box;
+  }
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
