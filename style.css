@@ -15,6 +15,7 @@ body {
 
   /* Заголовок и блок с ID пользователя */
   .header {
+    position: relative
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -32,14 +33,18 @@ body {
     margin: 0;
   }
 
-  .tg-user-info {
-  font-size: 11px;
-  color: #555;
-  max-width: 100%;
+  
+ .tg-user-info {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 10px;
+  color: #888;
+  max-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 4px 0 16px 0; /* небольшой отступ сверху и снизу */
+  user-select: none;
 }
 
   /* Кнопка обновления — компактнее */
