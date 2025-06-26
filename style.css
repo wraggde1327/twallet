@@ -28,7 +28,12 @@
     justify-content: space-between;
     padding: 6px 0;
     font-size: 14px;
-  }
+
+    /* Добавить для обрезки текста */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    }
 
   /* Добавляем подписи к полям */
   #paymentsList > div > div:nth-child(1)::before { content: "#"; font-weight: 600; }
