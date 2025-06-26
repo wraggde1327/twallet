@@ -178,11 +178,7 @@ function startEdit() {
   editInput.min = "0";
   editInput.value = selectedPayment["Сумма"];
   editInput.style.width = "100%";
-  editInput.style.padding = "8px 12px";
-  editInput.style.fontSize = "16px";
-  editInput.style.marginTop = "12px";
-  editInput.style.borderRadius = "8px";
-  editInput.style.border = "1.5px solid #ccc";
+  editInput.classList.add("dialog-edit-input");
   editInput.autofocus = true;
 
   dialogText.appendChild(editInput);
