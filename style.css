@@ -52,7 +52,7 @@ body {
 
   /* Таблица — компактнее, шрифты меньше */
   .table-header, .payment-row {
-    grid-template-columns: 20px 2fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 18px 2fr 1fr 1fr 1fr 1fr;
     gap: 8px;
     padding: 8px 0;
   }
@@ -303,20 +303,19 @@ body {
   color: white;
 }
 
-
-
+/* -- Блок поиска --- */
 .search-block {
   display: flex;
+  align-items: center; /* выравнивание по вертикали */
   gap: 8px;
   margin-bottom: 20px;
 }
 #searchInput {
-  flex-grow: 1;
+ flex-grow: 1;
   padding: 10px 14px;
   font-size: 16px;
   border-radius: 12px;
   border: 1.5px solid #ccc;
-  transition: border-color 0.3s ease;
   outline-offset: 2px;
 }
 #searchInput:focus {
@@ -327,17 +326,20 @@ body {
   background: #bcbcbc;
   border: none;
   color: white;
-  font-size: 13px;
+  font-size: 14px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   cursor: pointer;
-  /*box-shadow: 0 0 3px rgba(233,75,75,0.8);*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background-color 0.3s ease;
   user-select: none;
 }
+
 #clearSearchBtn:hover {
-  background-color: #bcbcbc;
+  background-color: #a0a0a0;
 }
 
 /* Затемнение фона */
