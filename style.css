@@ -27,11 +27,11 @@ body {
   .payment-row > div {
     font-size: 11px;
   }
+  
   #dialog {
   max-width: 100vw; /* максимум 90% ширины экрана */
-  width: auto; /* чтобы не было фиксированной ширины */
-  box-sizing: border-box;
   }
+  
   .badge {
     font-size: 10px;
     width: 15px;
