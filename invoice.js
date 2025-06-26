@@ -111,7 +111,7 @@ invoiceForm.addEventListener('submit', async (e) => {
     id: clientId,
     type: paymentType,
     sum: parseFloat(amount),
-    who: tgUserId
+    who: tgUserLabel 
   };
 
   try {
