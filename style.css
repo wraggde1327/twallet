@@ -404,11 +404,13 @@ body {
   margin: 0;
   text-align: center;
 }
+
 .payment-type-group {
   display: flex;
   gap: 10px;
   width: 100%;
 }
+
 .payment-type-btn {
   flex: 1 1 0;
   border: none;
