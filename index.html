@@ -46,30 +46,30 @@
     </div>
 
     <!-- Вкладка Счет -->
-    <div id="invoiceContent" class="tab-content invoice-tab" style="display:none;">
-    <div class="header">
-      <h1>Создать счет</h1>
-    </div>
-    <form id="invoiceForm" class="invoice-form">
-      <div class="form-group">
-        <input type="text" id="clientSearchInput" class="form-control" placeholder="Поиск клиента...">
-        <select id="clientSelect" class="form-control" size="5"></select>
-      </div>
-      <div class="form-group">
-        <div class="payment-type-group">
-          <button type="button" class="payment-type-btn blue active" data-type="Счет">Счет</button>
-          <button type="button" class="payment-type-btn green" data-type="Наличные">Наличные</button>
-          <button type="button" class="payment-type-btn yellow" data-type="Пополнить">Пополнить</button>
-        </div>
-        <input type="hidden" name="paymentType" id="paymentTypeInput" value="Счет">
-      </div>
-      <div class="form-group">
-        <input type="number" id="amountInput" class="form-control" placeholder="Сумма">
-      </div>
-      <button type="submit" class="submit-btn">Создать</button>
-    </form>
+   <div id="invoiceContent" class="tab-content invoice-tab" style="display:none;">
+  <div class="header">
+    <h1>Создать счет</h1>
   </div>
+  <form id="invoiceForm" class="invoice-form">
+    <div class="form-group">
+      <input type="text" id="clientSearchInput" class="form-control" placeholder="Поиск клиента...">
+      <select id="clientSelect" class="form-control"></select>
+    </div>
+    <div class="form-group">
+      <div class="payment-type-group">
+        <button type="button" class="payment-type-btn blue active" data-type="Счет">Счет</button>
+        <button type="button" class="payment-type-btn green" data-type="Наличные">Наличные</button>
+        <button type="button" class="payment-type-btn yellow" data-type="Пополнить">Пополнить</button>
+      </div>
+      <input type="hidden" name="paymentType" id="paymentTypeInput" value="Счет">
+    </div>
+    <div class="form-group">
+      <input type="number" id="amountInput" class="form-control" placeholder="Сумма">
+    </div>
+    <button type="submit" class="submit-btn">Создать</button>
+  </form>
 </div>
+
 
   <!-- Диалог и уведомления -->
   <div id="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogText">
