@@ -90,20 +90,24 @@
   <script src="script.js"></script>
   <script src="invoice.js"></script>
   <script>
-    // Telegram Web App интеграция и отображение пользователя
-    const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
-    const tgUserInfoDiv = document.getElementById('tgUserInfo');
-    if (tg) {
-      tg.ready();
-      const user = tg.initDataUnsafe?.user;
-      if (user) {
-        let userLabel = user.username ? '@' + user.username : 'ID: ' + user.id;
-        tgUserInfoDiv.textContent = userLabel;
-        tgUserInfoDiv.title = user.first_name + (user.last_name ? ' ' + user.last_name : '');
-      } else {
-        tgUserInfoDiv.textContent = '';
-      }
+  // Telegram Web App интеграция и отображение пользователя
+  const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
+  const tgUserInfoDiv = document.getElementById('tgUserInfo');
+  window.tgUserId = null; // Инициализируем глобальную переменную
+
+  if (tg) {
+    tg.ready();
+    const user = tg.initDataUnsafe?.user;
+    if (user) {
+      let userLabel = user.username ? '@' + user.username : 'ID: ' + user.id;
+      tgUserInfoDiv.textContent = userLabel;
+      tgUserInfoDiv.title = user.first_name + (user.last_name ? ' ' + user.last_name : '');
+      window.tgUserId = user.id; // Сохраняем ID пользователя глобально
+    } else {
+      tgUserInfoDiv.textContent = '';
     }
-  </script>
+  }
+</script>
+
 </body>
 </html>
