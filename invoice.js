@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Переменные ---
-  let allClients = [];
   let selectedClientId = null;
 
   const clientSearchInput = document.getElementById('clientSearchInput');
@@ -8,23 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const invoiceForm = document.getElementById('invoiceForm');
   const paymentTypeInput = document.getElementById('paymentTypeInput');
 
-  // --- Загрузка клиентов ---
   async function loadClients() {
     try {
       const response = await fetch('https://fastapi-myapp-production.up.railway.app/clients');
       if (!response.ok) throw new Error('Ошибка загрузки клиентов');
-      allClients = await response.json();
+      window.allClients = await response.json(); // обновляем глобальную переменную
     } catch (e) {
-      allClients = [];
+      window.allClients = [];
       showNotification('Ошибка загрузки клиентов', 'error');
       console.error(e);
     }
   }
 
-  // --- Показать выпадающий список ---
   function showDropdown(filter = '') {
     clientDropdown.innerHTML = '';
-    const filtered = allClients.filter(cl => cl.name.toLowerCase().includes(filter.toLowerCase()));
+    const filtered = window.allClients.filter(cl => cl.name.toLowerCase().includes(filter.toLowerCase()));
     if (filtered.length === 0) {
       clientDropdown.innerHTML = '<div class="autocomplete-option" style="color:#888;">Нет совпадений</div>';
     } else {
@@ -44,47 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
     clientDropdown.style.display = 'block';
   }
 
-  // --- Скрыть dropdown ---
-  function hideDropdown() {
-    setTimeout(() => { clientDropdown.style.display = 'none'; }, 120);
-  }
+  // ... остальные обработчики ...
 
-  // --- События для автокомплита ---
-  clientSearchInput.addEventListener('focus', () => showDropdown(''));
-  clientSearchInput.addEventListener('input', function() {
-    selectedClientId = null;
-    showDropdown(this.value);
-  });
-  clientSearchInput.addEventListener('blur', hideDropdown);
-
-  // --- При клике вне автокомплита — скрыть ---
-  document.addEventListener('mousedown', function(e) {
-    if (!clientSearchInput.contains(e.target) && !clientDropdown.contains(e.target)) {
-      clientDropdown.style.display = 'none';
-    }
-  });
-
-  // --- Кнопки выбора типа платежа ---
-  document.querySelectorAll('.payment-type-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.payment-type-btn').forEach(b => b.classList.remove('active', 'blue', 'green', 'yellow'));
-      this.classList.add('active');
-      if (this.dataset.type === "Счет") this.classList.add('blue');
-      else if (this.dataset.type === "Наличные") this.classList.add('green');
-      else if (this.dataset.type === "Пополнить") this.classList.add('yellow');
-      paymentTypeInput.value = this.dataset.type;
-    });
-  });
-
-  // --- Загрузи клиентов при первом открытии вкладки ---
+  // При переключении вкладки
   const invoiceTabBtn = document.getElementById('invoiceTab');
   if (invoiceTabBtn) {
     invoiceTabBtn.addEventListener('click', () => {
-      if (allClients.length === 0) loadClients();
+      if (window.allClients.length === 0) loadClients();
     });
   }
 
-  // --- Обработка отправки формы ---
+  // При отправке формы
   invoiceForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -93,13 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const amountStr = invoiceForm.querySelector('#amountInput').value.trim();
     const amount = parseFloat(amountStr);
 
-    // Найти id клиента по имени, если не выбран через dropdown
     let clientId = selectedClientId;
     if (!clientId) {
-      const found = allClients.find(cl => cl.name.toLowerCase() === clientName.toLowerCase());
+      const found = window.allClients.find(cl => cl.name.toLowerCase() === clientName.toLowerCase());
       clientId = found ? found.id : null;
     }
-
+    
     if (!clientId) {
       showNotification('Пожалуйста, выберите клиента из списка', 'error');
       return;
