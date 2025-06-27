@@ -58,15 +58,13 @@
   .submit-btn {
     padding: 12px;
     font-size: 15px;
+    width: 70%;
   }
   .invoice-form {
     padding: 10px 0;
   }
-
-  .submit-btn {
-  width: 70%;
-  }
 }
+
 
 /* --- Основные стили --- */
 body {
@@ -561,21 +559,25 @@ body {
 
 .button-org,
 .button-tarif {
-  padding: 16px 40px;          /* больше внутренние отступы */
+  padding: 16px 30px;          /* больше внутренние отступы */
   margin-right: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   border: none;
   border-radius: 12px;         /* более плавные скругления */
   cursor: pointer;
-  font-weight: 700;
-  font-size: 18px;             /* увеличенный размер шрифта */
-  min-width: 140px;            /* минимальная ширина */
-  height: 50px;                /* фиксированная высота */
+  font-weight: 500;
+  font-size: 16px;             /* увеличенный размер шрифта */
+  min-width: 25%;            /* минимальная ширина */
+  height: 40px;                /* фиксированная высота */
   background-color: #ccc;
   color: #444;
   transition: background-color 0.3s, color 0.3s;
   user-select: none;           /* запрет выделения текста при клике */
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center; /* горизонтальное центрирование */
+  align-items: center;     /* вертикальное центрирование */
+  text-align: center;      /* на всякий случай */
 }
 
 .button-org.active {
@@ -584,7 +586,7 @@ body {
 }
 
 .button-tarif.active {
-  background-color: #f7bb04; /* оранжевый */
+  background-color: #f0ba14; /* оранжевый */
   color: white;
 }
 
