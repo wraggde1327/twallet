@@ -561,16 +561,22 @@ body {
 .contract-row {
   display: flex;
   align-items: center;
-  gap: 28px;                /* БОЛЬШОЙ отступ между всеми элементами */
-  margin-bottom: 48px;      /* БОЛЬШОЙ отступ снизу для следующего блока */
-  flex-wrap: wrap;          /* Если не помещается — перенос на новую строку */
+  flex-wrap: nowrap; /* если не нужно переносить */
+  margin-bottom: 50px; /* отступ снизу */
+  margin-left: -20px;  /* компенсируем отступ слева у детей */
 }
 
+.contract-row > * {
+  margin-left: 20px;   /* отступ между элементами */
+}
+
+/* Стили для input и label остаются прежними */
 .label-text {
   font-weight: 600;
   font-size: 16px;
   white-space: nowrap;
   color: #333;
+  flex-shrink: 0;
 }
 
 .input-field {
@@ -584,19 +590,18 @@ body {
   background: #fff;
 }
 
-/* СДЕЛАТЬ ПОЛЕ "Договор №" КОМПАКТНЫМ */
 .input-contract-number {
-  width: 120px;      /* или подбери по вкусу: 100-140px */
+  width: 120px;
   min-width: 80px;
   max-width: 180px;
 }
 
-/* Поле даты — тоже компактное */
 .input-contract-date {
   width: 140px;
   min-width: 100px;
   max-width: 180px;
 }
+
 
 
 .button-group {
@@ -605,7 +610,7 @@ body {
   margin-bottom: 20px;
 }
 
-.button-org, .batton-tarif {
+.button-org, .button-tarif {
   flex: 1 1 0;
   height: 44px;
   min-width: 120px;
