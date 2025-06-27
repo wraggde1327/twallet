@@ -98,8 +98,9 @@
 
     <div class="form-label" style="margin-bottom: 8px;">Тип организации</div>
     <div class="payment-type-group org-type-group" style="margin-bottom: 20px;">
-  <button type="button" class="payment-type-btn" data-value="ИП">ИП</button>
-  <button type="button" class="payment-type-btn" data-value="ООО">ООО</button>
+    <div>
+  <button type="button" class="button-org active" data-value="ИП">ИП</button>
+  <button type="button" class="button-org" data-value="ООО">ООО</button>
 </div>
     <input type="hidden" id="orgType" value="ИП" />
 
@@ -143,10 +144,9 @@
     <label class="form-label" for="ks">Корр. счет (не обязательно)</label>
     <input type="text" id="ks" class="form-control" />
 
-    <div class="form-label" style="margin-top: 20px; margin-bottom: 8px;">Тариф</div>
-    <div class="payment-type-group tarif-group" style="margin-bottom: 20px;">
-  <button type="button" class="payment-type-btn" data-value="Стандарт">Стандарт</button>
-  <button type="button" class="payment-type-btn" data-value="Пробный">Пробный</button>
+    <div style="margin-top: 20px;">
+  <button type="button" class="button-tarif active" data-value="Стандарт">Стандарт</button>
+  <button type="button" class="button-tarif" data-value="Промо">Промо</button>
 </div>
     <input type="hidden" id="tarif" value="Стандарт" />
 
