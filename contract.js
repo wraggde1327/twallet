@@ -1,24 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const contractForm = document.getElementById('contractForm');
-  if (!contractForm) return;
-
-  const contractNumberInput = document.getElementById('contractNumber');
-  const contractDateInput = document.getElementById('contractDate');
-  const orgTypeButtons = document.querySelectorAll('#contractContent .payment-type-group:nth-of-type(1) .payment-type-btn');
+  const orgTypeButtons = document.querySelectorAll('#contractContent .org-type-group .payment-type-btn');
+  const tarifButtons = document.querySelectorAll('#contractContent .tarif-group .payment-type-btn');
   const orgTypeInput = document.getElementById('orgType');
-
-  const tarifButtons = document.querySelectorAll('#contractContent .payment-type-group:nth-of-type(2) .payment-type-btn');
   const tarifInput = document.getElementById('tarif');
 
-  const notification = document.getElementById('notification');
+  function initDefaultButtons() {
+    if (orgTypeButtons.length > 0) {
+      orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green'));
+      orgTypeButtons[0].classList.add('active', 'blue');
+      orgTypeInput.value = 'ИП';
+    }
 
-  function showNotification(message, duration = 2500) {
-    notification.textContent = message;
-    notification.style.display = 'block';
-    setTimeout(() => {
-      notification.style.display = 'none';
-    }, duration);
+    if (tarifButtons.length > 0) {
+      tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green'));
+      tarifButtons[0].classList.add('active', 'yellow');
+      tarifInput.value = 'Стандарт';
+    }
   }
+
+  initDefaultButtons();
+
+  const notification = document.getElementById('notification');
 
   function generateContractNumber() {
     const now = new Date();
