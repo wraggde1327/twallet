@@ -48,26 +48,34 @@ document.addEventListener('DOMContentLoaded', () => {
   contractDateInput.valueAsDate = new Date();
   initDefaultButtons();
 
-  // Обработчики выбора ИП/ООО
-  orgTypeButtons.forEach(btn => {
+   // Обработчики выбора ИП/ООО
+orgTypeButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green'));
+    orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green-org'));
     btn.classList.add('active');
-    if (btn.dataset.value === 'ИП') btn.classList.add('blue');
-    else if (btn.dataset.value === 'ООО') btn.classList.add('green');
+    if (btn.dataset.value === 'ИП') {
+      btn.classList.add('blue');
+    } else if (btn.dataset.value === 'ООО') {
+      btn.classList.add('green-org');
+    }
     orgTypeInput.value = btn.dataset.value;
   });
 });
 
+// Обработчики выбора тарифа
 tarifButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green'));
+    tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green-tarif'));
     btn.classList.add('active');
-    if (btn.dataset.value === 'Стандарт') btn.classList.add('yellow');
-    else if (btn.dataset.value === 'Пробный') btn.classList.add('green');
+    if (btn.dataset.value === 'Стандарт') {
+      btn.classList.add('yellow');
+    } else if (btn.dataset.value === 'Пробный') {
+      btn.classList.add('green-tarif');
+    }
     tarifInput.value = btn.dataset.value;
   });
 });
+
 
   // Отправка формы
   contractForm.addEventListener('submit', async (e) => {
