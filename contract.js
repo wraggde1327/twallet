@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Простая валидация обязательных полей
     if (!data.zakazchik || !data.inn || !data.ogrn || !data.lico || !data.osnovan || !data.rucl || !data.adress || !data.pochta || !data.bank || !data.bik || !data.rs) {
-      alert('Пожалуйста, заполните все обязательные поля');
+      showNotification('Пожалуйста, заполните все обязательные поля', 3000);
       return;
     }
 
