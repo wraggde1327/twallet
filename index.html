@@ -48,8 +48,12 @@
     <!-- Вкладка Счет -->
    <div id="invoiceContent" class="tab-content invoice-tab" style="display: none;">
   <div class="header">
-    <h1>Создать счет</h1>
-  </div>
+  <h1>
+    Создать счет
+    <span id="clientsLoadIndicator" title="Статус загрузки клиентов"></span>
+  </h1>
+</div>
+
   <form id="invoiceForm" class="invoice-form">
     <div class="form-group">
   <label for="clientSearchInput" class="form-label">Клиент</label>
