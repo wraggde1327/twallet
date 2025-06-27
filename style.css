@@ -453,9 +453,19 @@ body {
   background: #43b94a;
   color: #fff;
 }
+//для организации кнопка
+.payment-type-btn.green-org.active {
+  background: #43b94a;
+  color: #fff;
+}
 
 .payment-type-btn.yellow.active {
   background: #f7bb04;
+  color: #fff;
+}
+//для тарифа кнопка
+.payment-type-btn.green-tarif.active {
+  background: #43b94a;
   color: #fff;
 }
 
