@@ -610,7 +610,8 @@ body {
   margin-bottom: 20px;
 }
 
-.button-org, .button-tarif {
+.button-org, 
+.button-tarif {
   flex: 1 1 0;
   height: 44px;
   min-width: 120px;
