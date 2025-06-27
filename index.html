@@ -85,16 +85,15 @@
     <h2>Создать договор</h2>
   <form id="contractForm" novalidate>
     <!-- Поля договора (по примеру из contract.html) -->
-     <div class="contract-header">
-      <div class="field-group">
-        <label for="contractNumber">№ договора</label>
-        <input type="text" id="contractNumber" />
-      </div>
-      <div class="field-group">
-        <label for="contractDate">Дата</label>
-        <input type="date" id="contractDate" />
-      </div>
-    </div>
+     <div class="contract-row">
+  <label for="contractNumber" class="label-left">№ договора</label>
+  <label for="contractDate" class="label-right">Дата</label>
+</div>
+<div class="contract-row">
+  <input type="text" id="contractNumber" class="input-left" />
+  <input type="date" id="contractDate" class="input-right" />
+</div>
+
 
     <div class="form-label" style="margin-bottom: 20px;">Тип организации</div>
       <div>
