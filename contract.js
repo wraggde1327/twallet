@@ -19,6 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initDefaultButtons();
+  
+  // --- Функция уведомлений ---
+  function showNotification(text, type = '', timeout = 2500) {
+    const notif = document.getElementById('notification');
+    if (!notif) return;
+    notif.textContent = text;
+    notif.className = 'show' + (type === 'error' ? ' error' : '');
+    setTimeout(() => {
+      notif.className = '';
+    }, timeout);
+  }
 
   const notification = document.getElementById('notification');
 
