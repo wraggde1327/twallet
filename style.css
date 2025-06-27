@@ -559,11 +559,12 @@ body {
 
 // формы и классы Догворы доп
 .contract-row {
-  display: flex;
-  align-items: center;
-  gap: 40px;              /* увеличенный отступ между элементами */
+  display: flex !important;          /* обязательно flex */
+  align-items: center !important;    /* вертикальное выравнивание */
+  gap: 40px !important;               /* отступы между элементами */
   max-width: 600px;
-  margin: 0 auto 50px;    /* больше отступ снизу для следующего блока */
+  margin: 0 auto 50px !important;    /* отступ снизу */
+  box-sizing: border-box;
 }
 
 .label-text {
@@ -571,6 +572,13 @@ body {
   font-size: 16px;
   white-space: nowrap;
   color: #333;
+  flex-shrink: 0;                    /* не сжимать */
+  user-select: none;
+}
+
+.date-label {
+  width: 30px;
+  text-align: center;
 }
 
 .input-field {
@@ -580,7 +588,6 @@ body {
   border: 1.5px solid #ccc;
   border-radius: 14px;
   box-sizing: border-box;
-  min-width: 150px;
   transition: border-color 0.3s;
 }
 
@@ -589,6 +596,19 @@ body {
   outline: none;
   box-shadow: 0 0 6px rgba(74, 144, 226, 0.5);
 }
+
+/* Поле договора занимает всё свободное пространство */
+.input-contract-number {
+  flex-grow: 1 !important;
+  min-width: 150px;
+}
+
+/* Поле даты фиксированной ширины */
+.input-contract-date {
+  width: 150px !important;
+  flex-shrink: 0;
+}
+
 
 .button-group {
   display: flex;
