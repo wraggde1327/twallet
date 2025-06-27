@@ -39,20 +39,26 @@ if (window.Telegram && window.Telegram.WebApp) {
 }
 
 // --- Переключение вкладок ---
-document.getElementById('paymentsTab').addEventListener('click', function() {
-  document.getElementById('paymentsContent').style.display = 'block';
-  document.getElementById('invoiceContent').style.display = 'none';
-  this.classList.add('active');
-  document.getElementById('invoiceTab').classList.remove('active');
-});
+const paymentsTab = document.getElementById('paymentsTab');
+const invoiceTab = document.getElementById('invoiceTab');
 
-document.getElementById('invoiceTab').addEventListener('click', function() {
-  document.getElementById('paymentsContent').style.display = 'none';
-  document.getElementById('invoiceContent').style.display = 'block';
-  this.classList.add('active');
-  document.getElementById('paymentsTab').classList.remove('active');
-  if (allClients.length === 0) loadClients();
-});
+if (paymentsTab && invoiceTab) {
+  paymentsTab.addEventListener('click', function() {
+    document.getElementById('paymentsContent').style.display = 'block';
+    document.getElementById('invoiceContent').style.display = 'none';
+    this.classList.add('active');
+    invoiceTab.classList.remove('active');
+  });
+
+  invoiceTab.addEventListener('click', function() {
+    document.getElementById('paymentsContent').style.display = 'none';
+    document.getElementById('invoiceContent').style.display = 'block';
+    this.classList.add('active');
+    paymentsTab.classList.remove('active');
+    if (window.allClients && window.allClients.length === 0) loadClients();
+  });
+}
+
 
 
 // Загрузка данных
