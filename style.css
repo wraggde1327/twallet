@@ -453,19 +453,9 @@ body {
   background: #43b94a;
   color: #fff;
 }
-//для организации кнопка
-.payment-type-btn.green-org.active {
-  background: #43b94a;
-  color: #fff;
-}
 
 .payment-type-btn.yellow.active {
   background: #f7bb04;
-  color: #fff;
-}
-//для тарифа кнопка
-.payment-type-btn.green-tarif.active {
-  background: #43b94a;
   color: #fff;
 }
 
@@ -567,6 +557,29 @@ body {
 
 #clientsLoadIndicator.error {
   background-color: red;
+}
+
+.button-org,
+.button-tarif {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #ccc;
+  color: #444;
+  transition: background-color 0.3s;
+}
+
+.button-org.active {
+  background-color: #4a90e2; /* синий */
+  color: white;
+}
+
+.button-tarif.active {
+  background-color: #f7bb04; /* оранжевый */
+  color: white;
 }
 
 
