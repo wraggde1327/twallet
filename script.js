@@ -19,25 +19,29 @@ const dialogButtons = document.getElementById("dialog-buttons");
 const buttons = dialogButtons.getElementsByTagName("button"); // [0] Да, [1] Изменить, [2] Нет
 
 // --- Telegram Web App интеграция ---
-/*const tgUserInfoDiv = document.getElementById('tgUserInfo');*/
+const tgUserInfoDiv = document.getElementById('tgUserInfo');
 let tgUserLabel = '';
 let tgUserId = null;
 let tgUserObj = null;
 
-if (window.Telegram && window.Telegram.WebApp) {
-  const tg = window.Telegram.WebApp;
+const tg = window.Telegram?.WebApp;
+
+if (tg) {
   document.body.classList.add('telegram-webapp');
-  tg.ready && tg.ready();
+  tg.ready();
+
   const user = tg.initDataUnsafe?.user;
   if (user) {
     tgUserObj = user;
     tgUserId = user.id;
     tgUserLabel = user.username ? '@' + user.username : 'ID: ' + user.id;
-    tgUserInfoDiv.textContent = tgUserLabel;
-    tgUserInfoDiv.title = user.first_name + (user.last_name ? ' ' + user.last_name : '');
+
+    if (tgUserInfoDiv) {
+      tgUserInfoDiv.textContent = tgUserLabel;
+      tgUserInfoDiv.title = user.first_name + (user.last_name ? ' ' + user.last_name : '');
+    }
   }
 }
-
 // --- Переключение вкладок ---
 const paymentsTab = document.getElementById('paymentsTab');
 const invoiceTab = document.getElementById('invoiceTab');
