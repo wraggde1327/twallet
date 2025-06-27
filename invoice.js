@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.allClients = await response.json();
 
       clientsLoadIndicator.style.backgroundColor = 'green'; // загрузка успешна
-      showDropdown(clientSearchInput.value);
+    //  showDropdown(clientSearchInput.value);
     } catch (e) {
       window.allClients = [];
       clientsLoadIndicator.style.backgroundColor = 'red'; // ошибка загрузки
