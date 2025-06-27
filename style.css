@@ -558,58 +558,57 @@ body {
 }
 
 // формы и классы Догворы доп
-.contract-row {
+.contract-fields-row {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
-.label-left,
-.input-left {
-  flex: 1 1 60%; /* занимает примерно 60% ширины */
+.contract-field {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.label-right,
-.input-right {
-  flex: 1 1 35%; /* занимает примерно 35% ширины */
-  text-align: right;
-}
-
-/* Стили для input */
-.input-left,
-.input-right {
-  height: 40px;
-  padding: 8px 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-sizing: border-box;
-}
-
-.button-org,
-.button-tarif {
-  padding: 16px 30px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
+.contract-field label {
+  margin-bottom: 7px;
   font-weight: 500;
-  font-size: 16px;
-  flex: 1; /* кнопки равномерно делят ширину контейнера */
-  height: 40px;
-  background-color: #ccc;
-  color: #444;
-  transition: background-color 0.3s, color 0.3s;
-  user-select: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 0; /* убираем margin-right, чтобы не было лишних отступов */
+  font-size: 15px;
 }
 
+.contract-field input {
+  height: 42px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0 14px;
+  font-size: 16px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+
+.button-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.button-org {
+  flex: 1 1 0;
+  height: 44px;
+  min-width: 120px;
+  background: #ccc;
+  color: #444;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .button-org.active {
   background-color: #4a90e2; /* синий */
