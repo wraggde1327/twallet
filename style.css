@@ -561,9 +561,9 @@ body {
 .contract-row {
   display: flex;
   align-items: center;
-  gap: 24px;          /* увеличенный отступ между элементами */
+  gap: 40px;              /* увеличенный отступ между элементами */
   max-width: 600px;
-  margin: 0 auto 32px; /* больший отступ снизу для следующей строки */
+  margin: 0 auto 50px;    /* больше отступ снизу для следующего блока */
 }
 
 .label-text {
@@ -574,11 +574,11 @@ body {
 }
 
 .input-field {
-  height: 44px;               /* чуть выше для удобства */
-  padding: 10px 16px;         /* увеличенные внутренние отступы */
+  height: 44px;
+  padding: 10px 16px;
   font-size: 16px;
   border: 1.5px solid #ccc;
-  border-radius: 14px;        /* более закруглённые углы */
+  border-radius: 14px;
   box-sizing: border-box;
   min-width: 150px;
   transition: border-color 0.3s;
@@ -589,10 +589,6 @@ body {
   outline: none;
   box-shadow: 0 0 6px rgba(74, 144, 226, 0.5);
 }
-
-
-
-
 
 .button-group {
   display: flex;
