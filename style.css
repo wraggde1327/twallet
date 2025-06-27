@@ -561,26 +561,35 @@ body {
 .contract-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  max-width: 600px; /* по желанию */
-  margin: 0 auto 20px;
+  gap: 24px;          /* увеличенный отступ между элементами */
+  max-width: 600px;
+  margin: 0 auto 32px; /* больший отступ снизу для следующей строки */
 }
 
 .label-text {
   font-weight: 600;
   font-size: 16px;
-  white-space: nowrap; /* чтобы текст не переносился */
+  white-space: nowrap;
+  color: #333;
 }
 
 .input-field {
-  height: 38px;
-  padding: 6px 12px;
+  height: 44px;               /* чуть выше для удобства */
+  padding: 10px 16px;         /* увеличенные внутренние отступы */
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: 1.5px solid #ccc;
+  border-radius: 14px;        /* более закруглённые углы */
   box-sizing: border-box;
-  min-width: 140px;
+  min-width: 150px;
+  transition: border-color 0.3s;
 }
+
+.input-field:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 6px rgba(74, 144, 226, 0.5);
+}
+
 
 
 
