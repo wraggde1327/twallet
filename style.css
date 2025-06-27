@@ -558,38 +558,30 @@ body {
 }
 
 // формы и классы Догворы доп
-.contract-fields-row {
+.contract-row {
   display: flex;
-  gap: 16px;
-  width: 100%;
-  max-width: 600px; /* можно подстроить */
-  margin-bottom: 16px;
+  align-items: center;
+  gap: 12px;
+  max-width: 600px; /* по желанию */
+  margin: 0 auto 20px;
 }
 
-.contract-field {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
+.label-text {
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap; /* чтобы текст не переносился */
 }
 
-.labels-row .contract-field:first-child label {
-  text-align: left;
-}
-
-.labels-row .contract-field:last-child label {
-  text-align: right;
-}
-
-.inputs-row .contract-field input {
-  height: 42px;
-  padding: 8px 12px;
+.input-field {
+  height: 38px;
+  padding: 6px 12px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 6px;
   box-sizing: border-box;
-  width: 100%;
+  min-width: 140px;
 }
+
 
 
 
