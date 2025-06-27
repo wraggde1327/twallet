@@ -557,6 +557,37 @@ body {
   background-color: red;
 }
 
+// формы и классы Догворы доп
+.contract-header {
+  display: flex;
+  flex-wrap: nowrap;          /* чтобы элементы были в одну строку */
+  justify-content: space-between; /* равномерное распределение */
+  align-items: center;        /* выравнивание по вертикали */
+  gap: 10px;                  /* отступ между группами */
+  margin-bottom: 20px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;                   /* чтобы обе группы занимали равное пространство */
+}
+
+.field-group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.field-group input {
+  height: 40px;              /* одинаковая высота для всех полей */
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
 .button-org,
 .button-tarif {
   padding: 16px 30px;          /* больше внутренние отступы */
