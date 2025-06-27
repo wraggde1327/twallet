@@ -1,32 +1,46 @@
-// Объявляем глобальную переменную allClients, чтобы она была доступна везде
-window.allClients = window.allClients || [];
-
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Переменные ---
   let selectedClientId = null;
 
-  // Получаем элементы из DOM
   const clientSearchInput = document.getElementById('clientSearchInput');
   const clientDropdown = document.getElementById('clientDropdown');
   const invoiceForm = document.getElementById('invoiceForm');
   const paymentTypeInput = document.getElementById('paymentTypeInput');
-  const invoiceTabBtn = document.getElementById('invoiceTab');
-  const paymentsTabBtn = document.getElementById('paymentsTab');
+  const clientsLoadIndicator = document.getElementById('clientsLoadIndicator');
 
-  // --- Функция загрузки клиентов ---
+  window.allClients = window.allClients || [];
+
+  // --- Функция уведомлений ---
+  function showNotification(text, type = '', timeout = 2500) {
+    const notif = document.getElementById('notification');
+    if (!notif) return;
+    notif.textContent = text;
+    notif.className = 'show' + (type === 'error' ? ' error' : '');
+    setTimeout(() => {
+      notif.className = '';
+    }, timeout);
+  }
+
+  // --- Загрузка клиентов ---
   async function loadClients() {
     try {
+      clientsLoadIndicator.style.backgroundColor = 'gray'; // загрузка началась
+
       const response = await fetch('https://fastapi-myapp-production.up.railway.app/clients');
       if (!response.ok) throw new Error('Ошибка загрузки клиентов');
       window.allClients = await response.json();
-      console.log('Клиенты загружены:', window.allClients);
+
+      clientsLoadIndicator.style.backgroundColor = 'green'; // загрузка успешна
+      showDropdown(clientSearchInput.value);
     } catch (e) {
       window.allClients = [];
+      clientsLoadIndicator.style.backgroundColor = 'red'; // ошибка загрузки
       showNotification('Ошибка загрузки клиентов', 'error');
       console.error(e);
     }
   }
 
-  // --- Показать выпадающий список клиентов ---
+  // --- Показать выпадающий список ---
   function showDropdown(filter = '') {
     clientDropdown.innerHTML = '';
     const filtered = window.allClients.filter(cl => cl.name.toLowerCase().includes(filter.toLowerCase()));
@@ -62,8 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   clientSearchInput.addEventListener('blur', hideDropdown);
 
-  // --- Скрыть dropdown при клике вне ---
-  document.addEventListener('mousedown', (e) => {
+  // --- При клике вне автокомплита — скрыть ---
+  document.addEventListener('mousedown', function(e) {
     if (!clientSearchInput.contains(e.target) && !clientDropdown.contains(e.target)) {
       clientDropdown.style.display = 'none';
     }
@@ -81,25 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Переключение вкладок ---
-  if (paymentsTabBtn && invoiceTabBtn) {
-    paymentsTabBtn.addEventListener('click', () => {
-      document.getElementById('paymentsContent').style.display = 'block';
-      document.getElementById('invoiceContent').style.display = 'none';
-      paymentsTabBtn.classList.add('active');
-      invoiceTabBtn.classList.remove('active');
-    });
+  // --- Инициализация индикатора серым цветом ---
+  clientsLoadIndicator.style.backgroundColor = 'gray';
 
+  // --- Загрузка клиентов при первом открытии вкладки ---
+  const invoiceTabBtn = document.getElementById('invoiceTab');
+  if (invoiceTabBtn) {
     invoiceTabBtn.addEventListener('click', () => {
-      document.getElementById('paymentsContent').style.display = 'none';
-      document.getElementById('invoiceContent').style.display = 'block';
-      invoiceTabBtn.classList.add('active');
-      paymentsTabBtn.classList.remove('active');
-
-      // Загружаем клиентов при первом открытии вкладки "Создать счет"
-      if (window.allClients.length === 0) {
-        loadClients();
-      }
+      if (window.allClients.length === 0) loadClients();
     });
   }
 
@@ -112,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const amountStr = invoiceForm.querySelector('#amountInput').value.trim();
     const amount = parseFloat(amountStr);
 
-    // Найти id клиента по имени, если не выбран через dropdown
     let clientId = selectedClientId;
     if (!clientId) {
       const found = window.allClients.find(cl => cl.name.toLowerCase() === clientName.toLowerCase());
@@ -128,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Получаем tgUserId из глобальной переменной, если она есть
     const who = window.tgUserId ? `tg_user_${window.tgUserId}` : 'unknown';
 
     const payload = {
@@ -152,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
         clientSearchInput.value = '';
         selectedClientId = null;
 
-        // Сброс кнопок выбора типа платежа
         document.querySelectorAll('.payment-type-btn').forEach(b => b.classList.remove('active', 'blue', 'green', 'yellow'));
         const blueBtn = document.querySelector('.payment-type-btn.blue');
         if (blueBtn) blueBtn.classList.add('active');
@@ -167,15 +167,4 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(error);
     }
   });
-
-  // --- Функция уведомлений ---
-  function showNotification(text, type = '', timeout = 2500) {
-    const notif = document.getElementById('notification');
-    if (!notif) return;
-    notif.textContent = text;
-    notif.className = 'show' + (type === 'error' ? ' error' : '');
-    setTimeout(() => {
-      notif.className = '';
-    }, timeout);
-  }
 });
