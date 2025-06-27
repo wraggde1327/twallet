@@ -104,8 +104,8 @@ invoiceForm.addEventListener('submit', async (e) => {
     return;
   }
 
-  /*const tgUserId = window.tgUserId || null;*/
-  const who = window.tgUserId ? `tg_user_${window.tgUserId}` : 'unknown';
+  
+  const who = tgUserId ? `tg_user_${tgUserId}` : 'xz';
 
 
   const payload = {
