@@ -1,16 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Инициализация элементов
+  const contractForm = document.getElementById('contractForm');
+  if (!contractForm) return;
+
   const contractNumberInput = document.getElementById('contractNumber');
   const contractDateInput = document.getElementById('contractDate');
-  const orgTypeButtons = document.querySelectorAll('.payment-type-group:nth-of-type(1) .payment-type-btn');
+  const orgTypeButtons = document.querySelectorAll('#contractContent .payment-type-group:nth-of-type(1) .payment-type-btn');
   const orgTypeInput = document.getElementById('orgType');
 
-  const tarifButtons = document.querySelectorAll('.payment-type-group:nth-of-type(2) .payment-type-btn');
+  const tarifButtons = document.querySelectorAll('#contractContent .payment-type-group:nth-of-type(2) .payment-type-btn');
   const tarifInput = document.getElementById('tarif');
 
-  const contractForm = document.getElementById('contractForm');
+  const notification = document.getElementById('notification');
 
-  // Генерация номера договора формата "2706/2025"
+  function showNotification(message, duration = 2500) {
+    notification.textContent = message;
+    notification.style.display = 'block';
+    setTimeout(() => {
+      notification.style.display = 'none';
+    }, duration);
+  }
+
   function generateContractNumber() {
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
@@ -19,11 +28,22 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${day}${month}/${year}`;
   }
 
-  // Устанавливаем номер договора и дату по умолчанию
+  function initDefaultButtons() {
+    orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green'));
+    orgTypeButtons[0].classList.add('active', 'blue');
+    orgTypeInput.value = 'ИП';
+
+    tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green'));
+    tarifButtons[0].classList.add('active', 'yellow');
+    tarifInput.value = 'Стандарт';
+  }
+
+  // Инициализация
   contractNumberInput.value = generateContractNumber();
   contractDateInput.valueAsDate = new Date();
+  initDefaultButtons();
 
-  // Обработчик выбора ИП или ООО
+  // Обработчики выбора ИП/ООО
   orgTypeButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green'));
@@ -34,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Обработчик выбора тарифа
+  // Обработчики выбора тарифа
   tarifButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green'));
@@ -49,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
   contractForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Собираем данные из формы
     const data = {
       contractNumber: contractNumberInput.value,
       contractDate: contractDateInput.value,
@@ -70,13 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
       tarif: tarifInput.value,
     };
 
-    // Валидация (пример простая, можно расширить)
+    // Простая валидация обязательных полей
     if (!data.zakazchik || !data.inn || !data.ogrn || !data.lico || !data.osnovan || !data.rucl || !data.adress || !data.pochta || !data.bank || !data.bik || !data.rs) {
       alert('Пожалуйста, заполните все обязательные поля');
       return;
     }
 
     try {
+      showNotification('Отправляем...', 3000);
+
       const response = await fetch('https://fastapi-myapp-production.up.railway.app/contracts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -84,26 +105,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (response.ok) {
-        alert('Договор успешно создан!');
+        showNotification('Договор успешно создан!', 3000);
         contractForm.reset();
-        // Обновим номер и дату после сброса
         contractNumberInput.value = generateContractNumber();
         contractDateInput.valueAsDate = new Date();
-
-        // Сбросим выбор кнопок
-        orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green'));
-        orgTypeButtons[0].classList.add('active', 'blue');
-        orgTypeInput.value = 'ИП';
-
-        tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green'));
-        tarifButtons[0].classList.add('active', 'yellow');
-        tarifInput.value = 'Стандарт';
+        initDefaultButtons();
       } else {
         const errText = await response.text();
-        alert('Ошибка при создании договора: ' + errText);
+        showNotification('Ошибка при создании договора: ' + errText, 4000);
       }
     } catch (error) {
-      alert('Ошибка сети: ' + error.message);
+      showNotification('Ошибка сети: ' + error.message, 4000);
     }
   });
 });
