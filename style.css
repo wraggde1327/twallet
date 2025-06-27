@@ -62,6 +62,10 @@
   .invoice-form {
     padding: 10px 0;
   }
+
+  .submit-btn {
+  width: 70%;
+  }
 }
 
 /* --- Основные стили --- */
@@ -407,11 +411,20 @@ body {
   text-align: center;
 }
 
+.form-label {
+  display: block;          /* Чтобы label занимал всю ширину и отступы работали корректно */
+  margin-bottom: 10px;      /* Отступ снизу — расстояние до поля ввода */
+  font-weight: 600;        /* Немного выделим текст */
+  font-size: 16px;         /* Подходящий размер шрифта */
+  color: #615e5e;             /* Цвет текста — можно изменить под дизайн */
+  user-select: none;       /* Чтобы текст метки нельзя было выделить случайно */
+}
+
 /* Группа кнопок с отступами */
 .payment-type-group {
   display: flex;
   gap: 20px; /* горизонтальный и вертикальный отступ между кнопками */
-  width: 100%;
+  width: 90%;
   margin-bottom: 20px; /* отступ снизу всей группы */
 }
 
@@ -509,11 +522,11 @@ body {
 /* Кнопка отправки */
 .submit-btn {
   display: block; /* для корректного центрирования */
-  width: 50%;
+  width: 70%;
   padding: 14px 0;
   border: none;
   border-radius: 12px;
-  background: #4a90e2;
+  background: #67c43e;
   color: #fff;
   font-size: 18px;
   font-weight: 700;
