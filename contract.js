@@ -35,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Инициализация полей и кнопок
   contractNumberInput.value = generateContractNumber();
   contractDateInput.valueAsDate = new Date();
-  initDefaultButtons();
-
+  
  // Функция переключения для группы org
   orgButtons.forEach(btn => {
     btn.addEventListener('click', () => {
