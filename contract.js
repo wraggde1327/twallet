@@ -3,13 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const contractDateInput = document.getElementById('contractDate');
   const contractForm = document.getElementById('contractForm');
 
-  const orgTypeButtons = document.querySelectorAll('#contractContent .org-type-group .payment-type-btn');
-  const tarifButtons = document.querySelectorAll('#contractContent .tarif-group .payment-type-btn');
+  const orgButtons = document.querySelectorAll('.button-org');
+  const tarifButtons = document.querySelectorAll('.button-tarif');
+
   const orgTypeInput = document.getElementById('orgType');
   const tarifInput = document.getElementById('tarif');
 
   // Уведомления
   const notification = document.getElementById('notification');
+  
   function showNotification(text, type = '', timeout = 2500) {
     if (!notification) return;
     notification.textContent = text;
@@ -29,52 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${day}${month}/${year}`;
   }
 
-  function initDefaultButtons() {
-    if (orgTypeButtons.length > 0) {
-      orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green'));
-      orgTypeButtons[0].classList.add('active', 'blue');
-      orgTypeInput.value = 'ИП';
-    }
-
-    if (tarifButtons.length > 0) {
-      tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green'));
-      tarifButtons[0].classList.add('active', 'yellow');
-      tarifInput.value = 'Стандарт';
-    }
-  }
-
+  
   // Инициализация полей и кнопок
   contractNumberInput.value = generateContractNumber();
   contractDateInput.valueAsDate = new Date();
   initDefaultButtons();
 
-   // Обработчики выбора ИП/ООО
-orgTypeButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green-org'));
-    btn.classList.add('active');
-    if (btn.dataset.value === 'ИП') {
-      btn.classList.add('blue');
-    } else if (btn.dataset.value === 'ООО') {
-      btn.classList.add('green-org');
-    }
-    orgTypeInput.value = btn.dataset.value;
+ // Функция переключения для группы org
+  orgButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      orgButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      orgTypeInput.value = btn.dataset.value;
+    });
   });
-});
 
-// Обработчики выбора тарифа
-tarifButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green-tarif'));
-    btn.classList.add('active');
-    if (btn.dataset.value === 'Стандарт') {
-      btn.classList.add('yellow');
-    } else if (btn.dataset.value === 'Пробный') {
-      btn.classList.add('green-tarif');
-    }
-    tarifInput.value = btn.dataset.value;
+  // Функция переключения для группы tarif
+  tarifButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tarifButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tarifInput.value = btn.dataset.value;
+    });
   });
-});
 
 
   // Отправка формы
