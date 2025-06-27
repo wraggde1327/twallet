@@ -55,11 +55,10 @@ if (paymentsTab && invoiceTab) {
     document.getElementById('invoiceContent').style.display = 'block';
     this.classList.add('active');
     paymentsTab.classList.remove('active');
-    if (window.allClients && window.allClients.length === 0) loadClients();
+
+    // Убрал вызов loadClients() — этим занимается invoice.js
   });
 }
-
-
 
 // Загрузка данных
 function fetchPayments() {
