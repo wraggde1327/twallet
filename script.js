@@ -42,6 +42,7 @@ if (tg) {
     }
   }
 }
+
 // --- Переключение вкладок ---
 const paymentsTab = document.getElementById('paymentsTab');
 const invoiceTab = document.getElementById('invoiceTab');
