@@ -50,25 +50,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Обработчики выбора ИП/ООО
   orgTypeButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green'));
-      btn.classList.add('active');
-      if (btn.dataset.value === 'ИП') btn.classList.add('blue');
-      else if (btn.dataset.value === 'ООО') btn.classList.add('green');
-      orgTypeInput.value = btn.dataset.value;
-    });
+  btn.addEventListener('click', () => {
+    orgTypeButtons.forEach(b => b.classList.remove('active', 'blue', 'green'));
+    btn.classList.add('active');
+    if (btn.dataset.value === 'ИП') btn.classList.add('blue');
+    else if (btn.dataset.value === 'ООО') btn.classList.add('green');
+    orgTypeInput.value = btn.dataset.value;
   });
+});
 
-  // Обработчики выбора тарифа
-  tarifButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green'));
-      btn.classList.add('active');
-      if (btn.dataset.value === 'Стандарт') btn.classList.add('yellow');
-      else if (btn.dataset.value === 'Пробный') btn.classList.add('green');
-      tarifInput.value = btn.dataset.value;
-    });
+tarifButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tarifButtons.forEach(b => b.classList.remove('active', 'yellow', 'green'));
+    btn.classList.add('active');
+    if (btn.dataset.value === 'Стандарт') btn.classList.add('yellow');
+    else if (btn.dataset.value === 'Пробный') btn.classList.add('green');
+    tarifInput.value = btn.dataset.value;
   });
+});
 
   // Отправка формы
   contractForm.addEventListener('submit', async (e) => {
