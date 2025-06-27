@@ -14,6 +14,7 @@
     <div class="tabs">
   <button id="paymentsTab" class="tab-button active">Платежи</button>
   <button id="invoiceTab" class="tab-button">Создать счет</button>
+  <button id="contractTab" class="tab-btn">Договор</button>
 </div>
 
     <!-- Вкладка Платежи -->
@@ -74,6 +75,82 @@
       <input type="number" id="amountInput" class="form-control" placeholder="Сумма">
     </div>
     <button type="submit" class="submit-btn">Создать</button>
+  </form>
+</div>
+
+
+    <!-- Здесь разместим форму договора -->
+    
+<div id="contractContent" class="tab-content" style="display:none;">
+    <h1>Создать договор</h1>
+  <form id="contractForm" novalidate>
+    <!-- Поля договора (по примеру из contract.html) -->
+    <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+      <div>
+        <label class="form-label" for="contractNumber">Номер договора</label>
+        <input type="text" id="contractNumber" class="form-control" readonly />
+      </div>
+      <div>
+        <label class="form-label" for="contractDate">Дата</label>
+        <input type="date" id="contractDate" class="form-control" />
+      </div>
+    </div>
+
+    <div class="form-label" style="margin-bottom: 8px;">Тип организации</div>
+    <div class="payment-type-group" style="margin-bottom: 20px;">
+      <button type="button" class="payment-type-btn blue active" data-value="ИП">ИП</button>
+      <button type="button" class="payment-type-btn green" data-value="ООО">ООО</button>
+    </div>
+    <input type="hidden" id="orgType" value="ИП" />
+
+    <!-- Остальные поля, как в контракте -->
+    <label class="form-label" for="zakazchik">Заказчик</label>
+    <input type="text" id="zakazchik" class="form-control" required />
+
+    <label class="form-label" for="inn">ИНН</label>
+    <input type="number" id="inn" class="form-control" required />
+
+    <label class="form-label" for="ogrn">ОГРН</label>
+    <input type="number" id="ogrn" class="form-control" required />
+
+    <label class="form-label" for="lico">В лице</label>
+    <input type="text" id="lico" class="form-control" placeholder="ген директора ФИО или ИП" required />
+
+    <label class="form-label" for="osnovan">На основании</label>
+    <input type="text" id="osnovan" class="form-control" placeholder="Устава, Доверенности, Свидетельства" required />
+
+    <label class="form-label" for="rucl">Руководитель</label>
+    <input type="text" id="rucl" class="form-control" placeholder="Ливенцева О.С." required />
+
+    <label class="form-label" for="adress">Адрес</label>
+    <input type="text" id="adress" class="form-control" required />
+
+    <label class="form-label" for="tel">Телефон (не обязательно)</label>
+    <input type="tel" id="tel" class="form-control" />
+
+    <label class="form-label" for="pochta">Почта</label>
+    <input type="email" id="pochta" class="form-control" required />
+
+    <label class="form-label" for="bank">Банк</label>
+    <input type="text" id="bank" class="form-control" required />
+
+    <label class="form-label" for="bik">БИК</label>
+    <input type="text" id="bik" class="form-control" required />
+
+    <label class="form-label" for="rs">Расчетный счет</label>
+    <input type="text" id="rs" class="form-control" required />
+
+    <label class="form-label" for="ks">Корр. счет (не обязательно)</label>
+    <input type="text" id="ks" class="form-control" />
+
+    <div class="form-label" style="margin-top: 20px; margin-bottom: 8px;">Тариф</div>
+    <div class="payment-type-group" style="margin-bottom: 20px;">
+      <button type="button" class="payment-type-btn yellow active" data-value="Стандарт">Стандарт</button>
+      <button type="button" class="payment-type-btn green" data-value="Пробный">Пробный</button>
+    </div>
+    <input type="hidden" id="tarif" value="Стандарт" />
+
+    <button type="submit" class="submit-btn">Создать договор</button>
   </form>
 </div>
 
