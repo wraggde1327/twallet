@@ -561,30 +561,36 @@ body {
 .contract-fields-row {
   display: flex;
   gap: 16px;
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: 600px; /* можно подстроить */
+  margin-bottom: 16px;
 }
 
 .contract-field {
-  flex: 1 1 0;
+  flex: 1;
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
 }
 
-.contract-field label {
-  margin-bottom: 7px;
-  font-weight: 500;
-  font-size: 15px;
+.labels-row .contract-field:first-child label {
+  text-align: left;
 }
 
-.contract-field input {
+.labels-row .contract-field:last-child label {
+  text-align: right;
+}
+
+.inputs-row .contract-field input {
   height: 42px;
+  padding: 8px 12px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 0 14px;
-  font-size: 16px;
   box-sizing: border-box;
   width: 100%;
 }
+
 
 
 .button-group {
