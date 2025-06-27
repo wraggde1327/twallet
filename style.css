@@ -522,11 +522,11 @@ body {
 /* Кнопка отправки */
 .submit-btn {
   display: block; /* для корректного центрирования */
-  width: 70%;
+  width: 50%;
   padding: 14px 0;
   border: none;
   border-radius: 12px;
-  background: #67c43e;
+  background: #0b5394;
   color: #fff;
   font-size: 18px;
   font-weight: 700;
