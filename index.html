@@ -85,21 +85,24 @@
     <h2>Создать договор</h2>
   <form id="contractForm" novalidate>
     <!-- Поля договора (по примеру из contract.html) -->
-     <div class="contract-row">
-  <label for="contractNumber" class="label-left">№ договора</label>
-  <label for="contractDate" class="label-right">Дата</label>
-</div>
-<div class="contract-row">
-  <input type="text" id="contractNumber" class="input-left" />
-  <input type="date" id="contractDate" class="input-right" />
+     <div class="contract-fields-row">
+  <div class="contract-field">
+    <label for="contractNumber">№ договора</label>
+    <input type="text" id="contractNumber" />
+  </div>
+  <div class="contract-field">
+    <label for="contractDate">Дата</label>
+    <input type="date" id="contractDate" />
+  </div>
 </div>
 
 
     <div class="form-label" style="margin-bottom: 20px;">Тип организации</div>
-      <div>
-        <button type="button" class="button-org active" data-value="ИП">ИП</button>
-        <button type="button" class="button-org" data-value="ООО">ООО</button>
-      </div>
+      <div class="button-group">
+  <button type="button" class="button-org active" data-value="ИП">ИП</button>
+  <button type="button" class="button-org" data-value="ООО">ООО</button>
+</div>
+
         <input type="hidden" id="orgType" value="ИП" />
 
     <!-- Остальные поля, как в контракте -->
@@ -143,6 +146,7 @@
     <input type="text" id="ks" class="form-control" />
 
     <div style="margin-top: 20px;">
+      <div class="button-group">
       <button type="button" class="button-tarif active" data-value="Стандарт">Стандарт</button>
       <button type="button" class="button-tarif" data-value="Промо">Промо</button>
     </div>
