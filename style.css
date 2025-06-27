@@ -558,29 +558,29 @@ body {
 }
 
 // формы и классы Догворы доп
-.contract-header {
+.contract-row {
   display: flex;
-  flex-wrap: nowrap;          /* чтобы элементы были в одну строку */
-  justify-content: space-between; /* равномерное распределение */
-  align-items: center;        /* выравнивание по вертикали */
-  gap: 10px;                  /* отступ между группами */
-  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
-.field-group {
-  display: flex;
-  flex-direction: column;
-  flex: 1;                   /* чтобы обе группы занимали равное пространство */
+.label-left,
+.input-left {
+  flex: 1 1 60%; /* занимает примерно 60% ширины */
 }
 
-.field-group label {
-  margin-bottom: 6px;
-  font-weight: 600;
-  font-size: 14px;
+.label-right,
+.input-right {
+  flex: 1 1 35%; /* занимает примерно 35% ширины */
+  text-align: right;
 }
 
-.field-group input {
-  height: 40px;              /* одинаковая высота для всех полей */
+/* Стили для input */
+.input-left,
+.input-right {
+  height: 40px;
   padding: 8px 12px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -590,26 +590,26 @@ body {
 
 .button-org,
 .button-tarif {
-  padding: 16px 30px;          /* больше внутренние отступы */
-  margin-right: 15px;
-  margin-bottom: 20px;
+  padding: 16px 30px;
   border: none;
-  border-radius: 12px;         /* более плавные скругления */
+  border-radius: 12px;
   cursor: pointer;
   font-weight: 500;
-  font-size: 16px;             /* увеличенный размер шрифта */
-  min-width: 25%;            /* минимальная ширина */
-  height: 40px;                /* фиксированная высота */
+  font-size: 16px;
+  flex: 1; /* кнопки равномерно делят ширину контейнера */
+  height: 40px;
   background-color: #ccc;
   color: #444;
   transition: background-color 0.3s, color 0.3s;
-  user-select: none;           /* запрет выделения текста при клике */
+  user-select: none;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   display: flex;
-  justify-content: center; /* горизонтальное центрирование */
-  align-items: center;     /* вертикальное центрирование */
-  text-align: center;      /* на всякий случай */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0; /* убираем margin-right, чтобы не было лишних отступов */
 }
+
 
 .button-org.active {
   background-color: #4a90e2; /* синий */
