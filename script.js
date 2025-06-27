@@ -44,7 +44,40 @@ if (tg) {
 }
 
 // --- Переключение вкладок ---
-const paymentsTab = document.getElementById('paymentsTab');
+
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = {
+    payments: document.getElementById('paymentsTab'),
+    invoice: document.getElementById('invoiceTab'),
+    contract: document.getElementById('contractTab'),
+  };
+
+  const contents = {
+    payments: document.getElementById('paymentsContent'),
+    invoice: document.getElementById('invoiceContent'),
+    contract: document.getElementById('contractContent'),
+  };
+
+  function showTab(tabName) {
+    // Скрываем все
+    Object.values(contents).forEach(c => c.style.display = 'none');
+    Object.values(tabs).forEach(t => t.classList.remove('active'));
+
+    // Показываем выбранную
+    contents[tabName].style.display = 'block';
+    tabs[tabName].classList.add('active');
+  }
+
+  // Обработчики кликов
+  tabs.payments.addEventListener('click', () => showTab('payments'));
+  tabs.invoice.addEventListener('click', () => showTab('invoice'));
+  tabs.contract.addEventListener('click', () => showTab('contract'));
+
+  // Показываем первую вкладку по умолчанию
+  showTab('payments');
+});
+
+/*const paymentsTab = document.getElementById('paymentsTab');
 const invoiceTab = document.getElementById('invoiceTab');
 
 if (paymentsTab && invoiceTab) {
@@ -63,7 +96,7 @@ if (paymentsTab && invoiceTab) {
 
     // Убрал вызов loadClients() — этим занимается invoice.js
   });
-}
+}*/
 
 // Загрузка данных
 function fetchPayments() {
