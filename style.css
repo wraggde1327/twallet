@@ -608,11 +608,11 @@ body {
   .table-header {
     gap: 4px;
     font-size: 12px;
-    grid-template-columns: 1fr 2.5fr 0.5fr 2fr 1fr 1.5fr; 
+    grid-template-columns: 1fr 2.3fr 0fr 2fr 1.5fr 1.7fr; 
     padding: 8px 8px;
   }
   .payment-row {
-    grid-template-columns: 1fr 2.5fr 0.5fr 2fr 1fr 1.5fr; 
+    grid-template-columns: 1fr 2.3fr 0fr 2fr 1.5fr 1.7fr; 
    /* align-items: center;*/
     gap: 5px;
     padding: 5px 5px;
