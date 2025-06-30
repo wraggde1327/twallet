@@ -674,4 +674,8 @@ body {
     background: #fff;
     transition: border-color 0.3s;
   }
+  .hidden {
+  display: none !important;
+}
+
 }
