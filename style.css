@@ -208,21 +208,22 @@ body {
   }
   /* Статус — выравниваем вправо и центрируем по высоте */
   .payment-row > .status {
-   font-size: 13px;
+    font-size: 13px;
+    text-align: center;
    }
 
 .status {
   font-weight: 450;
   text-transform: capitalize;
-  color: #e1aa04;
-  /*display: flex;*/
-  border-radius: 15px;
+  color: #000000;
+  border-radius: 10px;
   user-select: none;
   text-align: center;
 }
+
 .await {
-  background-color: #f7bb04;
-  color: #ffffff;
+  background-color: #f58612;
+  color: #000000;
   font-weight: 450;
 }
 
