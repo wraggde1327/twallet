@@ -252,11 +252,10 @@ function renderPayments() {
     // Формируем класс для статуса
     const statusClass = `status ${row["Статус"]?.toLowerCase().trim() === "ожидает" ? "await" : ""}`;
 
-
+// <div role="cell">${row["Тип"] ?? "—"}</div>
     div.innerHTML = `
       <div role="cell">${row["№"] ?? idx + 1}</div>
       <div role="cell">${row["Название"] ?? "—"}</div>
-      <div role="cell">${row["Тип"] ?? "—"}</div>
       <div role="cell">${formattedDate}</div>
       <div role="cell">${row["Сумма"] ?? "—"}</div>
       <div role="cell" class="${statusClass}">${row["Статус"] ?? "—"}</div>
