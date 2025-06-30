@@ -175,7 +175,7 @@ body {
   grid-template-columns: 0.8fr 3fr 1fr 1.5fr 1.5fr 1.5fr; 
   gap: 8px;
   padding: 8px 10px;
-  align-items: center;
+  align-items: left;
   user-select: none;
 }
 .table-header {
@@ -193,7 +193,7 @@ body {
     padding: 8px 10px;
     background: #fff;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 14px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     width: 100%;             /* строка занимает всю ширину родителя */
@@ -219,7 +219,7 @@ body {
    }
 
 .status {
-  font-weight: 450;
+  font-weight: 550;
   text-transform: capitalize;
   color: #000000;
   border-radius: 10px;
@@ -232,7 +232,8 @@ body {
   color: #000000;
   min-height: 28px;
   height: 80%;
-  font-weight: 450;
+  font-weight: 550;
+  display: inline-flex;
 }
 
 /* --- Dialog --- */
@@ -603,38 +604,31 @@ body {
   .table-header {
     gap: 4px;
     font-size: 12px;
-    grid-template-columns: 1fr 2.5fr 1fr 1.5fr 1fr 1fr; 
+    grid-template-columns: 0.5fr 2.5fr 0.5fr 2fr 1fr 1.5fr; 
     padding: 8px 8px;
   }
   .payment-row {
-    grid-template-columns: 1fr 2.5fr 1fr 1.5fr 1fr 1fr; 
+    grid-template-columns: 0.5fr 2.5fr 0.5fr 2fr 1fr 1.5fr; 
    /* align-items: center;*/
-    gap: 2px;
+    /*gap: 2px;*/
     padding: 8px 8px;
     font-size: 11px;
     background: #fff;
     border-radius: 10px;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     overflow-x: auto;
   }
- /* .payment-row > div {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 2px;
-  }*/
- /* .payment-row > .status {
-    justify-self: end;
-    *min-width: 70px;
-    text-align: right;
-    font-size: 13px;
-    padding: 4px 10px;
-  }*/
+ .payment-row > div:first-child {
+    padding-left: 6px;   /* или больше, если хочется */
+}
+.payment-row > div:last-child {
+    padding-right: 6px;  /* или больше */
+}
   
   .dialog-edit-input {
-    width: 90vw;
-    max-width: 90vw;
+    width: 70vw;
+    max-width: 70vw;
     min-width: 0;
     font-size: 15px;
     padding: 10px 14px;
@@ -645,8 +639,8 @@ body {
   }
   #dialog {
     min-width: 0;
-    width: 90vw;
-    max-width: 99vw;
+    width: 70vw;
+    max-width: 70vw;
     padding-left: 8px;
     padding-right: 8px;
   }
