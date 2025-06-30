@@ -209,17 +209,13 @@ body {
   /* Статус — выравниваем вправо и центрируем по высоте */
   .payment-row > .status {
     justify-self: end;
-    text-align: left;
     font-size: 13px;
-    padding: 4px 10px;
-    align-self: center;
-    min-width: 0;
-  }
+   }
+
 .status {
   font-weight: 450;
   text-transform: capitalize;
   color: #4a90e2;
-  padding: 5px;
   display: flex;
   border-radius: 15px;
   user-select: none;
@@ -599,15 +595,15 @@ body {
   .table-header {
     gap: 4px;
     font-size: 12px;
-    grid-template-columns: 1fr 3fr 0fr 1.5fr 1fr 1.5fr;
+    grid-template-columns: 0.8fr 3fr 1fr 1.5fr 1.2fr 1.5fr; 
     padding: 8px 8px;
   }
   .payment-row {
-    grid-template-columns: 1fr 3fr 0fr 1.5fr 1fr 1.5fr;
+    grid-template-columns: 0.8fr 3fr 1fr 1.5fr 1.2fr 1.5fr; 
     align-items: center;
     gap: 4px;
     padding: 8px 8px;
-    font-size: 13px;
+    font-size: 111px;
     background: #fff;
     border-radius: 10px;
     margin-bottom: 7px;
