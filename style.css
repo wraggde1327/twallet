@@ -75,6 +75,7 @@ body {
   display: flex;
   margin-bottom: 20px;
   border-bottom: 1px solid #ddd;
+  gap: 10px
 }
 .tab-button {
   padding: 10px 20px;
@@ -184,28 +185,36 @@ body {
   border-bottom: 2px solid #cfd8dc;
   letter-spacing: 0.05em;
 }
-.payment-row {
-  background: #fafafa;
-  border-radius: 12px;
-  margin-bottom: 3px;
-  padding: 10px 5px;
-  min-height: 30px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-.payment-row:hover {
-  background-color: #e8f0fe;
-  box-shadow: 0 4px 8px rgba(74,144,226,0.15);
-}
-.payment-row > div {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: 15px;
-  color: #222;
-}
+ .payment-row {
+    display: grid;
+    grid-template-columns: 36px 1.5fr 1fr 1fr 1fr; /* # Имя Дата Сумма Статус */
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    width: 100%;             /* строка занимает всю ширину родителя */
+    min-width: 0;
+  }
+  .payment-row > div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    min-width: 0;            /* для корректного сжатия текста */
+  }
+  /* Статус — выравниваем вправо и центрируем по высоте */
+  .payment-row > .status {
+    justify-self: end;
+    text-align: right;
+    font-size: 13px;
+    padding: 4px 10px;
+    align-self: center;
+    min-width: 0;
+  }
 .status {
   font-weight: 450;
   text-transform: capitalize;
@@ -596,7 +605,7 @@ body {
     grid-template-columns: 36px 1.8fr 1.3fr 1fr auto;
     align-items: center;
     gap: 4px;
-    padding: 8px 0;
+    padding: 8px 8px;
     font-size: 13px;
     background: #fff;
     border-radius: 10px;
