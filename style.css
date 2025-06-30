@@ -188,7 +188,7 @@ body {
  .payment-row {
     display: grid;
     grid-template-columns: 0.8fr 3fr 1fr 1.5fr 1.2fr 1.5fr; 
-    align-items: left;
+    align-items: center;
     gap: 8px;
     padding: 8px 10px;
     background: #fff;
@@ -224,16 +224,18 @@ body {
   color: #000000;
   border-radius: 10px;
   user-select: none;
-  text-align: center;
+  display: inline-flex;       /* или flex, если нужно */
+  justify-content: center;    /* горизонтальное центрирование */
+  align-items: center;  
 }
 
 .await {
-  background-color: #ffd966;
-  color: #fff;
+  background-color: #f1c232;
+  color: #bcbcbc;
   min-height: 28px;
-  height: 80%;
+ /* height: 70%;*/
   font-weight: 500;
-  display: inline-flex;
+  /*display: inline-flex;*/
   text-align: center;
 }
 
@@ -605,15 +607,15 @@ body {
   .table-header {
     gap: 4px;
     font-size: 12px;
-    grid-template-columns: 0.5fr 2.5fr 0.5fr 2fr 1fr 1.5fr; 
+    grid-template-columns: 1fr 2.5fr 0.5fr 2fr 1fr 1.5fr; 
     padding: 8px 8px;
   }
   .payment-row {
-    grid-template-columns: 0.5fr 2.5fr 0.5fr 2fr 1fr 1.5fr; 
+    grid-template-columns: 1fr 2.5fr 0.5fr 2fr 1fr 1.5fr; 
    /* align-items: center;*/
     /*gap: 2px;*/
-    padding: 8px 8px;
-    font-size: 11px;
+    padding: 5px 5px;
+    font-size: 10px;
     background: #fff;
     border-radius: 10px;
     margin-bottom: 5px;
