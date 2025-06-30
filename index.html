@@ -9,6 +9,22 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
+  <!-- Приветственный экран -->
+<div id="welcome-screen">
+  <div id="welcome-content">
+    <div id="greeting" style="display:none;">
+      <p>Доброго дня<br><span id="user-nick"></span></p>
+      <button id="continue-btn">Продолжить</button>
+    </div>
+    <div id="nickname-input" style="display:none;">
+      <p>Введите никнейм</p>
+      <input type="text" id="nickname-field" placeholder="Ваш никнейм" autocomplete="off" />
+      <button id="submit-nick-btn">Продолжить</button>
+      <p id="error-msg">Никнейм не найден в списке</p>
+    </div>
+  </div>
+</div>
+
   <div class="container">
     <!-- Вкладки -->
     <div class="tabs">
