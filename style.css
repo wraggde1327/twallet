@@ -79,6 +79,10 @@
   background: #fff;
   transition: border-color 0.3s;
 }
+ 
+.contract-row > * {
+  margin-left: 5px;   /* отступ между элементами */
+}
 }
 
 
@@ -579,11 +583,11 @@ body {
   align-items: center;
   flex-wrap: nowrap; /* если не нужно переносить */
   margin-bottom: 50px; /* отступ снизу */
-  margin-left: -20px;  /* компенсируем отступ слева у детей */
+  /*margin-left: -20px;  /* компенсируем отступ слева у детей */
 }
 
 .contract-row > * {
-  margin-left: 20px;   /* отступ между элементами */
+  margin-left: 15px;   /* отступ между элементами */
 }
 
 /* Стили для input и label остаются прежними */
