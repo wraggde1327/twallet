@@ -63,26 +63,6 @@
   .invoice-form {
     padding: 10px 0;
   }
-
-  .input-contract-number,
-.input-contract-date {
-  flex-shrink: 1;          /* разрешаем сжиматься */
-  flex-grow: 0;
-  min-width: 50px;         /* минимальная ширина для удобства */
-  max-width: 140px;        /* максимальная ширина */
-  height: 40px;
-  padding: 5px 10px;
-  font-size: 12px;
-  border-radius: 12px;
-  border: 1.5px solid #ccc;
-  box-sizing: border-box;
-  background: #fff;
-  transition: border-color 0.3s;
-}
- 
-.contract-row > * {
-  margin-left: 5px;   /* отступ между элементами */
-}
 }
 
 
