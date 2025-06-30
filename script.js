@@ -43,6 +43,79 @@ if (tg) {
   }
 }
 
+// --- Приветственный экран с проверкой Telegram никнейма ---
+document.addEventListener('DOMContentLoaded', () => {
+  // Массив разрешённых никнеймов
+  const allowedNicks = ['user1', 'user2', 'example_nick', 'telegram_user'];
+
+  // Получение ника из Telegram WebApp API, если доступен
+  let telegramNick = null;
+  if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
+    telegramNick = window.Telegram.WebApp.initDataUnsafe.user?.username || null;
+  }
+
+  // Для теста можно раскомментировать и задать ник вручную
+  // telegramNick = 'user1';
+
+  const welcomeScreen = document.getElementById('welcome-screen');
+  const mainContent = document.querySelector('.container');
+  const greetingBlock = document.getElementById('greeting');
+  const nicknameInputBlock = document.getElementById('nickname-input');
+  const userNickSpan = document.getElementById('user-nick');
+  const continueBtn = document.getElementById('continue-btn');
+  const submitNickBtn = document.getElementById('submit-nick-btn');
+  const nicknameField = document.getElementById('nickname-field');
+  const errorMsg = document.getElementById('error-msg');
+
+  function showMainContent() {
+    welcomeScreen.style.display = 'none';
+    mainContent.style.filter = 'none';
+  }
+
+  function showGreeting(nick) {
+    userNickSpan.textContent = '@' + nick;
+    greetingBlock.style.display = 'block';
+    nicknameInputBlock.style.display = 'none';
+  }
+
+  function showNicknameInput() {
+    greetingBlock.style.display = 'none';
+    nicknameInputBlock.style.display = 'block';
+  }
+
+  // Затемнение основного контента пока приветствие активно
+  mainContent.style.filter = 'blur(3px)';
+
+  if (telegramNick && allowedNicks.includes(telegramNick.toLowerCase())) {
+    showGreeting(telegramNick);
+  } else {
+    showNicknameInput();
+  }
+
+  continueBtn.addEventListener('click', () => {
+    showMainContent();
+  });
+
+  submitNickBtn.addEventListener('click', () => {
+    const enteredNick = nicknameField.value.trim().toLowerCase();
+    if (allowedNicks.includes(enteredNick)) {
+      showGreeting(enteredNick);
+      errorMsg.style.display = 'none';
+    } else {
+      errorMsg.style.display = 'block';
+    }
+  });
+
+  nicknameField.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      submitNickBtn.click();
+    }
+  });
+});
+
+// --- Переключение вкладок ---
+
+
 // --- Переключение вкладок ---
 
 document.addEventListener('DOMContentLoaded', () => {
