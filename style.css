@@ -172,9 +172,9 @@ body {
 /* --- Table --- */
 .table-header, .payment-row {
   display: grid;
-  grid-template-columns: 0.5fr 3fr 1.5fr 1.5fr 1.5fr 1.5fr; 
-  gap: 12px;
-  padding: 12px 0;
+  grid-template-columns: 0.8fr 3fr 1fr 1.5fr 1.5fr 1.5fr; 
+  gap: 8px;
+  padding: 8px 10px;
   align-items: center;
   user-select: none;
 }
@@ -187,7 +187,7 @@ body {
 }
  .payment-row {
     display: grid;
-    grid-template-columns: 0.5fr 3fr 1.5fr 1.5fr 1.5fr 1.5fr; 
+    grid-template-columns: 0.8fr 3fr 1fr 1.5fr 1.2fr 1.5fr; 
     align-items: center;
     gap: 8px;
     padding: 8px 10px;
@@ -587,7 +587,7 @@ body {
   color: white;
 }
 
-/* --- Адаптив для мобильных и планшетов --- */
+/* --- Адаптив для мобильных и планшетов --- ---------------------------------------------------------------------------------------------------------*/
 @media (max-width: 1000px) {
   .container {
     background: #dddddd !important;
@@ -597,12 +597,13 @@ body {
     box-shadow: none;
   }
   .table-header {
+    gap: 4px;
     font-size: 12px;
-    padding: 6px 0;
+    grid-template-columns: 0.8fr 2.5fr 1.5fr 1.2fr 1.5fr;
+    padding: 8px 8px;
   }
   .payment-row {
-    display: grid;
-    grid-template-columns: 0.5fr 2.5fr 1fr 1fr 1fr;
+    grid-template-columns: 0.8fr 2.5fr 1.5fr 1.2fr 1.5fr;
     align-items: center;
     gap: 4px;
     padding: 8px 8px;
