@@ -614,7 +614,7 @@ body {
   .payment-row {
     grid-template-columns: 1fr 2.5fr 0.5fr 2fr 1fr 1.5fr; 
    /* align-items: center;*/
-    /*gap: 2px;*/
+    gap: 5px;
     padding: 5px 5px;
     font-size: 8px;
     background: #fff;
@@ -646,10 +646,9 @@ body {
     font-size: 14px;
     padding: 8px 10px;
   }
-  .table-header, .payment-row {
-    grid-template-columns: 28px 1.3fr 1fr 1fr 1fr 1fr;
-    gap: 6px;
-    padding: 8px 0;
+  .table-header {
+    gap: 5px;
+    padding: 5px 5px;
   }
   .form-control {
     padding: 10px 12px;
@@ -677,8 +676,5 @@ body {
     border: 1.5px solid #ccc;
     background: #fff;
     transition: border-color 0.3s;
-  }
-  .cell-type {
-    display: none !important;
   }
 }
