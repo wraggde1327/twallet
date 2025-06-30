@@ -1,88 +1,9 @@
-/* --- Мобильная адаптация (до 1000px) --- */More actions
-@media (max-width: 1000px) {
-  .container {
-    background: #dddddd !important;
-    padding: 8px 0;
-    max-width: 100vw;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  .payment-row {
-    display: flex;
-    flex-direction: column;
-    font-size: 12px !important;
-  }
-  .payment-row > div {
-    font-size: 10px !important;
-    line-height: 1.2;
-    white-space: normal;
-    word-break: break-word;
-    overflow-wrap: anywhere;
-  }
-  .dialog-edit-input {
-    width: 95vw;
-    max-width: 98vw;
-    min-width: 0;
-    font-size: 15px;
-    padding: 10px 14px;
-    margin: 12px auto 0 auto;
-    display: block;
-    border-radius: 8px;
-    border: 1.5px solid #ccc;
-    box-sizing: border-box;
-  }
-  #dialog {
-    min-width: 0;
-    width: 98vw;
-    max-width: 99vw;
-    box-sizing: border-box;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  .tab-button {
-    font-size: 14px;
-    padding: 8px 10px;
-  }
-  .table-header, .payment-row {
-    grid-template-columns: 28px 1.3fr 1fr 1fr 1fr 1fr;
-    gap: 6px;
-    padding: 8px 0;
-  }
-  .payment-row > div {
-    font-size: 13px;
-  }
-  .form-control {
-    padding: 10px 12px;
-    font-size: 15px;
-  }
-  .submit-btn {
-    padding: 12px;
-    font-size: 15px;
-    width: 70%;
-  }
-  .invoice-form {
-    padding: 10px 0;
-  }
-
-  .input-contract-number,
-.input-contract-date {
-  flex-shrink: 1;          /* разрешаем сжиматься */
-  flex-grow: 0;
-  min-width: 70px;         /* минимальная ширина для удобства */
-  max-width: 140px;        /* максимальная ширина */
-  height: 40px;
-  padding: 8px 12px;
-  font-size: 13px;
-  border-radius: 12px;
-  border: 1.5px solid #ccc;
+/* --- Глобальный box-sizing для согласованности --- */
+*, *::before, *::after {
   box-sizing: border-box;
-  background: #fff;
-  transition: border-color 0.3s;
-}
 }
 
-
-/* --- Основные стили --- */
+/* --- Приветственный экран --- */
 #welcome-screen {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -133,6 +54,7 @@
   display: none;
 }
 
+/* --- Базовые стили --- */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -147,10 +69,8 @@ body {
   border-radius: 16px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   padding: 24px 32px;
-  box-sizing: border-box;
 }
 
-/* --- Tabs --- */
 .tabs {
   display: flex;
   margin-bottom: 20px;
@@ -262,8 +182,6 @@ body {
   font-size: 13px;
   font-weight: 600;
   border-bottom: 2px solid #cfd8dc;
-  text-transform: uppercase;
-  /*text-transform: uppercase;*/
   letter-spacing: 0.05em;
 }
 .payment-row {
@@ -328,7 +246,6 @@ body {
   margin-top: 12px;
   border-radius: 8px;
   border: 1.5px solid #ccc;
-  box-sizing: border-box;
 }
 #dialog-buttons {
   margin-top: 24px;
@@ -460,7 +377,6 @@ body {
 }
 
 /* --- Invoice вкладка и формы --- */
-/* Заголовок вкладки */
 .invoice-tab .header {
   display: flex;
   justify-content: center;
@@ -468,32 +384,26 @@ body {
   margin-bottom: 12px;
   padding: 0;
 }
-
 .invoice-tab .header h1 {
   font-size: 22px;
   font-weight: 700;
   margin: 0;
   text-align: center;
 }
-
 .form-label {
-  display: block;          /* Чтобы label занимал всю ширину и отступы работали корректно */
-  margin-bottom: 10px;      /* Отступ снизу — расстояние до поля ввода */
-  font-weight: 600;        /* Немного выделим текст */
-  font-size: 16px;         /* Подходящий размер шрифта */
-  color: #615e5e;             /* Цвет текста — можно изменить под дизайн */
-  user-select: none;       /* Чтобы текст метки нельзя было выделить случайно */
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #615e5e;
+  user-select: none;
 }
-
-/* Группа кнопок с отступами */
 .payment-type-group {
   display: flex;
-  gap: 20px; /* горизонтальный и вертикальный отступ между кнопками */
+  gap: 20px;
   width: 90%;
-  margin-bottom: 20px; /* отступ снизу всей группы */
+  margin-bottom: 20px;
 }
-
-/* Кнопки выбора типа платежа */
 .payment-type-btn {
   flex: 1 1 0;
   border: none;
@@ -505,37 +415,29 @@ body {
   background: #e0e0e0;
   color: #666;
   transition: background 0.2s, color 0.2s;
-  /* Добавляем margin-bottom для вертикального отступа, если кнопки вне группы */
   margin-bottom: 20px;
 }
-
 .payment-type-btn.blue.active {
   background: #4a90e2;
   color: #fff;
 }
-
 .payment-type-btn.green.active {
   background: #43b94a;
   color: #fff;
 }
-
 .payment-type-btn.yellow.active {
   background: #f7bb04;
   color: #fff;
 }
-
 .payment-type-btn:not(.active) {
   background: #e0e0e0;
   color: #888;
 }
-
-/* Автокомплит и выпадающий список */
 .autocomplete {
   position: relative;
   width: 100%;
-  margin-bottom: 20px; /* добавляем отступ снизу */
+  margin-bottom: 20px;
 }
-
 .autocomplete-dropdown {
   position: absolute;
   top: 100%;
@@ -550,22 +452,18 @@ body {
   overflow-y: auto;
   display: none;
 }
-
 .autocomplete-option {
   padding: 12px 18px;
   cursor: pointer;
   transition: background 0.15s;
   font-size: 16px;
 }
-
 .autocomplete-option:hover, .autocomplete-option.active {
   background: #e8f0fe;
 }
-
-/* Поля формы и поле поиска клиента */
 .form-control,
 #clientSearchInput {
-  display: block; /* чтобы margin работал корректно */
+  display: block;
   width: 100%;
   padding: 12px 14px;
   border: 1.5px solid #ccc;
@@ -573,20 +471,16 @@ body {
   font-size: 16px;
   background: #f9f9f9;
   transition: border 0.2s;
-  margin-bottom: 20px; /* единый вертикальный отступ */
-  box-sizing: border-box;
+  margin-bottom: 20px;
 }
-
 .form-control:focus,
 #clientSearchInput:focus {
   border-color: #4a90e2;
   outline: none;
   background: #fff;
 }
-
-/* Кнопка отправки */
 .submit-btn {
-  display: block; /* для корректного центрирования */
+  display: block;
   width: 50%;
   padding: 14px 0;
   border: none;
@@ -597,47 +491,33 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s;
-  margin: 16px auto 0; /* центрирование и отступ сверху */
+  margin: 16px auto 0;
 }
-
-/* Индикатор загрузки клиентов рядом с заголовком */
 #clientsLoadIndicator {
   display: inline-block;
   width: 14px;
   height: 14px;
   margin-left: 10px;
   border-radius: 50%;
-  background-color: gray; /* цвет по умолчанию */
+  background-color: gray;
   vertical-align: middle;
   transition: background-color 0.3s ease;
 }
+#clientsLoadIndicator.loading { background-color: gray; }
+#clientsLoadIndicator.success { background-color: green; }
+#clientsLoadIndicator.error { background-color: red; }
 
-#clientsLoadIndicator.loading {
-  background-color: gray;
-}
-
-#clientsLoadIndicator.success {
-  background-color: green;
-}
-
-#clientsLoadIndicator.error {
-  background-color: red;
-}
-
-// формы и классы Догворы доп
+/* --- Договоры --- */
 .contract-row {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap; /* если не нужно переносить */
-  margin-bottom: 50px; /* отступ снизу */
-  margin-left: -20px;  /* компенсируем отступ слева у детей */
+  flex-wrap: nowrap;
+  margin-bottom: 50px;
+  margin-left: -20px;
 }
-
 .contract-row > * {
-  margin-left: 20px;   /* отступ между элементами */
+  margin-left: 20px;
 }
-
-/* Стили для input и label остаются прежними */
 .label-text {
   font-weight: 600;
   font-size: 16px;
@@ -645,38 +525,32 @@ body {
   color: #333;
   flex-shrink: 0;
 }
-
 .input-field {
   height: 44px;
   padding: 10px 16px;
   font-size: 16px;
   border: 1.5px solid #ccc;
   border-radius: 14px;
-  box-sizing: border-box;
   transition: border-color 0.3s;
   background: #fff;
 }
-
 .input-contract-number {
   width: 120px;
   min-width: 80px;
   max-width: 180px;
 }
-
 .input-contract-date {
   width: 140px;
   min-width: 100px;
   max-width: 180px;
 }
 
-
-
+/* --- Кнопки выбора организации и тарифа --- */
 .button-group {
   display: flex;
   gap: 16px;
   margin-bottom: 20px;
 }
-
 .button-org, 
 .button-tarif {
   flex: 1 1 0;
@@ -694,13 +568,88 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 .button-org.active {
-  background-color: #4a90e2; /* синий */
+  background-color: #4a90e2;
+  color: white;
+}
+.button-tarif.active {
+  background-color: #f0ba14;
   color: white;
 }
 
-.button-tarif.active {
-  background-color: #f0ba14; /* оранжевый */
-  color: white;
+/* --- Адаптив для мобильных и планшетов --- */
+@media (max-width: 1000px) {
+  .container {
+    background: #dddddd !important;
+    padding: 8px 0;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .payment-row {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px !important;
+  }
+  .payment-row > div {
+    line-height: 1.2;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    font-size: 13px;
+  }
+  .dialog-edit-input {
+    width: 95vw;
+    max-width: 98vw;
+    min-width: 0;
+    font-size: 15px;
+    padding: 10px 14px;
+    margin: 12px auto 0 auto;
+    display: block;
+    border-radius: 8px;
+    border: 1.5px solid #ccc;
+  }
+  #dialog {
+    min-width: 0;
+    width: 98vw;
+    max-width: 99vw;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .tab-button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+  .table-header, .payment-row {
+    grid-template-columns: 28px 1.3fr 1fr 1fr 1fr 1fr;
+    gap: 6px;
+    padding: 8px 0;
+  }
+  .form-control {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+  .submit-btn {
+    padding: 12px;
+    font-size: 15px;
+    width: 70%;
+  }
+  .invoice-form {
+    padding: 10px 0;
+  }
+  /* Адаптивные поля договора */
+  .input-contract-number,
+  .input-contract-date {
+    flex-shrink: 1;
+    flex-grow: 0;
+    min-width: 70px;
+    max-width: 140px;
+    height: 40px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 12px;
+    border: 1.5px solid #ccc;
+    background: #fff;
+    transition: border-color 0.3s;
+  }
 }
