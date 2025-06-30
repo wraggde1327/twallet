@@ -214,10 +214,11 @@ body {
 .status {
   font-weight: 450;
   text-transform: capitalize;
-  color: #4a90e2;
+  color: #e1aa04;
   /*display: flex;*/
   border-radius: 15px;
   user-select: none;
+  text-align: center;
 }
 .await {
   background-color: #f7bb04;
@@ -601,7 +602,7 @@ body {
     align-items: center;
     gap: 4px;
     padding: 8px 8px;
-    font-size: 111px;
+    font-size: 11px;
     background: #fff;
     border-radius: 10px;
     margin-bottom: 7px;
