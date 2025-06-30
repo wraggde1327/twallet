@@ -609,7 +609,7 @@ body {
     gap: 4px;
     font-size: 12px;
     grid-template-columns: 1fr 2.3fr 0fr 2fr 1.5fr 1.7fr; 
-    padding: 8px 8px;
+    padding: 5px 5px;
   }
   .payment-row {
     grid-template-columns: 1fr 2.3fr 0fr 2fr 1.5fr 1.7fr; 
@@ -646,10 +646,7 @@ body {
     font-size: 14px;
     padding: 8px 10px;
   }
-  .table-header {
-    gap: 5px;
-    padding: 5px 5px;
-  }
+ 
   .form-control {
     padding: 10px 12px;
     font-size: 15px;
@@ -670,9 +667,9 @@ body {
     min-width: 70px;
     max-width: 140px;
     height: 40px;
-    padding: 8px 12px;
-    font-size: 13px;
-    border-radius: 12px;
+    padding: 5px 8px;
+    font-size: 12px;
+    border-radius: 10px;
     border: 1.5px solid #ccc;
     background: #fff;
     transition: border-color 0.3s;
