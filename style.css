@@ -83,6 +83,56 @@
 
 
 /* --- Основные стили --- */
+#welcome-screen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+#welcome-content {
+  background: #222;
+  padding: 30px 40px;
+  border-radius: 12px;
+  max-width: 320px;
+  width: 90%;
+}
+#welcome-content p {
+  margin: 15px 0;
+  font-size: 18px;
+}
+#welcome-content input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 15px;
+}
+#welcome-content button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4a90e2;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+#welcome-content button:hover {
+  background-color: #357ABD;
+}
+#error-msg {
+  color: #f44336;
+  margin-top: 8px;
+  display: none;
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
