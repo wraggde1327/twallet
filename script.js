@@ -115,9 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- Переключение вкладок ---
 
-
-// --- Переключение вкладок ---
-
 document.addEventListener('DOMContentLoaded', () => {
   const tabs = {
     payments: document.getElementById('paymentsTab'),
@@ -149,27 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Показываем первую вкладку по умолчанию
   showTab('payments');
 });
-
-/*const paymentsTab = document.getElementById('paymentsTab');
-const invoiceTab = document.getElementById('invoiceTab');
-
-if (paymentsTab && invoiceTab) {
-  paymentsTab.addEventListener('click', function() {
-    document.getElementById('paymentsContent').style.display = 'block';
-    document.getElementById('invoiceContent').style.display = 'none';
-    this.classList.add('active');
-    invoiceTab.classList.remove('active');
-  });
-
-  invoiceTab.addEventListener('click', function() {
-    document.getElementById('paymentsContent').style.display = 'none';
-    document.getElementById('invoiceContent').style.display = 'block';
-    this.classList.add('active');
-    paymentsTab.classList.remove('active');
-
-    // Убрал вызов loadClients() — этим занимается invoice.js
-  });
-}*/
 
 // Загрузка данных
 function fetchPayments() {
@@ -259,7 +235,7 @@ function renderPayments() {
     div.innerHTML = `
       <div role="cell">${row["№"] ?? idx + 1}</div>
       <div role="cell">${row["Название"] ?? "—"}</div>
-      ${!isMobile() ? `<div role="cell">${row["Тип"] ?? "—"}</div>` : ""}
+      <div role="cell">${row["Тип"] ?? "—"}</div>`
       <div role="cell">${formattedDate}</div>
       <div role="cell">${row["Сумма"] ?? "—"}</div>
       <div role="cell" class="${statusClass}">${row["Статус"] ?? "—"}</div>
