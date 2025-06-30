@@ -188,7 +188,7 @@ body {
  .payment-row {
     display: grid;
     grid-template-columns: 0.8fr 3fr 1fr 1.5fr 1.2fr 1.5fr; 
-    align-items: center;
+    align-items: left;
     gap: 8px;
     padding: 8px 10px;
     background: #fff;
@@ -204,22 +204,22 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-align: left;
-    min-width: 0;            /* для корректного сжатия текста */
+    min-width: 0;
+    font-size: 13px; /* для корректного сжатия текста */
   }
 
 .payment-row:hover {
   background: #f0f4f8;  /* светло-серый или любой другой цвет подсветки */
   cursor: pointer;      /* чтобы было видно, что строка кликабельна */
 }
-  /* Статус — выравниваем вправо и центрируем по высоте */
+  /* Статус — выравниваем вправо и центрируем по высоте 
   .payment-row > .status {
     font-size: 13px;
     text-align: center;
-   }
+   }*/
 
 .status {
-  font-weight: 550;
+  font-weight: 500;
   text-transform: capitalize;
   color: #000000;
   border-radius: 10px;
@@ -229,11 +229,12 @@ body {
 
 .await {
   background-color: #ffd966;
-  color: #000000;
+  color: #fff;
   min-height: 28px;
   height: 80%;
-  font-weight: 550;
+  font-weight: 500;
   display: inline-flex;
+  text-align: center;
 }
 
 /* --- Dialog --- */
