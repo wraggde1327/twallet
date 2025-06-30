@@ -212,7 +212,7 @@ body {
   font-size: 13px;
   font-weight: 600;
   border-bottom: 2px solid #cfd8dc;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   letter-spacing: 0.05em;
 }
 .payment-row {
