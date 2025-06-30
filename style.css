@@ -2,7 +2,7 @@
 @media (max-width: 1000px) {
   .container {
     background: #dddddd !important;
-    padding: 8px 0;
+    padding: 3px 0;
     max-width: 100vw;
     border-radius: 0;
     box-shadow: none;
@@ -68,11 +68,11 @@
 .input-contract-date {
   flex-shrink: 1;          /* разрешаем сжиматься */
   flex-grow: 0;
-  min-width: 70px;         /* минимальная ширина для удобства */
+  min-width: 50px;         /* минимальная ширина для удобства */
   max-width: 140px;        /* максимальная ширина */
   height: 40px;
-  padding: 8px 12px;
-  font-size: 13px;
+  padding: 5px 10px;
+  font-size: 12px;
   border-radius: 12px;
   border: 1.5px solid #ccc;
   box-sizing: border-box;
@@ -606,25 +606,27 @@ body {
   background: #fff;
 }
 
+//для № договора
 .input-contract-number {
-  width: 120px;
+  width: 100px;
   min-width: 80px;
   max-width: 180px;
 }
 
+//для даты договора
 .input-contract-date {
   width: 140px;
   min-width: 100px;
   max-width: 180px;
 }
 
-
-
 .button-group {
   display: flex;
   gap: 16px;
   margin-bottom: 20px;
 }
+
+//кнопки сверху и снизу
 
 .button-org, 
 .button-tarif {
