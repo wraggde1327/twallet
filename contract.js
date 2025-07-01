@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
       rs: document.getElementById('rs').value.trim(),
       ks: document.getElementById('ks').value.trim(),
       tarif: tarifInput.value,
+      who: window.telegramNick
     };
 
     // Валидация
