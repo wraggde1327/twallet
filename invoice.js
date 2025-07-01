@@ -8,9 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const paymentTypeInput = document.getElementById('paymentTypeInput');
   const clientsLoadIndicator = document.getElementById('clientsLoadIndicator');
 
+  // Контейнер и список для созданных счетов (предполагается, что есть в HTML)
+  const createdInvoicesList = document.getElementById('createdInvoicesList');
+
   window.allClients = window.allClients || [];
 
-  
   // --- Загрузка клиентов ---
   async function loadClients() {
     try {
@@ -103,6 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Добавление записи в блок "Созданные счета" ---
+  function addCreatedInvoice({ name, sum, type }) {
+    if (!createdInvoicesList) return;
+    const li = document.createElement('li');
+    li.textContent = `Добавлено: "${name}" на сумму ${sum}, с типом платежа - "${type}".`;
+    li.style.marginBottom = '6px';
+    createdInvoicesList.appendChild(li);
+  }
+
   // --- Обработка отправки формы ---
   invoiceForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -148,6 +159,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (response.ok) {
         const data = await response.json();
         showNotification(data.message || 'Счет успешно создан!', 'success', 3000);
+
+        // Добавляем запись в блок "Созданные счета"
+        addCreatedInvoice({
+          name: clientName,
+          sum: amount,
+          type: paymentType
+        });
+
         invoiceForm.reset();
         clientSearchInput.value = '';
         selectedClientId = null;
