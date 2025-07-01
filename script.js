@@ -42,6 +42,8 @@ if (tg) {
     }
   }
 }
+// Глобальная переменная для ника, доступная во всех скриптах
+window.telegramNick = null;
 
 // --- Приветственный экран с проверкой Telegram никнейма ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,6 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let telegramNick = null;
   if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
     telegramNick = window.Telegram.WebApp.initDataUnsafe.user?.username || null;
+  }
+
+   // Сохраняем ник в глобальную переменную, если есть и разрешён
+  if (telegramNick && allowedNicks.includes(telegramNick.toLowerCase())) {
+    window.telegramNick = telegramNick;
   }
 
   // Для теста можно раскомментировать и задать ник вручную
@@ -87,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   mainContent.style.filter = 'blur(3px)';
 
   if (telegramNick && allowedNicks.includes(telegramNick.toLowerCase())) {
-    showGreeting(telegramNick);
+    showGreeting(window.telegramNick);
   } else {
     showNicknameInput();
   }
@@ -99,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   submitNickBtn.addEventListener('click', () => {
     const enteredNick = nicknameField.value.trim().toLowerCase();
     if (allowedNicks.includes(enteredNick)) {
+       window.telegramNick = enteredNick;  // сохраняем ник глобально
       showGreeting(enteredNick);
       errorMsg.style.display = 'none';
     } else {
