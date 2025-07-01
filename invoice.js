@@ -12,17 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   showNotification('Загружаем клиентов...');
 
-  /*// --- Функция уведомлений ---
-  function showNotification(text, type = '', timeout = 2500) {
-    const notif = document.getElementById('notification');
-    if (!notif) return;
-    notif.textContent = text;
-    notif.className = 'show' + (type === 'error' ? ' error' : '');
-    setTimeout(() => {
-      notif.className = '';
-    }, timeout);
-  }*/
-
   // --- Загрузка клиентов ---
   async function loadClients() {
     try {
@@ -33,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.allClients = await response.json();
 
       clientsLoadIndicator.style.backgroundColor = 'green'; // загрузка успешна
-    //  showDropdown(clientSearchInput.value);
     } catch (e) {
       window.allClients = [];
       clientsLoadIndicator.style.backgroundColor = 'red'; // ошибка загрузки
@@ -108,6 +96,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Функция блокировки/разблокировки формы ---
+  function setFormDisabled(disabled) {
+    invoiceForm.querySelectorAll('input, select, button').forEach(el => {
+      el.disabled = disabled;
+    });
+  }
+
   // --- Обработка отправки формы ---
   invoiceForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -132,17 +127,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    /*const who = window.tgUserId ? `tg_user_${window.tgUserId}` : 'unknown';*/
-
     const payload = {
       id: clientId,
       type: paymentType,
       sum: amount,
-      who: window.telegramNick
+      who: window.telegramNick || ""
     };
     console.log('payload:', payload);
 
     try {
+      setFormDisabled(true);
+      showNotification('Отправка данных на сервер...', 'info');
+
       const response = await fetch('https://fastapi-myapp-production.up.railway.app/invoices', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -150,7 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (response.ok) {
-        showNotification('Счет успешно создан!');
+        const data = await response.json();
+        showNotification(data.message || 'Счет успешно создан!', 'success');
         invoiceForm.reset();
         clientSearchInput.value = '';
         selectedClientId = null;
@@ -165,8 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Ошибка сервера:', errorText);
       }
     } catch (error) {
-      showNotification('Ошибка сети', 'error');
+      showNotification('Ошибка сети: ' + error.message, 'error');
       console.error(error);
+    } finally {
+      setFormDisabled(false);
     }
   });
+
 });
