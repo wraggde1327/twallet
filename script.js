@@ -423,7 +423,7 @@ function showNotification(message, type = "info", duration = 2000) {
 
   let showTime = duration;
   if (type === "error") showTime = 4500;
-  if (type === "status") showTime = 1000;
+  if (type === "status") showTime = 3000;
 
   setTimeout(() => {
     notif.style.opacity = "0";
