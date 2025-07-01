@@ -48,7 +48,7 @@ window.telegramNick = null;
 // --- Приветственный экран с проверкой Telegram никнейма ---
 document.addEventListener('DOMContentLoaded', () => {
   // Массив разрешённых никнеймов
-  const allowedNicks = ['nick_xnm', 'jekminaev', '123', 'user'];
+  const allowedNicks = ['nick_xnm', 'jekminaev', 'boss', 'ManagerMahom'];
 
   // Получение ника из Telegram WebApp API, если доступен
   let telegramNick = null;
