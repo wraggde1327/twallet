@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /*const who = window.tgUserId ? `tg_user_${window.tgUserId}` : 'unknown';*/
 
     const payload = {
-      id: String(clientId),
+      id: Number(clientId),
       type: paymentType,
       sum: amount,
       who: window.telegramNick
