@@ -606,13 +606,13 @@ body {
     box-shadow: none;
   }
   .table-header {
-    gap: 4px;
+    gap: 5px;
     font-size: 12px;
-    grid-template-columns: 1fr 2.3fr 0fr 2fr 1.5fr 1.7fr; 
+    grid-template-columns: 1fr 2.6fr 2fr 1.7fr 1.7fr; 
     padding: 5px 5px;
   }
   .payment-row {
-    grid-template-columns: 1fr 2.3fr 0fr 2fr 1.5fr 1.7fr; 
+    grid-template-columns: 1fr 2.6fr 2fr 1.7fr 1.7fr; 
    /* align-items: center;*/
     gap: 5px;
     padding: 5px 5px;
