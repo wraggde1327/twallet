@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.allClients = window.allClients || [];
 
-  showNotification('Загружаем клиентов...');
-
+  
   // --- Загрузка клиентов ---
   async function loadClients() {
     try {
       clientsLoadIndicator.style.backgroundColor = 'gray'; // загрузка началась
+      showNotification('Загружаем клиентов...', 'info', 3000);
 
       const response = await fetch('https://fastapi-myapp-production.up.railway.app/clients');
       if (!response.ok) throw new Error('Ошибка загрузки клиентов');
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       setFormDisabled(true);
-      showNotification('Отправка данных на сервер...', 'info');
+      showNotification('Отправка данных на сервер...', 'info', 3000);
 
       const response = await fetch('https://fastapi-myapp-production.up.railway.app/invoices', {
         method: 'POST',
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (response.ok) {
         const data = await response.json();
-        showNotification(data.message || 'Счет успешно создан!', 'success');
+        showNotification(data.message || 'Счет успешно создан!', 'success', 3000);
         invoiceForm.reset();
         clientSearchInput.value = '';
         selectedClientId = null;
