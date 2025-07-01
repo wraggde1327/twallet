@@ -130,13 +130,13 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const who = window.tgUserId ? `tg_user_${window.tgUserId}` : 'unknown';
+    /*const who = window.tgUserId ? `tg_user_${window.tgUserId}` : 'unknown';*/
 
     const payload = {
       id: String(clientId),
       type: paymentType,
       sum: amount,
-      who: who
+      who: window.telegramNick
     };
     console.log('payload:', payload);
 
