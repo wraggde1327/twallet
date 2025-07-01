@@ -690,4 +690,8 @@ body {
   display: none !important;
 }
 
+  #createdInvoicesList li {
+  font-size: 9px; /
+  white-space: normal;
+  }
 }
