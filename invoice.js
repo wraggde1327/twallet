@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.allClients = window.allClients || [];
 
+  showNotification('Загружаем клиентов...');
+
   // --- Функция уведомлений ---
   function showNotification(text, type = '', timeout = 2500) {
     const notif = document.getElementById('notification');
@@ -133,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /*const who = window.tgUserId ? `tg_user_${window.tgUserId}` : 'unknown';*/
 
     const payload = {
-      id: Number(clientId),
+      id: clientId,
       type: paymentType,
       sum: amount,
       who: window.telegramNick
