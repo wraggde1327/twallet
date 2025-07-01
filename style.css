@@ -3,6 +3,18 @@
   box-sizing: border-box;
 }
 
+#createdInvoicesList li {
+  padding: 6px 0;
+  border-bottom: 1px solid #ccc; /* линия между строками */
+  white-space: nowrap; /* чтобы текст не переносился */
+  overflow: hidden; /* если текст длинный, скрывать переполнение */
+  text-overflow: ellipsis; /* добавлять "..." при обрезке */
+}
+
+#createdInvoicesList li:last-child {
+  border-bottom: none; /* у последнего элемента линии нет */
+}
+
 /* --- Приветственный экран --- */
 #welcome-screen {
   position: fixed;
