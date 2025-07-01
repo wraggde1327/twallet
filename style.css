@@ -606,16 +606,16 @@ body {
     box-shadow: none;
   }
   .table-header {
-    gap: 5px;
+    gap: 7px;
     font-size: 12px;
-    grid-template-columns: 1fr 2.6fr 2fr 1.7fr 1.7fr; 
-    padding: 5px 5px;
+    grid-template-columns: 0.8fr 2.4fr 2fr 1.8fr 1.8fr; 
+    padding: 5px 8px;
   }
   .payment-row {
-    grid-template-columns: 1fr 2.6fr 2fr 1.7fr 1.7fr; 
+    grid-template-columns: 0.8fr 2.4fr 2fr 1.8fr 1.8fr; 
    /* align-items: center;*/
-    gap: 5px;
-    padding: 5px 5px;
+    gap: 7px;
+    padding: 5px 8px;
     font-size: 8px;
     background: #fff;
     border-radius: 10px;
