@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Получение ника из Telegram WebApp API, если доступен
   let telegramNick = null;
   if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
-    telegramNick = window.Telegram.WebApp.initDataUnsafe.user?.username || null;
+    window.telegramNick = window.Telegram.WebApp.initDataUnsafe.user?.username || null;
   }
 
   // Для теста можно раскомментировать и задать ник вручную
