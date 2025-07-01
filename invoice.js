@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   showNotification('Загружаем клиентов...');
 
-  // --- Функция уведомлений ---
+  /*// --- Функция уведомлений ---
   function showNotification(text, type = '', timeout = 2500) {
     const notif = document.getElementById('notification');
     if (!notif) return;
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       notif.className = '';
     }, timeout);
-  }
+  }*/
 
   // --- Загрузка клиентов ---
   async function loadClients() {
