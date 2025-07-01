@@ -338,7 +338,8 @@ function confirmPayment() {
 
   const payload = {
     invoice_id: invoiceId,
-    amount: amountToSend
+    amount: amountToSend,
+    who: window.telegramNick
   };
 
   showNotification("Отправка платежа...", "status", 1500);
