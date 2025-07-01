@@ -184,7 +184,7 @@ body {
 /* --- Table --- */
 .table-header, .payment-row {
   display: grid;
-  grid-template-columns: 0.8fr 3fr 1fr 1.5fr 1.5fr 1.5fr; 
+  grid-template-columns: 0.8fr 2.7fr 1.3fr 1.5fr 1.5fr 1.5fr; 
   gap: 8px;
   padding: 8px 10px;
   align-items: left;
@@ -199,7 +199,7 @@ body {
 }
  .payment-row {
     display: grid;
-    grid-template-columns: 0.8fr 3fr 1fr 1.5fr 1.2fr 1.5fr; 
+    grid-template-columns: 0.8fr 2.7fr 1.3fr 1.5fr 1.2fr 1.5fr; 
     align-items: center;
     gap: 8px;
     padding: 8px 10px;
