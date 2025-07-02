@@ -70,14 +70,14 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background: #f0f2f5;
-  color: #333;
+  background: #516f9b;
+  color: #141414;
 }
 
 .container {
   max-width: 720px;
   margin: 20px auto;
-  background: #dddddd;
+  background: #d1d5db;
   border-radius: 16px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   padding: 24px 32px;
@@ -86,7 +86,7 @@ body {
 .tabs {
   display: flex;
   margin-bottom: 20px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 0px solid #ddd;
   gap: 10px
 }
 .tab-button {
@@ -96,12 +96,12 @@ body {
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
-  color: #666;
+  color: #636363;
   transition: color .2s;
 }
 .tab-button.active {
-  color: #4a90e2;
-  border-bottom: 2px solid #4a90e2;
+  color: #0054b7;
+  border-bottom: 2px solid #0075ff;
 }
 .tab-content {
   margin-top: 10px;
@@ -127,7 +127,7 @@ body {
   margin: 0;
 }
 .badge {
-  background: #e94b4b;
+  background: #ff0000;
   color: white;
   font-size: 14px;
   font-weight: 700;
@@ -137,7 +137,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 6px rgba(233,75,75,0.8);
+  box-shadow: 0 0 6px rgb(255 71 71 / 80%);
   user-select: none;
 }
 .refresh-btn {
@@ -163,7 +163,7 @@ body {
 
 /* --- Info block --- */
 .info-block {
-  background: #f9fbfd;
+  background: #acbace;
   border-radius: 16px;
   padding: 16px 24px;
   margin-bottom: 24px;
@@ -178,7 +178,7 @@ body {
 .updated {
   font-weight: 400;
   font-size: 13px;
-  color: #666;
+  color: #656565;
 }
 
 /* --- Table --- */
@@ -191,7 +191,7 @@ body {
   user-select: none;
 }
 .table-header {
-  color: #7a7a7a;
+  color: #000000;
   font-size: 13px;
   font-weight: 600;
   border-bottom: 2px solid #cfd8dc;
@@ -203,7 +203,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 8px 10px;
-    background: #fff;
+    background: #ffffff;
     border-radius: 10px;
     margin-bottom: 5px;
     font-size: 14px;
@@ -221,7 +221,7 @@ body {
   }
 
 .payment-row:hover {
-  background: #f0f4f8;  /* светло-серый или любой другой цвет подсветки */
+  background: #98a0a8;  /* светло-серый или любой другой цвет подсветки */
   cursor: pointer;      /* чтобы было видно, что строка кликабельна */
 }
   /* Статус — выравниваем вправо и центрируем по высоте 
@@ -242,8 +242,8 @@ body {
 }
 
 .await {
-  background-color: #f1c232;
-  color: #444444;
+  background-color: #ffc101;
+  color: #414141;
   min-height: 28px;
  /* height: 70%;*/
   font-weight: 500;
@@ -257,7 +257,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #efefef;
+  background: #d1d5db;
   padding: 28px 32px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
   border-radius: 20px;
@@ -296,7 +296,7 @@ body {
 }
 #dialog-buttons button:first-child {
   background: #4a90e2;
-  color: white;
+  color: #ffffff;
 }
 #dialog-buttons button:first-child:hover {
   background: #357abd;
@@ -423,10 +423,10 @@ body {
 }
 .form-label {
   display: block;
-  margin-bottom: 10px;
-  font-weight: 600;
+  margin-bottom: 5px;
+  font-weight: 500;
   font-size: 16px;
-  color: #615e5e;
+  color: #3e3e3e;
   user-select: none;
 }
 .payment-type-group {
@@ -466,7 +466,7 @@ body {
 }
 .autocomplete {
   position: relative;
-  width: 100%;
+  width: 80%;
   margin-bottom: 20px;
 }
 .autocomplete-dropdown {
@@ -475,7 +475,7 @@ body {
   left: 0;
   right: 0;
   z-index: 10;
-  background: #fff;
+  background: #fdfdfd;
   border: 1.5px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
@@ -496,13 +496,13 @@ body {
 #clientSearchInput {
   display: block;
   width: 100%;
-  padding: 12px 14px;
-  border: 1.5px solid #ccc;
+  padding: 10px 12px;
+  border: 1.5px solid #cac9c9;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 14px;
   background: #f9f9f9;
   transition: border 0.2s;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .form-control:focus,
 #clientSearchInput:focus {
@@ -513,7 +513,7 @@ body {
 .submit-btn {
   display: block;
   width: 50%;
-  padding: 14px 0;
+  padding: 14px 20px;
   border: none;
   border-radius: 12px;
   background: #0b5394;
@@ -522,7 +522,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s;
-  margin: 16px auto 0;
+  margin: 16px auto;
 }
 #clientsLoadIndicator {
   display: inline-block;
@@ -530,7 +530,7 @@ body {
   height: 14px;
   margin-left: 10px;
   border-radius: 50%;
-  background-color: gray;
+  background-color: #c3b7b7;
   vertical-align: middle;
   transition: background-color 0.3s ease;
 }
@@ -543,7 +543,7 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   margin-left: -20px;
 }
 .contract-row > * {
@@ -557,8 +557,8 @@ body {
   flex-shrink: 0;
 }
 .input-field {
-  height: 44px;
-  padding: 10px 16px;
+  height: 40px;
+  padding: 10px 10px;
   font-size: 16px;
   border: 1.5px solid #ccc;
   border-radius: 14px;
@@ -585,13 +585,13 @@ body {
 .button-org, 
 .button-tarif {
   flex: 1 1 0;
-  height: 44px;
-  min-width: 120px;
+  height: 38px;
+  min-width: 100px;
   background: #ccc;
   color: #444;
   border: none;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
