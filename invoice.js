@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clientsLoadIndicator.style.backgroundColor = 'gray'; // загрузка началась
       showNotification('Загружаем клиентов...', 'info', 3000);
 
-      const response = await fetch('https://147.45.158.220:8000/clients');
+      const response = await fetch('https://24sdmahom.ru/clients');
       if (!response.ok) throw new Error('Ошибка загрузки клиентов');
       window.allClients = await response.json();
 
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setFormDisabled(true);
       showNotification('Отправка данных на сервер...', 'info', 3000);
 
-      const response = await fetch('https://147.45.158.220:8000/invoices', {
+      const response = await fetch('https://24sdmahom.ru/invoices', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
