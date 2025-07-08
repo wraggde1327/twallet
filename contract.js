@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       showNotification('Отправляем данные...', 'info', 3000); // Уведомление о начале отправки
 
-      const response = await fetch('https://fastapi-myapp-production.up.railway.app/contracts', {
+      const response = await fetch('http://147.45.158.220:8000/contracts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
