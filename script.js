@@ -158,7 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // Загрузка данных
 function fetchPayments() {
   updatedAtEl.textContent = "Обновление...";
-  fetch("https://fastapi-myapp-production.up.railway.app/pending")
+ // fetch("https://fastapi-myapp-production.up.railway.app/pending")
+  fetch("http://147.45.158.220:8000/pending")
+    
     .then(res => res.json())
     .then(data => {
       paymentsData = data;
@@ -352,7 +354,7 @@ function confirmPayment() {
 
   showNotification("Отправка платежа...", "status", 1500);
 
-  fetch("https://fastapi-myapp-production.up.railway.app/update_invoice", {
+  fetch("http://147.45.158.220:8000//update_invoice", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
