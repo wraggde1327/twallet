@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function fetchPayments() {
   updatedAtEl.textContent = "Обновление...";
  // fetch("https://fastapi-myapp-production.up.railway.app/pending")
-  fetch("http://147.45.158.220:8000/pending")
+  fetch("https://24sdmahom.ru/pending")
     
     .then(res => res.json())
     .then(data => {
@@ -354,7 +354,7 @@ function confirmPayment() {
 
   showNotification("Отправка платежа...", "status", 1500);
 
-  fetch("http://147.45.158.220:8000//update_invoice", {
+  fetch("https://24sdmahom.ru/update_invoice", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
